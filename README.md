@@ -6,6 +6,16 @@ This CodeIgniter Application is for testing of [CI PHPUnit Test](https://github.
 
 * PHP 5.4 or later
 
+## How to Run Tests
+
+~~~
+$ git clone https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
+$ cd ci-app-for-ci-phpunit-test
+$ composer install
+$ ./install.php
+$ ./test.sh
+~~~
+
 ## Related Projects for CodeIgniter 3.0
 
 * [Cli for CodeIgniter 3.0](https://github.com/kenjis/codeigniter-cli)
