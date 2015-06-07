@@ -1,0 +1,29 @@
+<phpunit
+	bootstrap="./Bootstrap.php"
+	colors="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	stopOnError="false"
+	stopOnFailure="false"
+	stopOnIncomplete="false"
+	stopOnSkipped="false">
+	<testsuites>
+		<testsuite name="CodeIgniter Application Test Suite">
+			<directory suffix="test.php">./</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">./_ci_phpunit_test</directory>
+			<file>./TestCase.php</file>
+			<file>../database/seeds/CategorySeeder.php</file>
+			<file>../helpers/MY_url_helper.php</file>
+			<file>../libraries/Seeder.php</file>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-html" target="build/coverage"/>
+		<log type="coverage-clover" target="build/logs/clover.xml"/>
+		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+	</logging>
+</phpunit>
