@@ -1,0 +1,3 @@
+src_dir: .
+coverage_clover: application/tests/build/logs/clover.xml
+json_path: application/tests/build/logs/coveralls-upload.json
