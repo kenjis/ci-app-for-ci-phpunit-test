@@ -11,7 +11,7 @@ This CodeIgniter Application is for testing of [CI PHPUnit Test](https://github.
 ~~~
 $ git clone https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
 $ cd ci-app-for-ci-phpunit-test
-$ composer install
+$ composer update
 $ ./install.php
 $ ./test.sh
 ~~~
