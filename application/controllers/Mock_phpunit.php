@@ -1,6 +1,6 @@
 <?php
 
-class Mail extends CI_Controller
+class Mock_phpunit extends CI_Controller
 {
 	public function send()
 	{

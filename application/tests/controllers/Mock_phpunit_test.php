@@ -1,12 +1,12 @@
 <?php
 
-class Mail_test extends TestCase
+class Mock_phpunit_test extends TestCase
 {
 	public function test_send_okay()
 	{
 		$output = $this->request(
 			'POST',
-			['mail', 'send'],
+			['Mock_phpunit', 'send'],
 			[
 				'name' => 'Mike Smith',
 				'email' => 'mike@example.jp',
@@ -25,7 +25,7 @@ class Mail_test extends TestCase
 	{
 		$output = $this->request(
 			'POST',
-			['mail', 'send'],
+			['Mock_phpunit', 'send'],
 			[
 				'name' => 'Mike Smith',
 				'email' => 'mike@example.jp',
