@@ -11,3 +11,4 @@ build
 vendor/
 composer.phar
 application/logs/
+application/data/session/

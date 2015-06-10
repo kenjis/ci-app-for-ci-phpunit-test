@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "94f27a1701b27e1810d2c91036ed4885",
+    "hash": "02c0e8201a9a0d81d68f65e3a816e221",
     "packages": [
         {
             "name": "codeigniter/framework",
@@ -136,14 +136,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "77be06efe48d51042b1977151a500dd916b8ef79"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/77be06efe48d51042b1977151a500dd916b8ef79",
-                "reference": "77be06efe48d51042b1977151a500dd916b8ef79",
-                "shasum": ""
+                "url": "/Users/kenji/work/CodeIgniter/ci-phpunit-test",
+                "reference": "3ad4ffa0bb069b888d23d5b43a677cf6fe42d371"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -154,7 +148,6 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -171,7 +164,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-06-08 23:35:23"
+            "time": "2015-06-10 21:36:11"
         },
         {
             "name": "mikey179/vfsStream",
