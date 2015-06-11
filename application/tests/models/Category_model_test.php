@@ -7,6 +7,7 @@ class Category_model_test extends TestCase
 		parent::setUpBeforeClass();
 
 		$CI =& get_instance();
+		$CI->load->database();	// Make sure db class is loaded
 		$CI->load->library('migration');
 		$CI->migration->current();
 	}
