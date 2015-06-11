@@ -56,7 +56,7 @@ class Category_model_mocking_db_test extends TestCase
 			$this->assertEquals($expected[$category->id], $category->name);
 		}
 
-		// Reset CI object for next test, unless property db won't work
+		// Reset CI object for next test case, unless property db won't work
 		reset_instance();
 		new CI_Controller();
 	}
