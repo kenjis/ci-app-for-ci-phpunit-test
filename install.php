@@ -12,6 +12,8 @@
 $installer = new Installer();
 $installer->install();
 
+system('git checkout -- application/tests/TestCase.php');
+
 class Installer
 {
     public static function install()
