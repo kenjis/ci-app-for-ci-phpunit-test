@@ -2,16 +2,6 @@
 
 class Category_model_test extends TestCase
 {
-	public static function setUpBeforeClass()
-	{
-		parent::setUpBeforeClass();
-
-		$CI =& get_instance();
-		$CI->load->database();	// Make sure db class is loaded
-		$CI->load->library('migration');
-		$CI->migration->current();
-	}
-
 	public function setUp()
 	{
 		$this->CI =& get_instance();
