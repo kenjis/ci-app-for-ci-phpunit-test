@@ -1,4 +1,6 @@
 #!/bin/sh
 
+git checkout -- application/tests/TestCase.php
+
 cd application/tests
-phpunit --debug
+phpunit -v --debug
