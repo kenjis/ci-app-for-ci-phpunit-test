@@ -40,7 +40,9 @@ class Migration_Install_ion_auth extends CI_Migration {
 				'description' => 'General User'
 			)
 		);
-		$this->db->insert_batch('groups', $data);
+		foreach ($data as $record) {
+			$this->db->insert('groups', $record);
+		}
 
 
 		// Drop table 'users' if it exists
@@ -196,8 +198,9 @@ class Migration_Install_ion_auth extends CI_Migration {
 				'group_id' => '2',
 			)
 		);
-		$this->db->insert_batch('users_groups', $data);
-		
+		foreach ($data as $record) {
+			$this->db->insert('users_groups', $record);
+		}
 
 		// Drop table 'login_attempts' if it exists
 		$this->dbforge->drop_table('login_attempts', TRUE);
