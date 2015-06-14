@@ -12,6 +12,7 @@
 $installer = new Installer();
 $installer->install();
 
+system('php vendor/kenjis/ci-phpunit-test/install.php');
 system('git checkout -- application/tests/TestCase.php');
 
 class Installer
