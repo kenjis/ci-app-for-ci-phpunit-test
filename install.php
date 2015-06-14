@@ -9,23 +9,35 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
+system('php vendor/kenjis/ci-phpunit-test/install.php');
+
 $installer = new Installer();
 $installer->install();
-
-system('php vendor/kenjis/ci-phpunit-test/install.php');
-system('git checkout -- application/tests/TestCase.php');
 
 class Installer
 {
     public static function install()
     {
         self::recursiveCopy(
-            'vendor/kenjis/ci-phpunit-test/application',
-            'application'
+            'vendor/kenjis/ci-phpunit-test/application/database',
+            'application/database'
         );
+        self::recursiveCopy(
+            'vendor/kenjis/ci-phpunit-test/application/helpers',
+            'application/helpers'
+        );
+        self::recursiveCopy(
+            'vendor/kenjis/ci-phpunit-test/application/libraries',
+            'application/libraries'
+        );
+
         self::copy(
             'application/tests/phpunit.xml.dist',
             'application/tests/phpunit.xml'
+        );
+        self::copy(
+            'application/tests/TestCase.php.dist',
+            'application/tests/TestCase.php'
         );
     }
 
