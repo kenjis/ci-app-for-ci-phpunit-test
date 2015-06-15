@@ -2,16 +2,16 @@
 
 class Auth_test extends TestCase
 {
-//	/**
-//	 * @expectedException				PHPUnit_Framework_Exception
-//	 * @expectedExceptionCode			0
-//	 * @expectedExceptionMessageRegExp	!\ARedirect to .+/auth/login\z!
-//	 */
-//	public function test_index()
-//	{
-//		// This request is redirected to '/auth/login'
-//		$output = $this->request('GET', ['Auth', 'index']);
-//	}
+	/**
+	 * @expectedException				PHPUnit_Framework_Exception
+	 * @expectedExceptionCode			0
+	 * @expectedExceptionMessageRegExp	!\ARedirect to .+/auth/login\z!
+	 */
+	public function test_index()
+	{
+		// This request is redirected to '/auth/login'
+		$output = $this->request('GET', ['Auth', 'index']);
+	}
 
 	public function test_index_logged_in()
 	{
