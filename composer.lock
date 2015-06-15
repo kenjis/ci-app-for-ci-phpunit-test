@@ -137,7 +137,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "afa488b1828124b6c1904b1a2930873769db7197"
+                "reference": "a1fb69abaaae394c93ffbbeb191ed944f06d2401"
             },
             "require": {
                 "php": ">=5.4.0"
@@ -164,7 +164,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2015-06-14 22:50:47"
+            "time": "2015-06-15 23:52:39"
         },
         {
             "name": "mikey179/vfsStream",
