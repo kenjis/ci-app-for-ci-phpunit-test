@@ -1,5 +1,6 @@
 {
     "description": "The CodeIgniter Test Application for CI PHPUnit Test",
+    "type": "project",
     "require": {
         "php": ">=5.4",
         "codeigniter/framework": "3.0.*"
