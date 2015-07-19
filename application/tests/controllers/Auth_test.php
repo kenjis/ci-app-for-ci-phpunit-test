@@ -2,10 +2,14 @@
 
 class Auth_test extends TestCase
 {
+	/**
+	 * @expectedException				PHPUnit_Framework_Exception
+	 * @expectedExceptionCode			0
+	 * @expectedExceptionMessageRegExp	!\ARedirect to .+/auth/login\z!
+	 */
 	public function test_index()
 	{
 		// This request is redirected to '/auth/login'
-		$this->setExpectedRedirect('auth/login');
 		$output = $this->request('GET', ['Auth', 'index']);
 	}
 
@@ -47,6 +51,11 @@ class Auth_test extends TestCase
 		$this->assertContains('<p>Please login with your email/username and password below.</p>', $output);
 	}
 
+	/**
+	 * @expectedException				PHPUnit_Framework_Exception
+	 * @expectedExceptionCode			0
+	 * @expectedExceptionMessageRegExp	!\ARedirect to .+/auth/login\z!
+	 */
 	public function test_login_validation_pass_but_login_fail()
 	{
 		$this->request->setCallable(
@@ -64,8 +73,6 @@ class Auth_test extends TestCase
 				$CI->form_validation = $validation;
 			}
 		);
-		
-		$this->setExpectedRedirect('auth/login');
 		$output = $this->request('POST', 'auth/login');
 	}
 }

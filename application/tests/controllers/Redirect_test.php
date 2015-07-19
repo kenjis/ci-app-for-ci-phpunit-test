@@ -2,15 +2,23 @@
 
 class Redirect_test extends TestCase
 {
-	public function test_redirect_request_controller()
+	/**
+	 * @expectedException				PHPUnit_Framework_Exception
+	 * @expectedExceptionCode			302
+	 * @expectedExceptionMessageRegExp	!\ARedirect to .+/\z!
+	 */
+	public function test_index()
 	{
-		$this->setExpectedRedirect('/', 302);
-		$this->request('GET', ['Redirect', 'index']);
+		$output = $this->request('GET', ['Redirect', 'index']);
 	}
 
-	public function test_rediret_request_uri()
+	/**
+	 * @expectedException				PHPUnit_Framework_Exception
+	 * @expectedExceptionCode			302
+	 * @expectedExceptionMessageRegExp	!\ARedirect to .+/\z!
+	 */
+	public function test_uri_rediret()
 	{
-		$this->setExpectedRedirect('/', 302);
-		$this->request('GET', 'redirect');
+		$output = $this->request('GET', 'redirect');
 	}
 }
