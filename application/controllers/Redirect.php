@@ -7,4 +7,10 @@ class Redirect extends CI_Controller
 		$this->load->helper('url');
 		redirect('/');
 	}
+
+	public function refresh()
+	{
+		$this->load->helper('url');
+		redirect('/', 'refresh');
+	}
 }
