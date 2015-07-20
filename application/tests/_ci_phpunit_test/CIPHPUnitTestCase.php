@@ -16,6 +16,11 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 * @var CIPHPUnitTestRequest
 	 */
 	protected $request;
+	
+	/**
+	 * @var CIPHPUnitTestDouble
+	 */
+	protected $double;
 
 	/**
 	 * Constructs a test case with the given name.
@@ -29,6 +34,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 		parent::__construct($name, $data, $dataName);
 
 		$this->request = new CIPHPUnitTestRequest();
+		$this->double = new CIPHPUnitTestDouble($this);
 	}
 
 	public static function setUpBeforeClass()
@@ -60,7 +66,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 * @param string       $http_method HTTP method
 	 * @param array|string $argv        array of controller,method,arg|uri
 	 * @param array        $params      POST parameters/Query string
-	 * @param callable     $callable
+	 * @param callable     $callable    [deprecated] function to run after controller instantiation. Use $this->request->setCallable() method instead
 	 */
 	public function ajaxRequest($http_method, $argv, $params = [], $callable = null)
 	{
@@ -86,59 +92,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 */
 	public function getDouble($classname, $params)
 	{
-		$methods = array_keys($params);
-
-		$mock = $this->getMockBuilder($classname)->setMethods($methods)
-			->getMock();
-
-		foreach ($params as $method => $return)
-		{
-			$mock->method($method)->willReturn($return);
-		}
-
-		return $mock;
-	}
-
-	protected function _verify($mock, $method, $params = null, $expects, $with)
-	{
-		$invocation = $mock->expects($expects)
-			->method($method);
-
-		$count = count($params);
-
-		switch ($count) {
-			case 0:
-				break;
-			case 1:
-				$invocation->$with(
-					$params[0]
-				);
-				break;
-			case 2:
-				$invocation->$with(
-					$params[0], $params[1]
-				);
-				break;
-			case 3:
-				$invocation->$with(
-					$params[0], $params[1], $params[2]
-				);
-				break;
-			case 4:
-				$invocation->$with(
-					$params[0], $params[1], $params[2], $params[3]
-				);
-				break;
-			case 5:
-				$invocation->$with(
-					$params[0], $params[1], $params[2], $params[3], $params[4], $params[5]
-				);
-				break;
-			default:
-				throw new RuntimeException(
-					'Sorry, ' . $count . ' params not implemented yet'
-				);
-		}
+		return $this->double->getDouble($classname, $params);
 	}
 
 	/**
@@ -170,8 +124,8 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 */
 	public function verifyInvokedMultipleTimes($mock, $method, $times, $params = null)
 	{
-		$this->_verify(
-			$mock, $method, $params, $this->exactly($times), 'withConsecutive'
+		$this->double->verifyInvokedMultipleTimes(
+			$mock, $method, $times, $params
 		);
 	}
 
@@ -184,9 +138,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 */
 	public function verifyInvoked($mock, $method, $params = null)
 	{
-		$this->_verify(
-			$mock, $method, $params, $this->atLeastOnce(), 'with'
-		);
+		$this->double->verifyInvoked($mock, $method, $params);
 	}
 
 	/**
@@ -198,9 +150,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 */
 	public function verifyInvokedOnce($mock, $method, $params = null)
 	{
-		$this->_verify(
-			$mock, $method, $params, $this->once(), 'with'
-		);
+		$this->double->verifyInvokedOnce($mock, $method, $params);
 	}
 
 	/**
@@ -212,9 +162,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	 */
 	public function verifyNeverInvoked($mock, $method, $params = null)
 	{
-		$this->_verify(
-			$mock, $method, $params, $this->never(), 'with'
-		);
+		$this->double->verifyNeverInvoked($mock, $method, $params);
 	}
 
 	public function warningOff()
@@ -225,5 +173,63 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 	public function warningOn()
 	{
 		error_reporting($this->_error_reporting);
+	}
+
+	/**
+	 * Asserts HTTP response code
+	 * 
+	 * @param int $code
+	 */
+	public function assertResponseCode($code)
+	{
+		$status = $this->request->getStatus();
+		$actual = $status['code'];
+
+		$this->assertSame(
+			$code,
+			$actual,
+			'Status code is not ' . $code . ' but ' . $actual . '.'
+		);
+	}
+
+	/**
+	 * Set Expected Redirect
+	 * 
+	 * This method needs <https://github.com/kenjis/ci-phpunit-test/blob/master/application/helpers/MY_url_helper.php>.
+	 * 
+	 * @param string $uri  URI to redirect
+	 * @param int    $code Response Code
+	 */
+	public function assertRedirect($uri, $code = null)
+	{
+		$status = $this->request->getStatus();
+
+		if ($status['redirect'] === null)
+		{
+			$this->fail('redirect() is not called.');
+		}
+
+		if (! function_exists('site_url'))
+		{
+			$CI =& get_instance();
+			$CI->load->helper('url');
+		}
+		$absolute_url = site_url($uri);
+		$expected = 'Redirect to ' . $absolute_url;
+
+		$this->assertSame(
+			$expected,
+			$status['redirect'],
+			'URL to redirect is not ' . $expected . ' but ' . $status['redirect'] . '.'
+		);
+
+		if ($code !== null)
+		{
+			$this->assertSame(
+				$code,
+				$status['code'],
+				'Status code is not ' . $code . ' but ' . $status['code'] . '.'
+			);
+		}
 	}
 }

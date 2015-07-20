@@ -137,12 +137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "19974ba897f1a120016f7b101eca1f8df76cfffb"
+                "reference": "39f83b5a38c4e1a59a8f94348c1cfbe19aee241a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/19974ba897f1a120016f7b101eca1f8df76cfffb",
-                "reference": "19974ba897f1a120016f7b101eca1f8df76cfffb",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/39f83b5a38c4e1a59a8f94348c1cfbe19aee241a",
+                "reference": "39f83b5a38c4e1a59a8f94348c1cfbe19aee241a",
                 "shasum": ""
             },
             "require": {
@@ -165,13 +165,14 @@
                 }
             ],
             "description": "An easier way to use PHPUnit with CodeIgniter 3.0",
+            "homepage": "http://kenjis.github.io/ci-phpunit-test/",
             "keywords": [
                 "codeigniter",
                 "phpunit",
                 "test",
                 "unit testing"
             ],
-            "time": "2015-07-14 01:31:17"
+            "time": "2015-07-19 23:53:28"
         },
         {
             "name": "mikey179/vfsStream",

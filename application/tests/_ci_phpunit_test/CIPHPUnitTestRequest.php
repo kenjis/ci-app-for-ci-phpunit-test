@@ -4,6 +4,16 @@ class CIPHPUnitTestRequest
 {
 	protected $callable;
 	protected $enableHooks = false;
+	protected $CI;
+
+	/**
+	 * @var bool whether throwing PHPUnit_Framework_Exception or not
+	 * 
+	 * If true, throws PHPUnit_Framework_Exception when show_404() and show_error() are called. This behavior is compatible to v0.3.0 and before.
+	 * 
+	 * @deprecated
+	 */
+	protected $bc_mode_throw_PHPUnit_Framework_Exception = false;
 
 	/**
 	 * Set callable
@@ -34,15 +44,60 @@ class CIPHPUnitTestRequest
 	 */
 	public function request($http_method, $argv, $params = [], $callable = null)
 	{
-		if (is_array($argv))
-		{
-			return $this->callControllerMethod(
-				$http_method, $argv, $params, $callable
-			);
+		// We need this because if 404 route, no controller is created.
+		// But we need $this->CI->output->_status
+		$this->CI =& get_instance();
+
+		try {
+			if (is_array($argv))
+			{
+				return $this->callControllerMethod(
+					$http_method, $argv, $params, $callable
+				);
+			}
+			else
+			{
+				return $this->requestUri($http_method, $argv, $params, $callable);
+			}
 		}
-		else
+		// redirect()
+		catch (CIPHPUnitTestRedirectException $e)
 		{
-			return $this->requestUri($http_method, $argv, $params, $callable);
+			if ($e->getCode() === 0)
+			{
+				set_status_header(200);
+			}
+			else
+			{
+				set_status_header($e->getCode());
+			}
+			$this->CI->output->_status['redirect'] = $e->getMessage();
+		}
+		// show_404()
+		catch (CIPHPUnitTestShow404Exception $e)
+		{
+			set_status_header($e->getCode());
+
+			// @deprecated
+			if ($this->bc_mode_throw_PHPUnit_Framework_Exception)
+			{
+				throw new PHPUnit_Framework_Exception(
+					$e->getMessage(), $e->getCode()
+				);
+			}
+		}
+		// show_error()
+		catch (CIPHPUnitTestShowErrorException $e)
+		{
+			set_status_header($e->getCode());
+
+			// @deprecated
+			if ($this->bc_mode_throw_PHPUnit_Framework_Exception)
+			{
+				throw new PHPUnit_Framework_Exception(
+					$e->getMessage(), $e->getCode()
+				);
+			}
 		}
 	}
 
@@ -173,11 +228,14 @@ class CIPHPUnitTestRequest
 
 		// Create controller
 		$controller = new $class;
-		$CI =& get_instance();
+		$this->CI =& get_instance();
+		// Set default response code 200
+		set_status_header(200);
+		// Run callable
 		if (is_callable($this->callable))
 		{
 			$callable = $this->callable;
-			$callable($CI);
+			$callable($this->CI);
 		}
 
 		if ($this->enableHooks)
@@ -191,7 +249,7 @@ class CIPHPUnitTestRequest
 
 		if ($output == '')
 		{
-			$output = $CI->output->get_output();
+			$output = $this->CI->output->get_output();
 		}
 
 		if ($this->enableHooks)
@@ -255,5 +313,21 @@ class CIPHPUnitTestRequest
 		}
 
 		return [$class, $method, $params];
+	}
+
+	/**
+	 * Get HTTP Status Code Info
+	 * 
+	 * @return array ['code' => code, 'text' => text]
+	 * @throws LogicException
+	 */
+	public function getStatus()
+	{
+		if (! isset($this->CI->output->_status))
+		{
+			throw new LogicException('Status code is not set. You must call $this->request() first');
+		}
+
+		return $this->CI->output->_status;
 	}
 }
