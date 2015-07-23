@@ -12,3 +12,4 @@ vendor/
 composer.phar
 application/logs/
 application/data/session/
+application/tests/tmp/

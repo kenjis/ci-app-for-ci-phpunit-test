@@ -2,6 +2,8 @@
 
 class TestCase extends CIPHPUnitTestCase
 {
+	public static $enable_patcher = true;
+
 	private static $migrate = false;
 
 	public static function setUpBeforeClass()
