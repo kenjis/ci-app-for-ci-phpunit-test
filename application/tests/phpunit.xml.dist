@@ -19,6 +19,9 @@
 			<file>../database/seeds/CategorySeeder.php</file>
 			<file>../helpers/MY_url_helper.php</file>
 			<file>../libraries/Seeder.php</file>
+			<exclude>
+				<directory suffix=".php">./_ci_phpunit_test/tests</directory>
+			</exclude>
 		</whitelist>
 	</filter>
 	<logging>
