@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @group patcher
+ */
 class CIPHPUnitTestExitPatcher_test extends PHPUnit_Framework_TestCase
 {
 	/**
