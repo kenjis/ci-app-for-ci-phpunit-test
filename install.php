@@ -57,6 +57,11 @@ class Installer
      */
     private static function recursiveCopy($src, $dst)
     {
+        if (! is_dir($src)) {
+            echo 'No such directory: ' . $src . PHP_EOL;
+            return;
+        }
+
         @mkdir($dst, 0755);
         
         $iterator = new \RecursiveIteratorIterator(
