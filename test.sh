@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd application/tests
-phpunit -v --debug
+phpunit -v --debug $@
