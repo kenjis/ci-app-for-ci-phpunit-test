@@ -2,7 +2,6 @@
 
 class Exit_to_exception_test extends TestCase
 {
-
 	public function test_index()
 	{
 		try {
