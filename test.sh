@@ -1,4 +1,6 @@
 #!/bin/sh
 
+cd `dirname $0`
+
 cd application/tests
-phpunit -v --debug $@
+../../vendor/bin/phpunit -v --debug $@
