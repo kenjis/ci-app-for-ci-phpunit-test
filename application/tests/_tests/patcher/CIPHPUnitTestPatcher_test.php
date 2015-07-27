@@ -7,8 +7,10 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
-		CIPHPUnitTestPatcher::setCacheDir(APPPATH . 'tests/tmp/cache');
-		self::recursiveUnlink(APPPATH . 'tests/tmp/cache/application/tests');
+		CIPHPUnitTest::setPatcherCacheDir();
+		self::recursiveUnlink(
+			CIPHPUnitTestPatcher::getCacheDir()
+		);
 	}
 
 	public static function recursiveUnlink($dir)
@@ -92,7 +94,7 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 
 	public function test_patch_miss_cache()
 	{
-		CIPHPUnitTestPatcher::setCacheDir(APPPATH . 'tests/tmp/cache');
+		CIPHPUnitTest::setPatcherCacheDir();
 
 		CIPHPUnitTestPatcher::patch(__FILE__);
 

@@ -2,14 +2,14 @@
 
 cd `dirname $0`
 
-cd ../application/tests/tmp/cache
+cd ../application/tests/_ci_phpunit_test/tmp/cache
 
 list=`find . -type f`
 
-cd ../../../..
+cd ../../../../..
 
 for i in $list
 do
-	#echo "$i" "./application/tests/tmp/cache/$i"
-	diff -u "$i" "./application/tests/tmp/cache/$i"
+	#echo "$i" "./application/tests/_ci_phpunit_test/tmp/cache/$i"
+	diff -u "$i" "./application/tests/_ci_phpunit_test/tmp/cache/$i"
 done

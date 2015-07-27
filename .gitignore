@@ -12,4 +12,4 @@ vendor/
 composer.phar
 application/logs/
 application/data/session/
-application/tests/tmp/
+application/tests/_ci_phpunit_test/tmp/
