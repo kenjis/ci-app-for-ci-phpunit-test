@@ -24,7 +24,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-exit_();
+exit__();
 EOL
 ],
 [<<<'EOL'
@@ -34,7 +34,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-exit_();
+exit__();
 EOL
 ],
 [<<<'EOL'
@@ -44,7 +44,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-exit_();
+exit__();
 EOL
 ],
 [<<<'EOL'
@@ -54,7 +54,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-exit_();
+exit__();
 EOL
 ],
 [<<<'EOL'
@@ -64,7 +64,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-exit_('status');
+exit__('status');
 EOL
 ],
 		];
