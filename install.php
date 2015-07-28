@@ -23,10 +23,6 @@ class Installer
             'application/database'
         );
         self::recursiveCopy(
-            'vendor/kenjis/ci-phpunit-test/application/helpers',
-            'application/helpers'
-        );
-        self::recursiveCopy(
             'vendor/kenjis/ci-phpunit-test/application/libraries',
             'application/libraries'
         );
