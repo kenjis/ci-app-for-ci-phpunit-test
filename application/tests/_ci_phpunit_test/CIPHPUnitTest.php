@@ -53,9 +53,7 @@ class CIPHPUnitTest
 			// If controller Welcome is called in bootstrap, we can't test
 			// the same name sub controller Welcome even when we use
 			// `@runInSeparateProcess` and `@preserveGlobalState disabled`
-			ob_start();
 			require_once BASEPATH . 'core/CodeIgniter.php';
-			ob_end_clean();
 		} catch (CIPHPUnitTestShow404Exception $e) {
 			// Catch 404 exception
 			new CI_Controller();
@@ -125,7 +123,15 @@ class CIPHPUnitTest
 				APPPATH . 'tests/',
 			]
 		);
-		CIPHPUnitTestPatcher::setCacheDir(APPPATH . 'tests/tmp/cache');
+
+		self::setPatcherCacheDir();
+	}
+
+	public static function setPatcherCacheDir()
+	{
+		CIPHPUnitTestPatcher::setCacheDir(
+			APPPATH . 'tests/_ci_phpunit_test/tmp/cache'
+		);
 	}
 
 	public static function loadLoader()
