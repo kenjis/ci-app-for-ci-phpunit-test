@@ -17,7 +17,6 @@
 			<directory suffix=".php">./_ci_phpunit_test</directory>
 			<file>./TestCase.php</file>
 			<file>../database/seeds/CategorySeeder.php</file>
-			<file>../helpers/MY_url_helper.php</file>
 			<file>../libraries/Seeder.php</file>
 		</whitelist>
 	</filter>
