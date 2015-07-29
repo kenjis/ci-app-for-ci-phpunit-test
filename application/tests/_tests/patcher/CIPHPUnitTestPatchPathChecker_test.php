@@ -7,12 +7,12 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
-		CIPHPUnitTestPatchPathChecker::setWhitelistDir(
+		CIPHPUnitTestPatchPathChecker::setWhitelistDirs(
 			[
 				APPPATH,
 			]
 		);
-		CIPHPUnitTestPatchPathChecker::setBlacklistDir(
+		CIPHPUnitTestPatchPathChecker::setBlacklistDirs(
 			[
 				realpath(APPPATH . '../vendor/'),
 				APPPATH . 'tests/',
@@ -22,7 +22,7 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 
 	public function test_check_true()
 	{
-		CIPHPUnitTestPatchPathChecker::setWhitelistDir(
+		CIPHPUnitTestPatchPathChecker::setWhitelistDirs(
 			[
 				'/abc/def',
 			]
@@ -33,7 +33,7 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 
 	public function test_check_false()
 	{
-		CIPHPUnitTestPatchPathChecker::setBlacklistDir(
+		CIPHPUnitTestPatchPathChecker::setBlacklistDirs(
 			[
 				'/abc/def/xyz',
 			]
