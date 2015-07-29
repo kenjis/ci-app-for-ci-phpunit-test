@@ -7,10 +7,11 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
-		CIPHPUnitTest::setPatcherCacheDir();
 		self::recursiveUnlink(
 			CIPHPUnitTestPatcher::getCacheDir()
 		);
+
+		CIPHPUnitTest::setPatcherCacheDir();
 	}
 
 	public static function recursiveUnlink($dir)
@@ -94,13 +95,15 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 
 	public function test_patch_miss_cache()
 	{
-		CIPHPUnitTest::setPatcherCacheDir();
+		$cache_dir = APPPATH . 'tests/_ci_phpunit_test/tmp/cache_test';
+		CIPHPUnitTest::setPatcherCacheDir($cache_dir);
+
+		$method = self::getPrivateMethodInvoker('CIPHPUnitTestPatcher', 'getCacheFilePath');
+		$cache_file = $method(__FILE__);
+		$this->assertFalse(file_exists($cache_file));
 
 		CIPHPUnitTestPatcher::patch(__FILE__);
 
-		$orig = file_get_contents(__FILE__);
-		$method = self::getPrivateMethodInvoker('CIPHPUnitTestPatcher', 'getCacheFilePath');
-		$cache = file_get_contents($method(__FILE__));
-		$this->assertEquals($orig, $cache);
+		$this->assertTrue(file_exists($cache_file));
 	}
 }
