@@ -11,5 +11,5 @@ cd ../../../../..
 for i in $list
 do
 	#echo "$i" "./application/tests/_ci_phpunit_test/tmp/cache/$i"
-	diff -u "$i" "./application/tests/_ci_phpunit_test/tmp/cache/$i"
+	diff -uwb "$i" "./application/tests/_ci_phpunit_test/tmp/cache/$i"
 done
