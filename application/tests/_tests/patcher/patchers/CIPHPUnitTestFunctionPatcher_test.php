@@ -24,7 +24,6 @@ EOL
 ,
 <<<'EOL'
 <?php
-
 \CIPHPUnitTestFunctionPatcherProxy::mt_rand(1, 100);
 EOL
 ],
@@ -48,9 +47,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-
 namespace Foo;
-
 \CIPHPUnitTestFunctionPatcherProxy::mt_rand(1, 100);
 EOL
 ],
@@ -94,7 +91,6 @@ EOL
 ,
 <<<'EOL'
 <?php
-
 mt_rand(1, 100);
 \CIPHPUnitTestFunctionPatcherProxy::time();
 EOL
@@ -122,7 +118,6 @@ EOL
 ,
 <<<'EOL'
 <?php
-
 not_loaded_func();
 \CIPHPUnitTestFunctionPatcherProxy::date(DATE_ATOM);
 EOL

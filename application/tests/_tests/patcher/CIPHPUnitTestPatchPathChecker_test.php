@@ -14,7 +14,7 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 		);
 		CIPHPUnitTestPatchPathChecker::setBlacklistDirs(
 			[
-				realpath(APPPATH . '../vendor/'),
+				APPPATH . '../vendor/',
 				APPPATH . 'tests/',
 			]
 		);
@@ -24,10 +24,10 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 	{
 		CIPHPUnitTestPatchPathChecker::setWhitelistDirs(
 			[
-				'/abc/def',
+				APPPATH . 'controllers/',
 			]
 		);
-		$test = CIPHPUnitTestPatchPathChecker::check('/abc/def/xyz');
+		$test = CIPHPUnitTestPatchPathChecker::check(APPPATH . 'controllers/abc.php');
 		$this->assertTrue($test);
 	}
 
@@ -35,10 +35,12 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 	{
 		CIPHPUnitTestPatchPathChecker::setBlacklistDirs(
 			[
-				'/abc/def/xyz',
+				APPPATH . 'controllers/sub/',
 			]
 		);
-		$test = CIPHPUnitTestPatchPathChecker::check('/abc/def/xyz/123');
+		$test = CIPHPUnitTestPatchPathChecker::check(
+			APPPATH . '/controllers/sub/abc.php'
+		);
 		$this->assertFalse($test);
 	}
 }
