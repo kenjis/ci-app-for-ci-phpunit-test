@@ -72,12 +72,12 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
-		CIPHPUnitTestFunctionPatcherNodeVisitor::addBlacklist('mt_rand');
+		CIPHPUnitTestFunctionPatcher::addBlacklist('mt_rand');
 
 		list($actual,) = CIPHPUnitTestFunctionPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
 		
-		CIPHPUnitTestFunctionPatcherNodeVisitor::removeBlacklist('mt_rand');
+		CIPHPUnitTestFunctionPatcher::removeBlacklist('mt_rand');
 	}
 
 	public function provide_source_blacklist()
