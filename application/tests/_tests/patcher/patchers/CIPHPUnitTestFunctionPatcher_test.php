@@ -118,7 +118,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-not_loaded_func();
+\CIPHPUnitTestFunctionPatcherProxy::not_loaded_func();
 \CIPHPUnitTestFunctionPatcherProxy::date(DATE_ATOM);
 EOL
 ],
