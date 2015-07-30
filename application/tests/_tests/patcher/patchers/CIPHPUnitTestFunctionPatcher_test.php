@@ -79,6 +79,8 @@ EOL
 
 		list($actual,) = CIPHPUnitTestFunctionPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
+		
+		CIPHPUnitTestFunctionPatcherNodeVisitor::removeBlacklist('mt_rand');
 	}
 
 	public function provide_source_blacklist()
