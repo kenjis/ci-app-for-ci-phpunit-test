@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @group ci-phpunit-test
  * @group patcher
  */
 class CIPHPUnitTestFunctionPatcher_test extends PHPUnit_Framework_TestCase

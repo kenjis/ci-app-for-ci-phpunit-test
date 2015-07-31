@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @group ci-phpunit-tests
+ */
 class MY_Loader_test extends TestCase
 {
 	public function test_testOfCIPHPUnitTest()
