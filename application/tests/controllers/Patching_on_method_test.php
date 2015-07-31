@@ -11,10 +11,10 @@ class Patching_on_method_test extends TestCase
 			'Category_model',
 			['get_category_list' => [(object) ['name' => 'Nothing']]]
 		);
-		MonkeyPatch::VerifyInvokedMultipleTimes(
+		MonkeyPatch::verifyInvokedMultipleTimes(
 			'Category_model::get_category_list', 1
 		);
-		MonkeyPatch::VerifyInvokedMultipleTimes(
+		MonkeyPatch::verifyInvokedMultipleTimes(
 			'Welcome::index', 0
 		);
 		$output = $this->request('GET', 'patching_on_method');
@@ -32,7 +32,7 @@ class Patching_on_method_test extends TestCase
 				}
 			]
 		);
-		MonkeyPatch::VerifyInvokedMultipleTimes(
+		MonkeyPatch::verifyInvokedMultipleTimes(
 			'Category_model::get_category_list', 1
 		);
 		$output = $this->request('GET', 'patching_on_method');
