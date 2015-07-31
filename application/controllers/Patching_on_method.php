@@ -15,4 +15,21 @@ class Patching_on_method extends CI_Controller
 			echo $category->name . "\n";
 		}
 	}
+
+	public function auth()
+	{
+		$this->load->model('Ion_auth_model');
+		$id = $this->input->post('id');
+		$password = $this->input->post('password');
+		$login = $this->Ion_auth_model->login($id, $password);
+		
+		if (! $login)
+		{
+			echo 'Error!';
+		}
+		else
+		{
+			echo 'Okay!';
+		}
+	}
 }

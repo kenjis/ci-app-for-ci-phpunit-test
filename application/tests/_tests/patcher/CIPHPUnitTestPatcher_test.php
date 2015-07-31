@@ -87,7 +87,7 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @expectedException LogicException
-	 * @expectedExceptionMessage You have to set $cache_dir
+	 * @expectedExceptionMessage You have to set "cache_dir"
 	 */
 	public function test_patch_error()
 	{

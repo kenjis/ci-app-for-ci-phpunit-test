@@ -15,7 +15,6 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 		);
 		CIPHPUnitTestPatchPathChecker::setExcludePaths(
 			[
-				APPPATH . '../vendor/',
 				APPPATH . 'tests/',
 			]
 		);

@@ -38,4 +38,26 @@ class Patching_on_method_test extends TestCase
 		$output = $this->request('GET', 'patching_on_method');
 		$this->assertContains('Nothing', $output);
 	}
+
+	public function test_auth()
+	{
+		MonkeyPatch::patchMethod(
+			'Ion_auth_model',
+			['login' => true]
+		);
+		MonkeyPatch::verifyInvokedMultipleTimes(
+			'Ion_auth_model::login', 1, ['foo', 'bar']
+		);
+		MonkeyPatch::verifyInvokedMultipleTimes(
+			'CI_Input::post', 1, ['id']
+		);
+		MonkeyPatch::verifyInvokedMultipleTimes(
+			'CI_Input::post', 1, ['password']
+		);
+		$output = $this->request(
+			'POST', 'patching_on_method/auth',
+			['id' => 'foo', 'password' => 'bar']
+		);
+		$this->assertContains('Okay!', $output);
+	}
 }
