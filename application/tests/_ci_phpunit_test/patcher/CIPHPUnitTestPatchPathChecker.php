@@ -10,24 +10,39 @@
 
 class CIPHPUnitTestPatchPathChecker
 {
-	private static $whitelist_dir = [];
-	private static $blacklist_dir = [];
+	private static $include_paths = [];
+	private static $exclude_paths = [];
 
-	public static function setWhitelistDir(array $dir)
+	protected static function normalizePaths(array $dirs)
 	{
-		self::$whitelist_dir = $dir;
+		$new_dirs = [];
+		foreach ($dirs as $dir)
+		{
+			$real_dir = realpath($dir);
+			if ($real_dir === FALSE)
+			{
+				throw new RuntimeException($dir . ' does not exist?');
+			}
+			$new_dirs[] = $real_dir . '/';
+		}
+		return $new_dirs;
 	}
 
-	public static function setBlacklistDir(array $dir)
+	public static function setIncludePaths(array $dir)
 	{
-		self::$blacklist_dir = $dir;
+		self::$include_paths = self::normalizePaths($dir);
+	}
+
+	public static function setExcludePaths(array $dir)
+	{
+		self::$exclude_paths = self::normalizePaths($dir);
 	}
 
 	public static function check($path)
 	{
 		// Whitelist first
 		$is_white = false;
-		foreach (self::$whitelist_dir as $white_dir) {
+		foreach (self::$include_paths as $white_dir) {
 			$len = strlen($white_dir);
 			if (substr($path, 0, $len) === $white_dir)
 			{
@@ -40,7 +55,7 @@ class CIPHPUnitTestPatchPathChecker
 		}
 
 		// Then blacklist
-		foreach (self::$blacklist_dir as $black_dir) {
+		foreach (self::$exclude_paths as $black_dir) {
 			$len = strlen($black_dir);
 			if (substr($path, 0, $len) === $black_dir)
 			{
