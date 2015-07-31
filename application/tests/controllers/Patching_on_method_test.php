@@ -26,7 +26,7 @@ class Patching_on_method_test extends TestCase
 		MonkeyPatch::patchMethod(
 			'Category_model',
 			['get_category_list' => 
-				function ($arg) {
+				function ($arg = null) {
 					return $arg === null ? [(object) ['name' => 'Nothing']]
 						: [(object) ['name' => 'Everything']];
 				}
