@@ -35,6 +35,10 @@ class Installer
             'application/tests/TestCase.php.dist',
             'application/tests/TestCase.php'
         );
+        self::copy(
+            'application/tests/Bootstrap.php.dist',
+            'application/tests/Bootstrap.php'
+        );
     }
 
     private static function copy($src, $dst)
