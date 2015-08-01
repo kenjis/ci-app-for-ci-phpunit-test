@@ -91,9 +91,9 @@ class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @expectedException LogicException
-	 * @expectedExceptionMessage You have to set "cache_dir"
+	 * @expectedExceptionMessage Can't read "dummy"
 	 */
-	public function test_patch_error()
+	public function test_patch_error_cannot_read_file()
 	{
 		MonkeyPatchManager::patch('dummy');
 	}
@@ -103,7 +103,7 @@ class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 		$cache_dir = APPPATH . 'tests/_ci_phpunit_test/tmp/cache_test';
 		CIPHPUnitTest::setPatcherCacheDir($cache_dir);
 
-		$method = self::getPrivateMethodInvoker('MonkeyPatchManager', 'getCacheFilePath');
+		$method = self::getPrivateMethodInvoker('MonkeyPatchManager', 'getSrcCacheFilePath');
 		$cache_file = $method(__FILE__);
 		$this->assertFalse(file_exists($cache_file));
 
