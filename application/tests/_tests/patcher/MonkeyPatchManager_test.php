@@ -1,15 +1,19 @@
 <?php
 
+namespace Kenjis\MonkeyPatch;
+
+use CIPHPUnitTest;
+
 /**
  * @group ci-phpunit-tests
  * @group patcher
  */
-class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
+class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
 		self::recursiveUnlink(
-			CIPHPUnitTestPatcher::getCacheDir()
+			MonkeyPatchManager::getCacheDir()
 		);
 
 		CIPHPUnitTest::setPatcherCacheDir();
@@ -39,7 +43,7 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 
 	public static function getPrivateMethodInvoker($class, $method)
 	{
-		$ref_method = new ReflectionMethod($class, $method);
+		$ref_method = new \ReflectionMethod($class, $method);
 		$ref_method->setAccessible(true);
 		$obj = (gettype($class) === 'object') ? $class : null;
 
@@ -52,9 +56,9 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 	public static function setPrivateProperty($class, $property, $value)
 	{
 		if (is_object($class)) {
-			$ref_class = new ReflectionObject($class);
+			$ref_class = new \ReflectionObject($class);
 		} else {
-			$ref_class = new ReflectionClass($class);
+			$ref_class = new \ReflectionClass($class);
 		}
 		
 		$ref_property = $ref_class->getProperty($property);
@@ -82,7 +86,7 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 	 */
 	public function test_setCacheDir_error()
 	{
-		CIPHPUnitTestPatcher::setCacheDir(null);
+		MonkeyPatchManager::setCacheDir(null);
 	}
 
 	/**
@@ -91,7 +95,7 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 	 */
 	public function test_patch_error()
 	{
-		CIPHPUnitTestPatcher::patch('dummy');
+		MonkeyPatchManager::patch('dummy');
 	}
 
 	public function test_patch_miss_cache()
@@ -99,11 +103,11 @@ class CIPHPUnitTestPatcher_test extends PHPUnit_Framework_TestCase
 		$cache_dir = APPPATH . 'tests/_ci_phpunit_test/tmp/cache_test';
 		CIPHPUnitTest::setPatcherCacheDir($cache_dir);
 
-		$method = self::getPrivateMethodInvoker('CIPHPUnitTestPatcher', 'getCacheFilePath');
+		$method = self::getPrivateMethodInvoker('MonkeyPatchManager', 'getCacheFilePath');
 		$cache_file = $method(__FILE__);
 		$this->assertFalse(file_exists($cache_file));
 
-		CIPHPUnitTestPatcher::patch(__FILE__);
+		MonkeyPatchManager::patch(__FILE__);
 
 		$this->assertTrue(file_exists($cache_file));
 	}

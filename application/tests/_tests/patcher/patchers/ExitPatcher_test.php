@@ -1,17 +1,19 @@
 <?php
 
+namespace Kenjis\MonkeyPatch\Patcher;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class CIPHPUnitTestExitPatcher_test extends PHPUnit_Framework_TestCase
+class ExitPatcher_test extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @dataProvider provide_source
 	 */
 	public function test_die($source, $expected)
 	{
-		list($actual,) = CIPHPUnitTestExitPatcher::patch($source);
+		list($actual,) = ExitPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 

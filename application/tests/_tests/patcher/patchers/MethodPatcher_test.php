@@ -1,17 +1,19 @@
 <?php
 
+namespace Kenjis\MonkeyPatch\Patcher;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class CIPHPUnitTestMethodPatcher_test extends PHPUnit_Framework_TestCase
+class MethodPatcher_test extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @dataProvider provide_source
 	 */
 	public function test_patch($source, $expected)
 	{
-		list($actual,) = CIPHPUnitTestMethodPatcher::patch($source);
+		list($actual,) = MethodPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -34,7 +36,7 @@ EOL
 class Foo
 {
 	public function bar()
-	{ if (($__ret__ = CIPHPUnitTestMethodPatchManager::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
+	{ if (($__ret__ = __PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
 		echo 'Bar';
 	}
 }
@@ -55,7 +57,7 @@ EOL
 <?php
 class Foo
 {
-	public function bar() { if (($__ret__ = CIPHPUnitTestMethodPatchManager::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
+	public function bar() { if (($__ret__ = __PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
 		echo 'Bar';
 	}
 }
@@ -76,7 +78,7 @@ EOL
 <?php
 class Foo
 {
-	public static function bar() { if (($__ret__ = CIPHPUnitTestMethodPatchManager::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
+	public static function bar() { if (($__ret__ = __PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
 		echo 'Bar';
 	}
 }

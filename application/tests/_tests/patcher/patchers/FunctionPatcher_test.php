@@ -1,17 +1,19 @@
 <?php
 
+namespace Kenjis\MonkeyPatch\Patcher;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class CIPHPUnitTestFunctionPatcher_test extends PHPUnit_Framework_TestCase
+class FunctionPatcher_test extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @dataProvider provide_source
 	 */
 	public function test_patch($source, $expected)
 	{
-		list($actual,) = CIPHPUnitTestFunctionPatcher::patch($source);
+		list($actual,) = FunctionPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -25,7 +27,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-\CIPHPUnitTestFunctionPatcherProxy::mt_rand(1, 100);
+\__FuncProxy__::mt_rand(1, 100);
 EOL
 ],
 
@@ -49,7 +51,7 @@ EOL
 <<<'EOL'
 <?php
 namespace Foo;
-\CIPHPUnitTestFunctionPatcherProxy::mt_rand(1, 100);
+\__FuncProxy__::mt_rand(1, 100);
 EOL
 ],
 
@@ -73,12 +75,12 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
-		CIPHPUnitTestFunctionPatcher::addBlacklist('mt_rand');
+		FunctionPatcher::addBlacklist('mt_rand');
 
-		list($actual,) = CIPHPUnitTestFunctionPatcher::patch($source);
+		list($actual,) = FunctionPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
 		
-		CIPHPUnitTestFunctionPatcher::removeBlacklist('mt_rand');
+		FunctionPatcher::removeBlacklist('mt_rand');
 	}
 
 	public function provide_source_blacklist()
@@ -93,7 +95,7 @@ EOL
 <<<'EOL'
 <?php
 mt_rand(1, 100);
-\CIPHPUnitTestFunctionPatcherProxy::time();
+\__FuncProxy__::time();
 EOL
 ],
 		];
@@ -104,7 +106,7 @@ EOL
 	 */
 	public function test_not_loaded_function($source, $expected)
 	{
-		list($actual,) = CIPHPUnitTestFunctionPatcher::patch($source);
+		list($actual,) = FunctionPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -119,8 +121,8 @@ EOL
 ,
 <<<'EOL'
 <?php
-\CIPHPUnitTestFunctionPatcherProxy::not_loaded_func();
-\CIPHPUnitTestFunctionPatcherProxy::date(DATE_ATOM);
+\__FuncProxy__::not_loaded_func();
+\__FuncProxy__::date(DATE_ATOM);
 EOL
 ],
 		];

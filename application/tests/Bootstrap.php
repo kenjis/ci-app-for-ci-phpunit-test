@@ -292,11 +292,12 @@ switch (ENVIRONMENT)
  *  Enabling Monkey Patching
  * -------------------------------------------------------------------
  * 
- * If you want to use monkey patching, uncomment below code.
+ * If you want to use monkey patching, uncomment below code and configure
+ * for your application.
  */
 
 require __DIR__ . '/_ci_phpunit_test/patcher/bootstrap.php';
-CIPHPUnitTestPatcher::init([
+MonkeyPatchManager::init([
 	'cache_dir' => APPPATH . 'tests/_ci_phpunit_test/tmp/cache',
 	// Directories to patch on source files
 	'include_paths' => [
@@ -314,6 +315,7 @@ CIPHPUnitTestPatcher::init([
 		'MethodPatcher',
 	],
 ]);
+MonkeyPatchManager::setExitExceptionName('CIPHPUnitTestExitException');
 
 
 /*

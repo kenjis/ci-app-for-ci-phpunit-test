@@ -1,19 +1,21 @@
 <?php
 
+namespace Kenjis\MonkeyPatch;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
+class PathChecker_test extends \PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
-		CIPHPUnitTestPatchPathChecker::setIncludePaths(
+		PathChecker::setIncludePaths(
 			[
 				APPPATH,
 			]
 		);
-		CIPHPUnitTestPatchPathChecker::setExcludePaths(
+		PathChecker::setExcludePaths(
 			[
 				APPPATH . 'tests/',
 			]
@@ -22,23 +24,23 @@ class CIPHPUnitTestPatchPathChecker_test extends PHPUnit_Framework_TestCase
 
 	public function test_check_true()
 	{
-		CIPHPUnitTestPatchPathChecker::setIncludePaths(
+		PathChecker::setIncludePaths(
 			[
 				APPPATH . 'controllers/',
 			]
 		);
-		$test = CIPHPUnitTestPatchPathChecker::check(APPPATH . 'controllers/abc.php');
+		$test = PathChecker::check(APPPATH . 'controllers/abc.php');
 		$this->assertTrue($test);
 	}
 
 	public function test_check_false()
 	{
-		CIPHPUnitTestPatchPathChecker::setExcludePaths(
+		PathChecker::setExcludePaths(
 			[
 				APPPATH . 'controllers/sub/',
 			]
 		);
-		$test = CIPHPUnitTestPatchPathChecker::check(
+		$test = PathChecker::check(
 			APPPATH . '/controllers/sub/abc.php'
 		);
 		$this->assertFalse($test);
