@@ -8,10 +8,17 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class CIPHPUnitTestPatcher
+namespace Kenjis\MonkeyPatch;
+
+use LogicException;
+use RuntimeException;
+
+class MonkeyPatchManager
 {
 	private static $cache_dir;
 	private static $load_patchers = false;
+	private static $exit_exception_name = 
+		'Kenjis\MonkeyPatch\Exception\ExitException';
 	
 	/**
 	 * @var array list of patcher classname
@@ -21,6 +28,43 @@ class CIPHPUnitTestPatcher
 		'FunctionPatcher',
 		'MethodPatcher',
 	];
+
+	public static function setExitExceptionName($name)
+	{
+		self::$exit_exception_name = $name;
+	}
+
+	public static function getExitExceptionName()
+	{
+		return self::$exit_exception_name;
+	}
+
+	public static function init(array $config)
+	{
+		if (! isset($config['cache_dir']))
+		{
+			throw new LogicException('You have to set "cache_dir"');
+		}
+		self::setCacheDir($config['cache_dir']);
+
+		if (! isset($config['include_paths']))
+		{
+			throw new LogicException('You have to set "include_paths"');
+		}
+		self::setIncludePaths($config['include_paths']);
+
+		if (isset($config['exclude_paths']))
+		{
+			self::setExcludePaths($config['exclude_paths']);
+		}
+
+		if (isset($config['patcher_list']))
+		{
+			self::setPatcherList($config['patcher_list']);
+		}
+
+		self::loadPatchers();
+	}
 
 	public static function isEnabled($patcher)
 	{
@@ -41,7 +85,6 @@ class CIPHPUnitTestPatcher
 	{
 		self::$cache_dir = $dir;
 		self::createDir($dir);
-		self::loadPatchers();
 	}
 
 	public static function getCacheDir()
@@ -51,22 +94,22 @@ class CIPHPUnitTestPatcher
 
 	public static function setIncludePaths(array $dir_list)
 	{
-		CIPHPUnitTestPatchPathChecker::setIncludePaths($dir_list);
+		PathChecker::setIncludePaths($dir_list);
 	}
 
 	public static function setExcludePaths(array $dir_list)
 	{
-		CIPHPUnitTestPatchPathChecker::setExcludePaths($dir_list);
+		PathChecker::setExcludePaths($dir_list);
 	}
 
 	public static function wrap()
 	{
-		CIPHPUnitTestIncludeStream::wrap();
+		IncludeStream::wrap();
 	}
 
 	public static function unwrap()
 	{
-		CIPHPUnitTestIncludeStream::unwrap();
+		IncludeStream::unwrap();
 	}
 
 	protected static function createDir($dir)
@@ -106,11 +149,16 @@ class CIPHPUnitTestPatcher
 		return self::$cache_dir . $relative_path;
 	}
 
+	/**
+	 * @param string $path original source file path
+	 * @return resouce
+	 * @throws LogicException
+	 */
 	public static function patch($path)
 	{
 		if (self::$cache_dir === null)
 		{
-			throw new LogicException('You have to set $cache_dir');
+			throw new LogicException('You have to set "cache_dir"');
 		}
 
 		// Check cache file
@@ -153,8 +201,7 @@ class CIPHPUnitTestPatcher
 
 		foreach (self::$patcher_list as $classname)
 		{
-			$classname = 'CIPHPUnitTest' . $classname;
-			require __DIR__ . '/patchers/' . $classname . '.php';
+			require __DIR__ . '/Patcher/' . $classname . '.php';
 		}
 
 		self::$load_patchers = true;
@@ -165,7 +212,7 @@ class CIPHPUnitTestPatcher
 		$patched = false;
 		foreach (self::$patcher_list as $classname)
 		{
-			$classname = 'CIPHPUnitTest' . $classname;
+			$classname = 'Kenjis\MonkeyPatch\Patcher\\' . $classname;
 			list($source, $patched_this) = $classname::patch($source);
 			$patched = $patched || $patched_this;
 		}

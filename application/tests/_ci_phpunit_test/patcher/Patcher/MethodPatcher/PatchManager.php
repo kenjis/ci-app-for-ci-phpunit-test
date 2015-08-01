@@ -8,7 +8,13 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-class CIPHPUnitTestMethodPatchManager
+namespace Kenjis\MonkeyPatch\Patcher\MethodPatcher;
+
+class_alias('Kenjis\MonkeyPatch\Patcher\MethodPatcher\PatchManager', '__PatchManager__');
+
+use PHPUnit_Framework_TestCase;
+
+class PatchManager
 {
 	private static $patches = [];
 	private static $expected_invocations = [];
@@ -92,6 +98,24 @@ class CIPHPUnitTestMethodPatchManager
 						$times,
 						$actual,
 						$class_method . '() expected to be invoked ' . $times . ' times, but invoked ' . $actual . ' times.'
+					);
+				}
+				else
+				{
+					$count = 0;
+					foreach (self::$invocations[$class_method] as $actual_params)
+					{
+						if ($actual_params == $params)
+						{
+							$count++;
+						}
+					}
+					
+					$params_print = implode(', ', $params);
+					PHPUnit_Framework_TestCase::assertEquals(
+						$times,
+						$count,
+						$class_method . '(' . $params_print . ') expected to be invoked ' . $times . ' times, but invoked ' . $count . ' times.'
 					);
 				}
 			}

@@ -49,20 +49,20 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 
 	public function tearDown()
 	{
-		if (class_exists('MonkeyPatch'))
+		if (class_exists('MonkeyPatch', false))
 		{
-			if (CIPHPUnitTestPatcher::isEnabled('FunctionPatcher'))
+			if (MonkeyPatchManager::isEnabled('FunctionPatcher'))
 			{
 				MonkeyPatch::resetFunctions();
 			}
 
 			try {
-				if (CIPHPUnitTestPatcher::isEnabled('MethodPatcher'))
+				if (MonkeyPatchManager::isEnabled('MethodPatcher'))
 				{
 					MonkeyPatch::verifyInvocations();
 				}
 			} catch (Exception $e) {
-				if (CIPHPUnitTestPatcher::isEnabled('MethodPatcher'))
+				if (MonkeyPatchManager::isEnabled('MethodPatcher'))
 				{
 					MonkeyPatch::resetMethods();
 				}
@@ -70,7 +70,7 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 				throw $e;
 			}
 
-			if (CIPHPUnitTestPatcher::isEnabled('MethodPatcher'))
+			if (MonkeyPatchManager::isEnabled('MethodPatcher'))
 			{
 				MonkeyPatch::resetMethods();
 			}

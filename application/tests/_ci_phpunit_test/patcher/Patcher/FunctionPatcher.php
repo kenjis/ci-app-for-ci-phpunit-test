@@ -8,11 +8,21 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
-require __DIR__ . '/../vendor/PHP-Parser/lib/bootstrap.php';
-require __DIR__ . '/CIPHPUnitTestFunctionPatcher/CIPHPUnitTestFunctionPatcherNodeVisitor.php';
-require __DIR__ . '/CIPHPUnitTestFunctionPatcher/CIPHPUnitTestFunctionPatcherProxy.php';
+namespace Kenjis\MonkeyPatch\Patcher;
 
-class CIPHPUnitTestFunctionPatcher
+require __DIR__ . '/../vendor/PHP-Parser/lib/bootstrap.php';
+require __DIR__ . '/FunctionPatcher/NodeVisitor.php';
+require __DIR__ . '/FunctionPatcher/Proxy.php';
+
+use LogicException;
+
+use PhpParser\Parser;
+use PhpParser\Lexer;
+use PhpParser\NodeTraverser;
+
+use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\NodeVisitor;
+
+class FunctionPatcher
 {
 	/**
 	 * @var array list of function names (in lower case) which you don't patch
@@ -23,6 +33,19 @@ class CIPHPUnitTestFunctionPatcher
 		'exit__',
 		// Error: Only variables should be assigned by reference
 		'get_instance',
+		'get_config',
+		'load_class',
+		'get_mimes',
+		'_get_validation_object',
+		// has reference param
+		'preg_replace',
+		'preg_match',
+		'preg_match_all',
+		'array_unshift',
+		'array_shift',
+		'sscanf',
+		'ksort',
+		'krsort',
 		// Special functions for ci-phpunit-test
 		'show_404',
 		'show_error',
@@ -61,11 +84,11 @@ class CIPHPUnitTestFunctionPatcher
 		$patched = false;
 		self::$replacement = [];
 
-		$parser = new PhpParser\Parser(new PhpParser\Lexer(
+		$parser = new Parser(new Lexer(
 			['usedAttributes' => ['startTokenPos', 'endTokenPos']]
 		));
-		$traverser = new PhpParser\NodeTraverser;
-		$traverser->addVisitor(new CIPHPUnitTestFunctionPatcherNodeVisitor());
+		$traverser = new NodeTraverser;
+		$traverser->addVisitor(new NodeVisitor());
 
 		$ast_orig = $parser->parse($source);
 		$traverser->traverse($ast_orig);
