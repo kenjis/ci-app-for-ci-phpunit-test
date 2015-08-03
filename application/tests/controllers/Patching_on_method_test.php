@@ -51,6 +51,9 @@ class Patching_on_method_test extends TestCase
 		MonkeyPatch::verifyInvokedOnce(
 			'Ion_auth_model::login', ['foo', 'bar']
 		);
+		MonkeyPatch::verifyNeverInvoked(
+			'Ion_auth_model::login', ['username', 'PHS/DL1m6OMYg']
+		);
 		MonkeyPatch::verifyInvokedOnce(
 			'CI_Input::post', ['id']
 		);
@@ -60,6 +63,7 @@ class Patching_on_method_test extends TestCase
 		MonkeyPatch::verifyInvokedMultipleTimes(
 			'CI_Input::post', 2
 		);
+
 		$output = $this->request(
 			'POST', 'patching_on_method/auth',
 			['id' => 'foo', 'password' => 'bar']
