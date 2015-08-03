@@ -11,11 +11,11 @@ class Patching_on_method_test extends TestCase
 			'Category_model',
 			['get_category_list' => [(object) ['name' => 'Nothing']]]
 		);
-		MonkeyPatch::verifyInvokedMultipleTimes(
-			'Category_model::get_category_list', 1
+		MonkeyPatch::verifyInvoked(
+			'Category_model::get_category_list'
 		);
-		MonkeyPatch::verifyInvokedMultipleTimes(
-			'Welcome::index', 0
+		MonkeyPatch::verifyNeverInvoked(
+			'Welcome::index'
 		);
 		$output = $this->request('GET', 'patching_on_method');
 		$this->assertContains('Nothing', $output);
@@ -32,8 +32,8 @@ class Patching_on_method_test extends TestCase
 				}
 			]
 		);
-		MonkeyPatch::verifyInvokedMultipleTimes(
-			'Category_model::get_category_list', 1
+		MonkeyPatch::verifyInvokedOnce(
+			'Category_model::get_category_list'
 		);
 		$output = $this->request('GET', 'patching_on_method');
 		$this->assertContains('Nothing', $output);
@@ -45,14 +45,20 @@ class Patching_on_method_test extends TestCase
 			'Ion_auth_model',
 			['login' => true]
 		);
-		MonkeyPatch::verifyInvokedMultipleTimes(
-			'Ion_auth_model::login', 1, ['foo', 'bar']
+		MonkeyPatch::verifyInvoked(
+			'Ion_auth_model::login', ['foo', 'bar']
+		);
+		MonkeyPatch::verifyInvokedOnce(
+			'Ion_auth_model::login', ['foo', 'bar']
+		);
+		MonkeyPatch::verifyInvokedOnce(
+			'CI_Input::post', ['id']
+		);
+		MonkeyPatch::verifyInvokedOnce(
+			'CI_Input::post', ['password']
 		);
 		MonkeyPatch::verifyInvokedMultipleTimes(
-			'CI_Input::post', 1, ['id']
-		);
-		MonkeyPatch::verifyInvokedMultipleTimes(
-			'CI_Input::post', 1, ['password']
+			'CI_Input::post', 2
 		);
 		$output = $this->request(
 			'POST', 'patching_on_method/auth',
