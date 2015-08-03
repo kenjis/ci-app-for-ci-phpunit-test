@@ -45,6 +45,7 @@ class Patching_on_method_test extends TestCase
 			'Ion_auth_model',
 			['login' => true]
 		);
+
 		MonkeyPatch::verifyInvoked(
 			'Ion_auth_model::login', ['foo', 'bar']
 		);
