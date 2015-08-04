@@ -121,7 +121,7 @@ EOL
 ,
 <<<'EOL'
 <?php
-\__FuncProxy__::not_loaded_func();
+not_loaded_func();
 \__FuncProxy__::date(DATE_ATOM);
 EOL
 ],

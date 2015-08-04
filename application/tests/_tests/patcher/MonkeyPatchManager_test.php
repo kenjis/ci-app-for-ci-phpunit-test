@@ -12,9 +12,7 @@ class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
-		self::recursiveUnlink(
-			MonkeyPatchManager::getCacheDir()
-		);
+		self::recursiveUnlink(Cache::clearCache());
 
 		CIPHPUnitTest::setPatcherCacheDir();
 	}
@@ -91,7 +89,7 @@ class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @expectedException LogicException
-	 * @expectedExceptionMessage Can't read "dummy"
+	 * @expectedExceptionMessage Can't read 'dummy'
 	 */
 	public function test_patch_error_cannot_read_file()
 	{
@@ -103,8 +101,7 @@ class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 		$cache_dir = APPPATH . 'tests/_ci_phpunit_test/tmp/cache_test';
 		CIPHPUnitTest::setPatcherCacheDir($cache_dir);
 
-		$method = self::getPrivateMethodInvoker('MonkeyPatchManager', 'getSrcCacheFilePath');
-		$cache_file = $method(__FILE__);
+		$cache_file = Cache::getSrcCacheFilePath(__FILE__);
 		$this->assertFalse(file_exists($cache_file));
 
 		MonkeyPatchManager::patch(__FILE__);
