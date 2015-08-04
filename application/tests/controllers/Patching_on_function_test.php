@@ -21,20 +21,27 @@ class Patching_on_function_test extends TestCase
 		$this->assertContains('19', $output);
 	}
 
-	/**
-	 * This test does not work now
-	 */
-//	public function test_passing_by_reference_patch_on_preg_replace()
-//	{
-//		MonkeyPatch::patchFunction(
-//			'preg_replace',
-//			function($pattern, $replacement, $subject, $limit, &$count) {
-//				$count = 999;
-//				return 'Patch by Monkey Patching';
-//			}
-//		);
-//		$output = $this->request('GET', 'patching_on_function/passing_by_reference');
-//		$this->assertContains('Patch by Monkey Patching', $output);
-//		$this->assertContains('999', $output);
-//	}
+	public function test_openssl_random_pseudo_bytes()
+	{
+		MonkeyPatch::patchFunction('openssl_random_pseudo_bytes', 'aaaa');
+		$output = $this->request(
+			'GET', 'patching_on_function/openssl_random_pseudo_bytes'
+		);
+		$this->assertEquals("61616161\n1\n", $output);
+	}
+
+	public function test_openssl_random_pseudo_bytes_callable()
+	{
+		MonkeyPatch::patchFunction(
+			'openssl_random_pseudo_bytes',
+			function ($int, &$crypto_strong) {
+				$crypto_strong = false;
+				return 'bbbb';
+			}
+		);
+		$output = $this->request(
+			'GET', 'patching_on_function/openssl_random_pseudo_bytes'
+		);
+		$this->assertEquals("62626262\n\n", $output);
+	}
 }

@@ -12,11 +12,11 @@ class Patching_on_function extends CI_Controller
 		echo mt_rand(1, 9);
 	}
 
-	public function passing_by_reference()
+	public function openssl_random_pseudo_bytes()
 	{
-		$count = 0;
-		echo preg_replace(array('/\d/', '/\s/'), '*', 'xp 4 to', -1 , $count);
-		echo "\n";
-		echo $count;
+		$bytes = openssl_random_pseudo_bytes(4, $cstrong);
+		$hex   = bin2hex($bytes);
+		echo "$hex\n";
+		echo "$cstrong\n";
 	}
 }
