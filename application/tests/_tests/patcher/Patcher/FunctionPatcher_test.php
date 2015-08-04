@@ -75,12 +75,24 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
+		\CIPHPUnitTestReflection::setPrivateProperty(
+			'Kenjis\MonkeyPatch\Patcher\FunctionPatcher',
+			'lock_function_list',
+			false
+		);
+
 		FunctionPatcher::addBlacklist('mt_rand');
 
 		list($actual,) = FunctionPatcher::patch($source);
 		$this->assertEquals($expected, $actual);
-		
+
 		FunctionPatcher::removeBlacklist('mt_rand');
+
+		\CIPHPUnitTestReflection::setPrivateProperty(
+			'Kenjis\MonkeyPatch\Patcher\FunctionPatcher',
+			'lock_function_list',
+			true
+		);
 	}
 
 	public function provide_source_blacklist()
