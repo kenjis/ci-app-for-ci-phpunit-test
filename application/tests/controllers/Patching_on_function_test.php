@@ -71,7 +71,8 @@ class Patching_on_function_test extends TestCase
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
-		$this->assertEquals("I use random_bytes().", $output);
+		$this->assertContains("I use random_bytes().", $output);
+		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
 	}
 
 	public function test_function_exists_use_openssl_random_pseudo_bytes()
@@ -100,7 +101,8 @@ class Patching_on_function_test extends TestCase
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
-		$this->assertEquals("I use openssl_random_pseudo_bytes().", $output);
+		$this->assertContains("I use openssl_random_pseudo_bytes().", $output);
+		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
 	}
 
 	public function test_function_exists_use_mcrypt_create_iv()
@@ -129,6 +131,7 @@ class Patching_on_function_test extends TestCase
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
-		$this->assertEquals("I use mcrypt_create_iv().", $output);
+		$this->assertContains("I use mcrypt_create_iv().", $output);
+		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
 	}
 }

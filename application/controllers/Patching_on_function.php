@@ -37,5 +37,10 @@ class Patching_on_function extends CI_Controller
 		else {
 			echo 'I use mt_rand().';
 		}
+
+		if (! function_exists('exit'))
+		{
+			echo ' Do you know? There is no exit() function in PHP.';
+		}
 	}
 }
