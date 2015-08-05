@@ -2,6 +2,9 @@
 
 namespace Kenjis\MonkeyPatch\Patcher;
 
+use Kenjis\MonkeyPatch\MonkeyPatch;
+use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
@@ -138,5 +141,32 @@ not_loaded_func();
 EOL
 ],
 		];
+	}
+
+	/**
+	 * @expectedException        LogicException
+	 * @expectedExceptionMessage Can't patch on 'redirect'. It is in blacklist.
+	 */
+	public function test_patch_on_blacklisted_func()
+	{
+		MonkeyPatch::patchFunction('redirect', null);
+	}
+
+	/**
+	 * @expectedException        LogicException
+	 * @expectedExceptionMessage Can't patch on 'htmlspecialchars'. It is not in whitelist.
+	 */
+	public function test_patch_on_not_whitelisted_func()
+	{
+		MonkeyPatch::patchFunction('htmlspecialchars', null);
+	}
+
+	/**
+	 * @expectedException        LogicException
+	 * @expectedExceptionMessage Can't patch on function 'ksort'.
+	 */
+	public function test_Proxy_checkPassedByReference()
+	{
+		Proxy::ksort([]);
 	}
 }
