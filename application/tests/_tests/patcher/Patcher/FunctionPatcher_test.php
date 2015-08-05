@@ -2,6 +2,8 @@
 
 namespace Kenjis\MonkeyPatch\Patcher;
 
+use LogicException;
+
 use Kenjis\MonkeyPatch\MonkeyPatch;
 use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
 
@@ -143,30 +145,45 @@ EOL
 		];
 	}
 
-	/**
-	 * @expectedException        LogicException
-	 * @expectedExceptionMessage Can't patch on 'redirect'. It is in blacklist.
-	 */
 	public function test_patch_on_blacklisted_func()
 	{
-		MonkeyPatch::patchFunction('redirect', null);
+		ob_start();
+		try {
+			MonkeyPatch::patchFunction('redirect', null);
+		} catch (LogicException $e) {
+			$this->assertContains(
+				"Can't patch on 'redirect'. It is in blacklist.",
+				$e->getMessage()
+			);
+		}
+		ob_end_clean();
 	}
 
-	/**
-	 * @expectedException        LogicException
-	 * @expectedExceptionMessage Can't patch on 'htmlspecialchars'. It is not in whitelist.
-	 */
 	public function test_patch_on_not_whitelisted_func()
 	{
-		MonkeyPatch::patchFunction('htmlspecialchars', null);
+		ob_start();
+		try {
+			MonkeyPatch::patchFunction('htmlspecialchars', null);
+		} catch (LogicException $e) {
+			$this->assertContains(
+				"Can't patch on 'htmlspecialchars'. It is not in whitelist.",
+				$e->getMessage()
+			);
+		}
+		ob_end_clean();
 	}
 
-	/**
-	 * @expectedException        LogicException
-	 * @expectedExceptionMessage Can't patch on function 'ksort'.
-	 */
 	public function test_Proxy_checkPassedByReference()
 	{
-		Proxy::ksort([]);
+		ob_start();
+		try {
+			Proxy::ksort([]);
+		} catch (LogicException $e) {
+			$this->assertContains(
+				"Can't patch on function 'ksort'.",
+				$e->getMessage()
+			);
+		}
+		ob_end_clean();
 	}
 }
