@@ -57,9 +57,13 @@ class Patching_on_function_test extends TestCase
 				elseif ($function === 'openssl_random_pseudo_bytes')
 				{
 					return false;
-				} elseif ($function === 'mcrypt_create_iv') {
+				}
+				elseif ($function === 'mcrypt_create_iv')
+				{
 					return false;
-				} else {
+				}
+				else
+				{
 					return __GO_TO_ORIG__;
 				}
 			}
@@ -82,9 +86,13 @@ class Patching_on_function_test extends TestCase
 				elseif ($function === 'openssl_random_pseudo_bytes')
 				{
 					return true;
-				} elseif ($function === 'mcrypt_create_iv') {
+				}
+				elseif ($function === 'mcrypt_create_iv')
+				{
 					return false;
-				} else {
+				}
+				else
+				{
 					return __GO_TO_ORIG__;
 				}
 			}
@@ -107,9 +115,13 @@ class Patching_on_function_test extends TestCase
 				elseif ($function === 'openssl_random_pseudo_bytes')
 				{
 					return false;
-				} elseif ($function === 'mcrypt_create_iv') {
+				}
+				elseif ($function === 'mcrypt_create_iv')
+				{
 					return true;
-				} else {
+				}
+				else
+				{
 					return __GO_TO_ORIG__;
 				}
 			}
