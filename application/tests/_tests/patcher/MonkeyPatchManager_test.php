@@ -12,31 +12,8 @@ class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
 {
 	public static function tearDownAfterClass()
 	{
-		self::recursiveUnlink(Cache::clearCache());
-
+		Cache::clearCache();
 		CIPHPUnitTest::setPatcherCacheDir();
-	}
-
-	public static function recursiveUnlink($dir)
-	{
-		if (! is_dir($dir)) {
-			return;
-		}
-
-		$iterator = new \RecursiveIteratorIterator(
-			new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
-			\RecursiveIteratorIterator::CHILD_FIRST
-		);
-
-		foreach ($iterator as $file) {
-			if ($file->isDir()) {
-				rmdir($file);
-			} else {
-				unlink($file);
-			}
-		}
-
-		rmdir($dir);
 	}
 
 	/**
