@@ -44,4 +44,79 @@ class Patching_on_function_test extends TestCase
 		);
 		$this->assertEquals("62626262\n\n", $output);
 	}
+
+	public function test_function_exists_use_random_bytes()
+	{
+		MonkeyPatch::patchFunction(
+			'function_exists',
+			function ($function) {
+				if ($function === 'random_bytes')
+				{
+					return true;
+				}
+				elseif ($function === 'openssl_random_pseudo_bytes')
+				{
+					return false;
+				} elseif ($function === 'mcrypt_create_iv') {
+					return false;
+				} else {
+					return __GO_TO_ORIG__;
+				}
+			}
+		);
+		$output = $this->request(
+			'GET', 'patching_on_function/function_exists'
+		);
+		$this->assertEquals("I use random_bytes().", $output);
+	}
+
+	public function test_function_exists_use_openssl_random_pseudo_bytes()
+	{
+		MonkeyPatch::patchFunction(
+			'function_exists',
+			function ($function) {
+				if ($function === 'random_bytes')
+				{
+					return false;
+				}
+				elseif ($function === 'openssl_random_pseudo_bytes')
+				{
+					return true;
+				} elseif ($function === 'mcrypt_create_iv') {
+					return false;
+				} else {
+					return __GO_TO_ORIG__;
+				}
+			}
+		);
+		$output = $this->request(
+			'GET', 'patching_on_function/function_exists'
+		);
+		$this->assertEquals("I use openssl_random_pseudo_bytes().", $output);
+	}
+
+	public function test_function_exists_use_mcrypt_create_iv()
+	{
+		MonkeyPatch::patchFunction(
+			'function_exists',
+			function ($function) {
+				if ($function === 'random_bytes')
+				{
+					return false;
+				}
+				elseif ($function === 'openssl_random_pseudo_bytes')
+				{
+					return false;
+				} elseif ($function === 'mcrypt_create_iv') {
+					return true;
+				} else {
+					return __GO_TO_ORIG__;
+				}
+			}
+		);
+		$output = $this->request(
+			'GET', 'patching_on_function/function_exists'
+		);
+		$this->assertEquals("I use mcrypt_create_iv().", $output);
+	}
 }

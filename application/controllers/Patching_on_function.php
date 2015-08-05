@@ -19,4 +19,23 @@ class Patching_on_function extends CI_Controller
 		echo "$hex\n";
 		echo "$cstrong\n";
 	}
+
+	public function function_exists()
+	{
+		if (function_exists('random_bytes'))
+		{
+			echo 'I use random_bytes().';
+		}
+		elseif (function_exists('openssl_random_pseudo_bytes'))
+		{
+			echo 'I use openssl_random_pseudo_bytes().';
+		}
+		elseif (function_exists('mcrypt_create_iv'))
+		{
+			echo 'I use mcrypt_create_iv().';
+		}
+		else {
+			echo 'I use mt_rand().';
+		}
+	}
 }

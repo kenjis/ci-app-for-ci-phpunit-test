@@ -36,7 +36,7 @@ EOL
 class Foo
 {
 	public function bar()
-	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
+	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
 		echo 'Bar';
 	}
 }
@@ -57,7 +57,7 @@ EOL
 <?php
 class Foo
 {
-	public function bar() { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
+	public function bar() { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
 		echo 'Bar';
 	}
 }
@@ -78,7 +78,7 @@ EOL
 <?php
 class Foo
 {
-	public static function bar() { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_ORIG_METHOD__) return $__ret__;
+	public static function bar() { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
 		echo 'Bar';
 	}
 }
