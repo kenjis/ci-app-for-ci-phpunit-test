@@ -19,7 +19,7 @@
 			<file>../database/seeds/CategorySeeder.php</file>
 			<file>../libraries/Seeder.php</file>
 			<exclude>
-				<directory suffix=".php">./_ci_phpunit_test/patcher/vendor</directory>
+				<directory suffix=".php">./_ci_phpunit_test/patcher/third_party</directory>
 				<directory suffix=".php">./_ci_phpunit_test/tmp</directory>
 			</exclude>
 		</whitelist>
