@@ -68,6 +68,12 @@ class Patching_on_function_test extends TestCase
 				}
 			}
 		);
+		MonkeyPatch::verifyInvokedOnce('function_exists', ['random_bytes']);
+		MonkeyPatch::verifyInvokedOnce('function_exists', ['exit']);
+		MonkeyPatch::verifyInvokedMultipleTimes('function_exists', 2);
+		MonkeyPatch::verifyNeverInvoked('function_exists', ['openssl_random_pseudo_bytes']);
+		MonkeyPatch::verifyNeverInvoked('function_exists', ['mcrypt_create_iv']);
+
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
