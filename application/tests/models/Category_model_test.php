@@ -2,13 +2,18 @@
 
 class Category_model_test extends TestCase
 {
+	public static function setUpBeforeClass()
+	{
+		parent::setUpBeforeClass();
+		
+		$CI =& get_instance();
+		$CI->load->library('Seeder');
+		$CI->seeder->call('CategorySeeder');
+	}
+
 	public function setUp()
 	{
-		$this->CI =& get_instance();
-		
-		$this->CI->load->library('Seeder');
-		$this->CI->seeder->call('CategorySeeder');
-		
+		$this->resetInstance();
 		$this->CI->load->model('Category_model');
 		$this->obj = $this->CI->Category_model;
 	}
