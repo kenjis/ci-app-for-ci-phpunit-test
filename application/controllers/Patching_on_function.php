@@ -43,4 +43,68 @@ class Patching_on_function extends CI_Controller
 			echo ' Do you know? There is no exit() function in PHP.';
 		}
 	}
+
+	public function scope_limitation_method()
+	{
+		if (function_exists('microtime'))
+		{
+			echo 'I have microtime().';
+		}
+		else
+		{
+			echo 'I don\'t have microtime().';
+		}
+
+		echo ' ';
+		$this->check_microtime();
+
+		$this->load->library('check_microtime');
+		echo ' ';
+		if ($this->check_microtime->exists('microtime'))
+		{
+			echo 'I have microtime().';
+		}
+		else
+		{
+			echo 'I don\'t have microtime().';
+		}
+	}
+
+	public function scope_limitation_class()
+	{
+		if (function_exists('microtime'))
+		{
+			echo 'I have microtime().';
+		}
+		else
+		{
+			echo 'I don\'t have microtime().';
+		}
+
+		echo ' ';
+		$this->check_microtime();
+
+		$this->load->library('check_microtime');
+		echo ' ';
+		if ($this->check_microtime->exists('microtime'))
+		{
+			echo 'I have microtime().';
+		}
+		else
+		{
+			echo 'I don\'t have microtime().';
+		}
+	}
+
+	protected function check_microtime()
+	{
+		if (function_exists('microtime'))
+		{
+			echo 'I have microtime().';
+		}
+		else
+		{
+			echo 'I don\'t have microtime().';
+		}
+	}
 }

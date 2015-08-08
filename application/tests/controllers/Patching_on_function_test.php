@@ -68,6 +68,7 @@ class Patching_on_function_test extends TestCase
 				}
 			}
 		);
+
 		MonkeyPatch::verifyInvokedOnce('function_exists', ['random_bytes']);
 		MonkeyPatch::verifyInvokedOnce('function_exists', ['exit']);
 		MonkeyPatch::verifyInvokedMultipleTimes('function_exists', 2);
@@ -139,5 +140,39 @@ class Patching_on_function_test extends TestCase
 		);
 		$this->assertContains("I use mcrypt_create_iv().", $output);
 		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
+	}
+
+	public function test_scope_limitation_method()
+	{
+		MonkeyPatch::patchFunction(
+			'function_exists',
+			false,
+			'Patching_on_function::scope_limitation_method'
+		);
+
+		$output = $this->request(
+			'GET', 'patching_on_function/scope_limitation_method'
+		);
+		$this->assertEquals(
+			"I don't have microtime(). I have microtime(). I have microtime().",
+			$output
+		);
+	}
+
+	public function test_scope_limitation_class()
+	{
+		MonkeyPatch::patchFunction(
+			'function_exists',
+			false,
+			'Patching_on_function'
+		);
+
+		$output = $this->request(
+			'GET', 'patching_on_function/scope_limitation_class'
+		);
+		$this->assertEquals(
+			"I don't have microtime(). I don't have microtime(). I have microtime().",
+			$output
+		);
 	}
 }
