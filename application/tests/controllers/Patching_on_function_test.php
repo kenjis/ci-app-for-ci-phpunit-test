@@ -7,23 +7,31 @@ class Patching_on_function_test extends TestCase
 {
 	public function test_index_patch_on_mt_rand()
 	{
-		MonkeyPatch::patchFunction('mt_rand', 100);
+		MonkeyPatch::patchFunction('mt_rand', 100, 'Patching_on_function');
 		$output = $this->request('GET', 'patching_on_function');
 		$this->assertContains('100', $output);
 	}
 
 	public function test_another_patch_on_mt_rand()
 	{
-		MonkeyPatch::patchFunction('mt_rand', function($a, $b) {
-			return $a . $b;
-		});
+		MonkeyPatch::patchFunction(
+			'mt_rand',
+			function($a, $b) {
+				return $a . $b;
+			},
+			'Patching_on_function'
+		);
 		$output = $this->request('GET', 'patching_on_function/another');
 		$this->assertContains('19', $output);
 	}
 
 	public function test_openssl_random_pseudo_bytes()
 	{
-		MonkeyPatch::patchFunction('openssl_random_pseudo_bytes', 'aaaa');
+		MonkeyPatch::patchFunction(
+			'openssl_random_pseudo_bytes',
+			'aaaa',
+			'Patching_on_function'
+		);
 		$output = $this->request(
 			'GET', 'patching_on_function/openssl_random_pseudo_bytes'
 		);
@@ -37,7 +45,8 @@ class Patching_on_function_test extends TestCase
 			function ($int, &$crypto_strong) {
 				$crypto_strong = false;
 				return 'bbbb';
-			}
+			},
+			'Patching_on_function'
 		);
 		$output = $this->request(
 			'GET', 'patching_on_function/openssl_random_pseudo_bytes'
@@ -66,7 +75,8 @@ class Patching_on_function_test extends TestCase
 				{
 					return __GO_TO_ORIG__;
 				}
-			}
+			},
+			'Patching_on_function'
 		);
 
 		MonkeyPatch::verifyInvokedOnce('function_exists', ['random_bytes']);
@@ -103,7 +113,8 @@ class Patching_on_function_test extends TestCase
 				{
 					return __GO_TO_ORIG__;
 				}
-			}
+			},
+			'Patching_on_function'
 		);
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
@@ -133,7 +144,8 @@ class Patching_on_function_test extends TestCase
 				{
 					return __GO_TO_ORIG__;
 				}
-			}
+			},
+			'Patching_on_function'
 		);
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
