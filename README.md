@@ -18,6 +18,7 @@ $ ./test.sh
 
 ## Related Projects for CodeIgniter 3.0
 
+* [CodeIgniter Composer Installer](https://github.com/kenjis/codeigniter-composer-installer)
 * [Cli for CodeIgniter 3.0](https://github.com/kenjis/codeigniter-cli)
 * [CI PHPUnit Test](https://github.com/kenjis/ci-phpunit-test)
 * [CodeIgniter Simple and Secure Twig](https://github.com/kenjis/codeigniter-ss-twig)
