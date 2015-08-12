@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @group patcher
+ */
 class Greeter_test extends TestCase
 {
 	public function setUp()
