@@ -13,12 +13,17 @@ use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
  */
 class FunctionPatcher_test extends \PHPUnit_Framework_TestCase
 {
+	public function setUp()
+	{
+		$this->obj = new FunctionPatcher();
+	}
+
 	/**
 	 * @dataProvider provide_source
 	 */
 	public function test_patch($source, $expected)
 	{
-		list($actual,) = FunctionPatcher::patch($source);
+		list($actual,) = $this->obj->patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 
@@ -88,7 +93,7 @@ EOL
 
 		FunctionPatcher::addBlacklist('mt_rand');
 
-		list($actual,) = FunctionPatcher::patch($source);
+		list($actual,) = $this->obj->patch($source);
 		$this->assertEquals($expected, $actual);
 
 		FunctionPatcher::removeBlacklist('mt_rand');
@@ -123,7 +128,7 @@ EOL
 	 */
 	public function test_not_loaded_function($source, $expected)
 	{
-		list($actual,) = FunctionPatcher::patch($source);
+		list($actual,) = $this->obj->patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 

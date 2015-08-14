@@ -8,12 +8,17 @@ namespace Kenjis\MonkeyPatch\Patcher;
  */
 class MethodPatcher_test extends \PHPUnit_Framework_TestCase
 {
+	public function setUp()
+	{
+		$this->obj = new MethodPatcher();
+	}
+
 	/**
 	 * @dataProvider provide_source
 	 */
 	public function test_patch($source, $expected)
 	{
-		list($actual,) = MethodPatcher::patch($source);
+		list($actual,) = $this->obj->patch($source);
 		$this->assertEquals($expected, $actual);
 	}
 
