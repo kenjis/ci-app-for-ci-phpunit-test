@@ -3,12 +3,12 @@
 /**
  * @group ci-phpunit-tests
  */
-class CIPHPUnitTestReflection_test extends PHPUnit_Framework_TestCase
+class CIPHPUnitTestReflection_test extends TestCase
 {
 	public function test_getPrivateProperty_object()
 	{
 		$obj = new __TestForCIPHPUnitTestReflection();
-		$actual = CIPHPUnitTestReflection::getPrivateProperty($obj, 'private');
+		$actual = $this->reflection->getPrivateProperty($obj, 'private');
 		$this->assertEquals('secret', $actual);
 	}
 
@@ -23,7 +23,7 @@ class CIPHPUnitTestReflection_test extends PHPUnit_Framework_TestCase
 	public function test_setPrivateProperty_object()
 	{
 		$obj = new __TestForCIPHPUnitTestReflection();
-		CIPHPUnitTestReflection::setPrivateProperty(
+		$this->reflection->setPrivateProperty(
 			$obj, 'private', 'open'
 		);
 		$this->assertEquals('open', $obj->getPrivate());
@@ -31,7 +31,7 @@ class CIPHPUnitTestReflection_test extends PHPUnit_Framework_TestCase
 
 	public function test_setPrivateProperty_static()
 	{
-		CIPHPUnitTestReflection::setPrivateProperty(
+		$this->reflection->setPrivateProperty(
 			'__TestForCIPHPUnitTestReflection', 'static_private', 'abc'
 		);
 		$this->assertEquals(
@@ -42,7 +42,7 @@ class CIPHPUnitTestReflection_test extends PHPUnit_Framework_TestCase
 	public function test_getPrivateMethodInvoker_object()
 	{
 		$obj = new __TestForCIPHPUnitTestReflection();
-		$method = CIPHPUnitTestReflection::getPrivateMethodInvoker(
+		$method = $this->reflection->getPrivateMethodInvoker(
 			$obj, 'privateMethod'
 		);
 		$this->assertEquals(
@@ -52,7 +52,7 @@ class CIPHPUnitTestReflection_test extends PHPUnit_Framework_TestCase
 
 	public function test_getPrivateMethodInvoker_static()
 	{
-		$method = CIPHPUnitTestReflection::getPrivateMethodInvoker(
+		$method = $this->reflection->getPrivateMethodInvoker(
 			'__TestForCIPHPUnitTestReflection', 'privateStaticMethod'
 		);
 		$this->assertEquals(
