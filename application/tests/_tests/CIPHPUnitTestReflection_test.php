@@ -14,7 +14,7 @@ class CIPHPUnitTestReflection_test extends TestCase
 
 	public function test_getPrivateProperty_static()
 	{
-		$actual = CIPHPUnitTestReflection::getPrivateProperty(
+		$actual = $this->reflection->getPrivateProperty(
 			'__TestForCIPHPUnitTestReflection', 'static_private'
 		);
 		$this->assertEquals('xyz', $actual);
