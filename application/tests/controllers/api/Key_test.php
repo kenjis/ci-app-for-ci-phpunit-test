@@ -67,19 +67,21 @@ class Key_test extends TestCase
 
 	public function test_index_delete_key()
 	{
-		$this->request->setCallablePreConstructor(
-			function () {
-				$INPUT =& load_class('Input', 'core');
-				CIPHPUnitTestReflection::setPrivateProperty(
-					$INPUT,
-					'_raw_input_stream',
-					'key='.self::$key
-				);
-			}
-		);
+//		$this->request->setCallablePreConstructor(
+//			function () {
+//				$INPUT =& load_class('Input', 'core');
+//				CIPHPUnitTestReflection::setPrivateProperty(
+//					$INPUT,
+//					'_raw_input_stream',
+//					'key='.self::$key
+//				);
+//			}
+//		);
 
 		try {
-			$output = $this->request('DELETE', 'api/key/index');
+			$output = $this->request(
+				'DELETE', 'api/key/index', 'key='.self::$key
+			);
 		} catch (CIPHPUnitTestExitException $e) {
 			$output = ob_get_clean();
 		}
