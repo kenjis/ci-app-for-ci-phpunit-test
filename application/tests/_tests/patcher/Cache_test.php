@@ -16,7 +16,7 @@ class Cache_test extends \PHPUnit_Framework_TestCase
 		CIPHPUnitTest::setPatcherCacheDir();
 	}
 
-	public function test_getCacheDir()
+	public function test_setCacheDir()
 	{
 		$cache_dir = APPPATH . 'tests/_ci_phpunit_test/tmp/cache_test';
 		Cache::setCacheDir($cache_dir);
@@ -25,19 +25,53 @@ class Cache_test extends \PHPUnit_Framework_TestCase
 
 	public function test_writeTmpFunctionWhitelist()
 	{
-		Cache::createTmpListFiles();
-		$functions = [
+		Cache::createTmpListDir();
+		$list = [
 			'file_exists',
 			'file_get_contents',
 			'file_put_contents',
 		];
-		Cache::writeTmpFunctionWhitelist($functions);
+		Cache::writeTmpFunctionWhitelist($list);
 		
 		$actual = Cache::getTmpFunctionWhitelist();
-		$this->assertEquals($functions, $actual);
+		$this->assertEquals($list, $actual);
 	}
 
+	public function test_writeTmpPatcherList()
+	{
+		$list = [
+			'ExitPatcher',
+			'FunctionPatcher',
+			'MethodPatcher',
+		];
+		Cache::writeTmpPatcherList($list);
+		
+		$actual = Cache::getTmpPatcherList();
+		$this->assertEquals($list, $actual);
+	}
 
+	public function test_writeTmpIncludePaths()
+	{
+		$list = [
+			APPPATH,
+			BASEPATH,
+		];
+		Cache::writeTmpIncludePaths($list);
+		
+		$actual = Cache::getTmpIncludePaths();
+		$this->assertEquals($list, $actual);
+	}
+
+	public function test_writeTmpExcludePaths()
+	{
+		$list = [
+			APPPATH.'test',
+		];
+		Cache::writeTmpExcludePaths($list);
+		
+		$actual = Cache::getTmpExcludePaths();
+		$this->assertEquals($list, $actual);
+	}
 
 	public function test_clearSrcCache()
 	{
