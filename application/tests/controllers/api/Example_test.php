@@ -46,6 +46,23 @@ class Example_test extends TestCase
 		$this->assertResponseCode(200);
 	}
 
+	public function test_users_get_id_with_http_accept_header()
+	{
+//		$_SERVER['HTTP_ACCEPT'] = 'application/csv';
+		$this->request->setHeader('Accept', 'application/csv');
+		$output = $this->request('GET', 'api/example/users/id/1');
+		$this->assertEquals(
+			'id,name,email,fact
+1,John,john@example.com,"Loves coding"
+',
+			$output
+		);
+		$this->assertResponseCode(200);
+		$this->assertResponseHeader(
+			'Content-Type', 'application/csv; charset=utf-8'
+		);
+	}
+
 	public function test_users_get_id_user_not_found()
 	{
 		$output = $this->request('GET', 'api/example/users/id/999');
