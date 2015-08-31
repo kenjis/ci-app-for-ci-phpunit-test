@@ -46,6 +46,24 @@ class Example_test extends TestCase
 		$this->assertResponseCode(200);
 	}
 
+	public function test_users_get_id_query_string_format_xml()
+	{
+		set_is_cli(FALSE);
+		$this->warningOff();
+		$_SERVER['REQUEST_URI'] = 'api/example/users/id/1?format=xml';
+		$output = $this->request('GET', 'api/example/users/id/1');
+		set_is_cli(TRUE);
+		$this->warningOn();
+
+		$this->assertEquals(
+			'<?xml version="1.0" encoding="utf-8"?>
+<xml><id>1</id><name>John</name><email>john@example.com</email><fact>Loves coding</fact></xml>
+',
+			$output
+		);
+		$this->assertResponseCode(200);
+	}
+
 	public function test_users_get_id_with_http_accept_header()
 	{
 //		$_SERVER['HTTP_ACCEPT'] = 'application/csv';
