@@ -11,7 +11,7 @@ class CIPHPUnitTestRequest_test extends PHPUnit_Framework_TestCase
 	 */
 	public function test_getStatus()
 	{
-		$obj = new CIPHPUnitTestRequest();
+		$obj = new CIPHPUnitTestRequest($this);
 		$obj->getStatus();
 	}
 }
