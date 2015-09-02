@@ -49,14 +49,14 @@ class Example_test extends TestCase
 	public function test_users_get_id_query_string_format_xml_get_params()
 	{
 		set_is_cli(FALSE);
-		$this->warningOff();
+//		$this->warningOff();
 		$output = $this->request(
 			'GET',
 			'api/example/users/id/1',
 			['format' => 'xml']
 		);
 		set_is_cli(TRUE);
-		$this->warningOn();
+//		$this->warningOn();
 
 		$this->assertEquals(
 			'<?xml version="1.0" encoding="utf-8"?>
@@ -70,13 +70,13 @@ class Example_test extends TestCase
 	public function test_users_get_id_query_string_format_xml_uri_query_string()
 	{
 		set_is_cli(FALSE);
-		$this->warningOff();
+//		$this->warningOff();
 		$output = $this->request(
 			'GET',
 			'api/example/users/id/1?format=xml'
 		);
 		set_is_cli(TRUE);
-		$this->warningOn();
+//		$this->warningOn();
 
 		$this->assertEquals(
 			'<?xml version="1.0" encoding="utf-8"?>
