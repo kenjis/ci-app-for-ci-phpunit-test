@@ -73,7 +73,7 @@ class Key_test extends TestCase
 //		$this->request->setCallablePreConstructor(
 //			function () {
 //				$INPUT =& load_class('Input', 'core');
-//				CIPHPUnitTestReflection::setPrivateProperty(
+//				ReflectionHelper::setPrivateProperty(
 //					$INPUT,
 //					'_raw_input_stream',
 //					'key='.self::$key

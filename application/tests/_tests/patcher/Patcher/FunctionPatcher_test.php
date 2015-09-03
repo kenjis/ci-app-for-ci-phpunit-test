@@ -4,6 +4,7 @@ namespace Kenjis\MonkeyPatch\Patcher;
 
 use LogicException;
 
+use ReflectionHelper;
 use Kenjis\MonkeyPatch\MonkeyPatch;
 use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
 
@@ -85,7 +86,7 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
-		\CIPHPUnitTestReflection::setPrivateProperty(
+		ReflectionHelper::setPrivateProperty(
 			'Kenjis\MonkeyPatch\Patcher\FunctionPatcher',
 			'lock_function_list',
 			false
@@ -98,7 +99,7 @@ EOL
 
 		FunctionPatcher::removeBlacklist('mt_rand');
 
-		\CIPHPUnitTestReflection::setPrivateProperty(
+		ReflectionHelper::setPrivateProperty(
 			'Kenjis\MonkeyPatch\Patcher\FunctionPatcher',
 			'lock_function_list',
 			true

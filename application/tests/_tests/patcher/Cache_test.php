@@ -3,7 +3,7 @@
 namespace Kenjis\MonkeyPatch;
 
 use CIPHPUnitTest;
-use CIPHPUnitTestReflection;
+use ReflectionHelper;
 
 /**
  * @group ci-phpunit-test
@@ -78,7 +78,7 @@ class Cache_test extends \PHPUnit_Framework_TestCase
 	{
 		Cache::clearSrcCache();
 		$this->assertFalse(file_exists(
-			CIPHPUnitTestReflection::getPrivateProperty(
+			ReflectionHelper::getPrivateProperty(
 				__NAMESPACE__.'\Cache', 'src_cache_dir'
 			)
 		));
@@ -88,7 +88,7 @@ class Cache_test extends \PHPUnit_Framework_TestCase
 	{
 		Cache::clearCache();
 		$this->assertFalse(file_exists(
-			CIPHPUnitTestReflection::getPrivateProperty(
+			ReflectionHelper::getPrivateProperty(
 				__NAMESPACE__.'\Cache', 'cache_dir'
 			)
 		));
