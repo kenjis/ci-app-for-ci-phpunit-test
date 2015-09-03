@@ -46,7 +46,7 @@ class CIPHPUnitTestReflection_test extends TestCase
 			$obj, 'privateMethod'
 		);
 		$this->assertEquals(
-			'private', $method()
+			'private param1param2', $method('param1', 'param2')
 		);
 	}
 
@@ -56,7 +56,7 @@ class CIPHPUnitTestReflection_test extends TestCase
 			'__TestForCIPHPUnitTestReflection', 'privateStaticMethod'
 		);
 		$this->assertEquals(
-			'private_static', $method()
+			'private_static param1param2', $method('param1', 'param2')
 		);
 	}
 }
@@ -76,13 +76,13 @@ class __TestForCIPHPUnitTestReflection
 		return self::$static_private;
 	}
 
-	private function privateMethod()
+	private function privateMethod($param1, $param2)
 	{
-		return 'private';
+		return 'private ' . $param1 . $param2;
 	}
 
-	private static function privateStaticMethod()
+	private static function privateStaticMethod($param1, $param2)
 	{
-		return 'private_static';
+		return 'private_static ' . $param1 . $param2;
 	}
 }
