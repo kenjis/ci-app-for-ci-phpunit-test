@@ -12,4 +12,15 @@ class MY_Session extends CI_Session
 
 		parent::__construct($params);
 	}
+
+	public function sess_destroy()
+	{
+		if (ENVIRONMENT === 'testing')
+		{
+			log_message('debug', 'Session: calling session_destroy() skipped under testing.');
+			return;
+		}
+
+		parent::sess_destroy();
+	}
 }
