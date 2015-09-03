@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @group patcher
+ */
 class Key_test extends TestCase
 {
 	private static $key;

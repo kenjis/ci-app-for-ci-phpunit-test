@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @group ci-phpunit-tests
+ * @group ci-phpunit-test
  */
 class CIPHPUnitTestFileCache_test extends PHPUnit_Framework_TestCase
 {

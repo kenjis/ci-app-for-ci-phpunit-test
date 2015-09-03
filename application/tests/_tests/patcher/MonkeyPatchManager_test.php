@@ -5,7 +5,7 @@ namespace Kenjis\MonkeyPatch;
 use CIPHPUnitTest;
 
 /**
- * @group ci-phpunit-tests
+ * @group ci-phpunit-test
  * @group patcher
  */
 class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase

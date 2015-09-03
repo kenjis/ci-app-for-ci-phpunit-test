@@ -6,7 +6,8 @@ use CIPHPUnitTest;
 use CIPHPUnitTestReflection;
 
 /**
- * @group ci-phpunit-tests
+ * @group ci-phpunit-test
+ * @group patcher
  */
 class Cache_test extends \PHPUnit_Framework_TestCase
 {

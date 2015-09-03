@@ -2,6 +2,9 @@
 
 class Example_test extends TestCase
 {
+	/**
+	 * @group patcher
+	 */
 	public function test_users_get()
 	{
 		try {
@@ -17,6 +20,9 @@ class Example_test extends TestCase
 		$this->assertResponseCode(200);
 	}
 
+	/**
+	 * @group patcher
+	 */
 	public function test_users_get_format_csv()
 	{
 		try {

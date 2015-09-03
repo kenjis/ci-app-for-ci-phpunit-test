@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @group ci-phpunit-tests
+ * @group ci-phpunit-test
  */
 class CIPHPUnitTestReflection_test extends TestCase
 {

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @group patcher
+ */
 class Rest_test_test extends TestCase
 {
 	public function test_index_get()
