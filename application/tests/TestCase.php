@@ -15,6 +15,8 @@ class TestCase extends CIPHPUnitTestCase
 			$CI->load->database();
 			$CI->load->library('migration');
 			$CI->migration->current();
+			
+			self::$migrate = true;
 		}
 	}
 }
