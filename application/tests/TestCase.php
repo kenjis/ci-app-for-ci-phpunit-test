@@ -8,7 +8,7 @@ class TestCase extends CIPHPUnitTestCase
 	{
 		parent::setUpBeforeClass();
 		
-		// Run migration once
+		// Run migrations once
 		if (! self::$migrate)
 		{
 			$CI =& get_instance();
