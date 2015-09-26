@@ -39,6 +39,19 @@ class Patching_on_method_test extends TestCase
 		$this->assertContains('Nothing', $output);
 	}
 
+	public function test_index_return_null()
+	{
+		MonkeyPatch::patchMethod(
+			'Patching_on_method',
+			['index' => null]
+		);
+		MonkeyPatch::verifyInvokedOnce(
+			'Patching_on_method::index'
+		);
+		$output = $this->request('GET', 'patching_on_method');
+		$this->assertEquals('', $output);
+	}
+
 	public function test_auth()
 	{
 		MonkeyPatch::patchMethod(
