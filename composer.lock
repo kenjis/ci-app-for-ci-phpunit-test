@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "codeigniter/framework",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcit-ci/CodeIgniter.git",
-                "reference": "aaa14814fcd98cbb7e53a306b67a4a28a797e17b"
+                "reference": "84d0e6b8396a5bd22f757272a00d8df53fe19872"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcit-ci/CodeIgniter/zipball/aaa14814fcd98cbb7e53a306b67a4a28a797e17b",
-                "reference": "aaa14814fcd98cbb7e53a306b67a4a28a797e17b",
+                "url": "https://api.github.com/repos/bcit-ci/CodeIgniter/zipball/84d0e6b8396a5bd22f757272a00d8df53fe19872",
+                "reference": "84d0e6b8396a5bd22f757272a00d8df53fe19872",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,7 @@
             ],
             "description": "The CodeIgniter framework",
             "homepage": "http://codeigniter.com",
-            "time": "2015-08-07 11:31:33"
+            "time": "2015-10-08 14:23:54"
         }
     ],
     "packages-dev": [
