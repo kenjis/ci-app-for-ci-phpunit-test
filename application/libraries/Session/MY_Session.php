@@ -7,7 +7,6 @@ class MY_Session extends CI_Session
 		if (ENVIRONMENT === 'testing')
 		{
 			log_message('debug', 'Session: Initialization under testing aborted.');
-			$_SESSION = [];
 			return;
 		}
 
