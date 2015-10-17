@@ -25,7 +25,9 @@ class Super_global extends CI_Controller
 		echo "\n";
 		
 		ob_start();
-		var_export($_SESSION);
+		if (isset($_SESSION)) {
+			var_export($_SESSION);
+		}
 		$session = ob_get_clean();
 		echo '$_SESSION: ' . $session;
 		echo "\n";
