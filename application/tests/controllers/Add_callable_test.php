@@ -2,6 +2,15 @@
 
 class Add_callable_test extends TestCase
 {
+	public static function setUpBeforeClass()
+	{
+		parent::setUpBeforeClass();
+		
+		$CI =& get_instance();
+		$CI->load->library('Seeder');
+		$CI->seeder->call('CategorySeeder');
+	}
+
 	public function setUp()
 	{
 		$this->request->setCallable(
