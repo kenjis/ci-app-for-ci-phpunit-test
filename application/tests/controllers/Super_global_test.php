@@ -50,4 +50,31 @@ EOL;
 EOL;
 		$this->assertContains($expected, $output);
 	}
+
+	public function test_index_with_2nd_arg_array()
+	{
+		$output = $this->request(
+			'GET',
+			['super_global', 'index', '6146', 'new-song'],
+			[
+				'name' => 'Mike O\'Reilly',
+				'nickname' => '~mike',
+				'city' => '東京',
+			]
+		);
+
+		$expected = <<< 'EOL'
+$_GET: array (
+  'name' => 'Mike O\'Reilly',
+  'nickname' => '~mike',
+  'city' => '東京',
+)
+EOL;
+		$this->assertContains($expected, $output);
+
+		$expected = <<< 'EOL'
+'REQUEST_URI' => '/super_global/index/6146/new-song?name=Mike+O%27Reilly&nickname=%7Emike&city=%E6%9D%B1%E4%BA%AC',
+EOL;
+		$this->assertContains($expected, $output);
+	}
 }
