@@ -26,6 +26,24 @@ EOL;
 		$this->assertResponseCode(200);
 	}
 
+	public function test_index_get_with_get_array()
+	{
+		try {
+			$output = $this->request(
+				'GET', 'api/rest_test',
+				['name' => 'John O\'reilly', 'city' => 'Tokyo']
+			);
+		} catch (CIPHPUnitTestExitException $e) {
+			$output = ob_get_clean();
+		}
+
+		$expected = <<< 'EOL'
+{"get":{"name":"John O'reilly","city":"Tokyo"},"query":{"name":"John O'reilly","city":"Tokyo"}}
+EOL;
+		$this->assertEquals($expected, $output);
+		$this->assertResponseCode(200);
+	}
+
 	public function test_index_post()
 	{
 		set_is_cli(FALSE);
