@@ -51,7 +51,7 @@ class Key_test extends TestCase
 		$response = json_decode($output);
 
 		$this->assertTrue($response->status);
-		$this->assertEquals('API key was updated', $response->success);
+		$this->assertEquals('API key was updated', $response->message);
 		$this->assertResponseCode(200);
 	}
 

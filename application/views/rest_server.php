@@ -1,25 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+    defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>REST Server Tests</title>
 
-    <style type="text/css">
+    <style>
 
     ::selection { background-color: #E13300; color: white; }
     ::-moz-selection { background-color: #E13300; color: white; }
 
     body {
-        background-color: #fff;
+        background-color: #FFF;
         margin: 40px;
         font: 16px/20px normal Helvetica, Arial, sans-serif;
         color: #4F5155;
+        word-wrap: break-word;
     }
 
     a {
-        color: #003399;
+        color: #039;
         background-color: transparent;
         font-weight: normal;
     }
@@ -112,35 +115,95 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
-<script type="text/javascript">
-//<![CDATA[
+<script>
+    // Create an 'App' namespace
+    var App = App || {};
 
-    $(function() {
+    // Basic rest module using an IIFE as a way of enclosing private variables
+    App.rest = (function (window, $) {
+        // Fields
 
-        $("#ajax").on("click", function(evt) {
+        // Cache the jQuery selector
+        var _$ajax = null;
 
-            evt.preventDefault();
+        // Methods (private)
 
+        /**
+         * Called on Ajax done
+         *
+         * @return {undefined}
+         */
+        function _ajaxDone(data) {
+            // The 'data' parameter is an array of objects that can be iterated over
+            window.alert(window.JSON.stringify(data, null, 2));
+        }
+
+        /**
+         * Called on Ajax fail
+         *
+         * @return {undefined}
+         */
+        function _ajaxFail() {
+            window.alert('Oh no! A problem with the Ajax request!');
+        }
+
+        /**
+         * On Ajax request
+         *
+         * @param {HTMLElement} $this Current element selected
+         * @return {undefined}
+         */
+        function _ajaxEvent($this) {
             $.ajax({
+                    // URL from the link that was 'clicked' on
+                    url: $this.attr('href')
+                })
+                .done(_ajaxDone)
+                .fail(_ajaxFail);
+        }
 
-                url: $(this).attr("href"), // URL from the link that was clicked on.
+        /**
+         * Bind events
+         *
+         * @return {undefined}
+         */
+        function _bindEvents() {
+            // Namespace the 'click' event
+            _$ajax.on('click.app.rest.module', function (event) {
+                event.preventDefault();
 
-            }).done(function (data) {
-
-                // The 'data' parameter is an array of objects that can be looped over.
-
-                alert(window.JSON.stringify(data));
-
-            }).fail(function () {
-
-                alert('Oh no! A problem with the AJAX request!');
+                // Pass this to the Ajax event function
+                _ajaxEvent($(this));
             });
-        });
+        }
+
+        /**
+         * Cache the DOM node(s)
+         *
+         * @return {undefined}
+         */
+        function _cacheDom() {
+            _$ajax = $('#ajax');
+        }
+
+        // Public API
+        return {
+            init: function () {
+                // Cache the DOM and bind event(s)
+                _cacheDom();
+                _bindEvents();
+            }
+        };
+    })(window, window.jQuery);
+
+    // DOM ready event
+    $(function () {
+        // Initialise the App module
+        App.rest.init();
     });
 
-//]]>
 </script>
 
 </body>

@@ -14,7 +14,7 @@ $config['force_https'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
-| REST Format
+| REST Output Format
 |--------------------------------------------------------------------------
 |
 | The default format of the response
@@ -30,6 +30,29 @@ $config['force_https'] = FALSE;
 |
 */
 $config['rest_default_format'] = 'json';
+
+/*
+|--------------------------------------------------------------------------
+| REST Supported Output Formats
+|--------------------------------------------------------------------------
+|
+| The following setting contains a list of the supported/allowed formats.
+| You may remove those formats that you don't want to use.
+| If the default format $config['rest_default_format'] is missing within
+| $config['rest_supported_formats'], it will be added silently during
+| REST_Controller initialization.
+|
+*/
+$config['rest_supported_formats'] = [
+    'json',
+    'array',
+    'csv',
+    'html',
+    'jsonp',
+    'php',
+    'serialized',
+    'xml',
+];
 
 /*
 |--------------------------------------------------------------------------
@@ -352,7 +375,7 @@ $config['rest_key_name'] = 'X-API-KEY';
 |       `time` INT(11) NOT NULL,
 |       `rtime` FLOAT DEFAULT NULL,
 |       `authorized` VARCHAR(1) NOT NULL,
-|       `response_code` SMALLINT(3) NOT NULL,
+|       `response_code` smallint(3) DEFAULT '0',
 |       PRIMARY KEY (`id`)
 |   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
@@ -477,3 +500,13 @@ $config['rest_ignore_http_accept'] = FALSE;
 |
 */
 $config['rest_ajax_only'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| REST Language File
+|--------------------------------------------------------------------------
+|
+| Language file to load from the language directory
+|
+*/
+$config['rest_language'] = 'english';

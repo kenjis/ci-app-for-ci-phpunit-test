@@ -114,7 +114,7 @@ class Example_test extends TestCase
 	{
 		$output = $this->request('GET', 'api/example/users/id/999');
 		$this->assertEquals(
-			'{"status":false,"error":"User could not be found"}',
+			'{"status":false,"message":"User could not be found"}',
 			$output
 		);
 		$this->assertResponseCode(404);
