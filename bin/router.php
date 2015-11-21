@@ -9,6 +9,11 @@
  */
 
 /**
+ * If you want to use ci-phpunit-test and psysh, remove comment mark below
+ */
+//require __DIR__ . '/../application/tests/_ci_phpunit_test/patcher/bootstrap.php';
+
+/**
  * Router script for PHP built-in server
  */
 $_SERVER = array_merge($_SERVER, $_ENV);
