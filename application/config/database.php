@@ -74,8 +74,9 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => 'sqlite:' . APPPATH . 'data/sqlite-database.db',
+	'dsn'      => 'sqlite:' . APPPATH . 'data/sqlite-database.db',
+//	'dsn'      => 'sqlite::memory:',
+	'hostname' => 'localhost',
 	'username' => '',
 	'password' => '',
 	'database' => '',
