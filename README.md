@@ -1,6 +1,6 @@
-# CodeIgniter Test Application for CI PHPUnit Test
+# CodeIgniter Test Application for ci-phpunit-test
 
-This CodeIgniter Application is for testing of [CI PHPUnit Test](https://github.com/kenjis/ci-phpunit-test).
+This CodeIgniter Application is for testing of [ci-phpunit-test](https://github.com/kenjis/ci-phpunit-test).
 
 ## Requirements
 
