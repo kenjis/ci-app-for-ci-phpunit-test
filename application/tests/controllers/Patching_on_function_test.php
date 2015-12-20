@@ -45,6 +45,19 @@ class Patching_on_function_test extends TestCase
 		$this->assertEquals("61616161\n1\n", $output);
 	}
 
+	public function test_openssl_random_pseudo_bytes_null()
+	{
+		MonkeyPatch::patchFunction(
+			'openssl_random_pseudo_bytes',
+			null,
+			'Patching_on_function'
+		);
+		$output = $this->request(
+			'GET', 'patching_on_function/openssl_random_pseudo_bytes'
+		);
+		$this->assertEquals("\n1\n", $output);
+	}
+
 	public function test_openssl_random_pseudo_bytes_callable()
 	{
 		MonkeyPatch::patchFunction(
