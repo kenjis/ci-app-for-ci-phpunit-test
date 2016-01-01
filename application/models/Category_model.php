@@ -14,4 +14,12 @@ class Category_model extends CI_Model
 		$query = $this->db->get('category');
 		return $query->result();
 	}
+
+	public function add_category($name)
+	{
+		$data = [
+			'name' => $name,
+		];
+		$this->db->insert('category', $data);
+	}
 }
