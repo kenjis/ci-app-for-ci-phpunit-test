@@ -207,4 +207,28 @@ class Patching_on_function_test extends TestCase
 			$output
 		);
 	}
+
+	public function test_header()
+	{
+		MonkeyPatch::patchFunction(
+			'header', null, 'Patching_on_function::header'
+		);
+		$output = $this->request('GET', 'patching_on_function/header');
+		MonkeyPatch::verifyInvokedOnce(
+			'header', ['Location: http://www.example.com/']
+		);
+		$this->assertEquals('call header()', $output);
+	}
+
+	public function test_setcookie()
+	{
+		MonkeyPatch::patchFunction(
+			'setcookie', null, 'Patching_on_function::setcookie'
+		);
+		$output = $this->request('GET', 'patching_on_function/setcookie');
+		MonkeyPatch::verifyInvokedOnce(
+			'setcookie', ['TestCookie', 'something from somewhere']
+		);
+		$this->assertEquals('call setcookie()', $output);
+	}
 }

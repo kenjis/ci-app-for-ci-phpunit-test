@@ -107,4 +107,16 @@ class Patching_on_function extends CI_Controller
 			echo 'I don\'t have microtime().';
 		}
 	}
+
+	public function header()
+	{
+		header('Location: http://www.example.com/');
+		echo 'call header()';
+	}
+
+	public function setcookie()
+	{
+		setcookie('TestCookie', 'something from somewhere');
+		echo 'call setcookie()';
+	}
 }
