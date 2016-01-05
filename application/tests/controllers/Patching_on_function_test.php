@@ -223,7 +223,7 @@ class Patching_on_function_test extends TestCase
 	public function test_setcookie()
 	{
 		MonkeyPatch::patchFunction(
-			'setcookie', null, 'Patching_on_function::setcookie'
+			'setcookie', true, 'Patching_on_function::setcookie'
 		);
 		$output = $this->request('GET', 'patching_on_function/setcookie');
 		MonkeyPatch::verifyInvokedOnce(
