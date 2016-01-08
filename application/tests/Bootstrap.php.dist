@@ -299,15 +299,17 @@ switch (ENVIRONMENT)
 require __DIR__ . '/_ci_phpunit_test/patcher/bootstrap.php';
 MonkeyPatchManager::init([
 	'cache_dir' => APPPATH . 'tests/_ci_phpunit_test/tmp/cache',
-	// Directories to patch on source files
+	// Directories to patch source files
 	'include_paths' => [
 		APPPATH,
 		BASEPATH,
 		APPPATH . 'tests/_ci_phpunit_test/replacing/',
 	],
 	// Excluding directories to patch
+	// If you want to patch files inside paths below, you must add the directory starting with '-'
 	'exclude_paths' => [
 		APPPATH . 'tests/',
+		'-' . APPPATH . 'tests/_ci_phpunit_test/replacing/',
 	],
 	// All patchers you use
 	'patcher_list' => [
