@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "codeigniter/framework",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcit-ci/CodeIgniter.git",
-                "reference": "e7f0e7aa3d48778b5ad926eda14c825f62f421eb"
+                "reference": "ac067858c21250dd8c60cdc1f9bc12ba2ff82755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcit-ci/CodeIgniter/zipball/e7f0e7aa3d48778b5ad926eda14c825f62f421eb",
-                "reference": "e7f0e7aa3d48778b5ad926eda14c825f62f421eb",
+                "url": "https://api.github.com/repos/bcit-ci/CodeIgniter/zipball/ac067858c21250dd8c60cdc1f9bc12ba2ff82755",
+                "reference": "ac067858c21250dd8c60cdc1f9bc12ba2ff82755",
                 "shasum": ""
             },
             "require": {
@@ -33,8 +33,8 @@
                 "MIT"
             ],
             "description": "The CodeIgniter framework",
-            "homepage": "http://codeigniter.com",
-            "time": "2015-10-31 17:37:24"
+            "homepage": "https://codeigniter.com",
+            "time": "2016-01-13 00:09:27"
         }
     ],
     "packages-dev": [
@@ -313,12 +313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "20a1d8b1f375120cdaf1a40693e3ad1bec395be6"
+                "reference": "6f129cfe4d12f106bd4b3369af7abf9093013d4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/20a1d8b1f375120cdaf1a40693e3ad1bec395be6",
-                "reference": "20a1d8b1f375120cdaf1a40693e3ad1bec395be6",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/6f129cfe4d12f106bd4b3369af7abf9093013d4b",
+                "reference": "6f129cfe4d12f106bd4b3369af7abf9093013d4b",
                 "shasum": ""
             },
             "require": {
@@ -352,7 +352,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2016-01-05 00:50:19"
+            "time": "2016-01-13 02:56:25"
         },
         {
             "name": "mikey179/vfsStream",
