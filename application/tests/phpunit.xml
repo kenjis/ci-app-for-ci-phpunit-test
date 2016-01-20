@@ -16,6 +16,8 @@
 			<exclude>
 				<directory suffix=".php">./_ci_phpunit_test/patcher/third_party</directory>
 				<directory suffix=".php">./_ci_phpunit_test/tmp</directory>
+				<file>./_ci_phpunit_test/autoloader.php</file>
+				<file>./_ci_phpunit_test/TestSuiteProvider.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
