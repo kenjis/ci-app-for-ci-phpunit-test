@@ -313,12 +313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "6f129cfe4d12f106bd4b3369af7abf9093013d4b"
+                "reference": "e9b39c3dd886c682f62bbf172313b8c0148f4305"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/6f129cfe4d12f106bd4b3369af7abf9093013d4b",
-                "reference": "6f129cfe4d12f106bd4b3369af7abf9093013d4b",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/e9b39c3dd886c682f62bbf172313b8c0148f4305",
+                "reference": "e9b39c3dd886c682f62bbf172313b8c0148f4305",
                 "shasum": ""
             },
             "require": {
@@ -352,7 +352,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2016-01-13 02:56:25"
+            "time": "2016-01-20 11:19:50"
         },
         {
             "name": "mikey179/vfsStream",
@@ -1522,16 +1522,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc"
+                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a5eb815363c0388e83247e7e9853e5dbc14999cc",
-                "reference": "a5eb815363c0388e83247e7e9853e5dbc14999cc",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
+                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
                 "shasum": ""
             },
             "require": {
@@ -1578,7 +1578,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "symfony/filesystem",
