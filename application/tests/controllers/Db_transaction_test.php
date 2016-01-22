@@ -14,7 +14,6 @@ class Db_transaction_test extends TestCase
 	public function setUp()
 	{
 		$this->resetInstance();
-		$this->CI->load->database();
 		$this->db = $this->CI->load->database('default', TRUE);
 		$this->db->trans_begin();
 		$DB = $this->db;
