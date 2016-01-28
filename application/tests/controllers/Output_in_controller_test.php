@@ -13,4 +13,10 @@ class Output_in_controller_test extends TestCase
 		$output = $this->request('GET', ['Output_in_controller', 'index']);
 		$this->assertEquals('bra bra bra', $output);
 	}
+
+	public function test_output()
+	{
+		$output = $this->request('GET', ['Output_in_controller', '_output', 'abc']);
+		$this->assertEquals('$output is &quot;abc&quot;', $output);
+	}
 }
