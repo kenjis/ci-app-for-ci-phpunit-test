@@ -316,12 +316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "1afbdd7bf63f909a3c8c5f1a73a90f3a4a249a4c"
+                "reference": "93d41e9c6d0dd7f7ccb34f9d8ef1fba48422b72f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/1afbdd7bf63f909a3c8c5f1a73a90f3a4a249a4c",
-                "reference": "1afbdd7bf63f909a3c8c5f1a73a90f3a4a249a4c",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/93d41e9c6d0dd7f7ccb34f9d8ef1fba48422b72f",
+                "reference": "93d41e9c6d0dd7f7ccb34f9d8ef1fba48422b72f",
                 "shasum": ""
             },
             "require": {
@@ -355,7 +355,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2016-03-09 21:26:59"
+            "time": "2016-03-12 09:07:01"
         },
         {
             "name": "mikey179/vfsStream",
@@ -740,16 +740,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.23",
+            "version": "4.8.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483"
+                "reference": "a1066c562c52900a142a0e2bbf0582994671385e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e351261f9cd33daf205a131a1ba61c6d33bd483",
-                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1066c562c52900a142a0e2bbf0582994671385e",
+                "reference": "a1066c562c52900a142a0e2bbf0582994671385e",
                 "shasum": ""
             },
             "require": {
@@ -808,7 +808,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-02-11 14:56:33"
+            "time": "2016-03-14 06:16:08"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
