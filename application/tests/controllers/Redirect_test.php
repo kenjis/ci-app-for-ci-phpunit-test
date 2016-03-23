@@ -14,6 +14,12 @@ class Redirect_test extends TestCase
 		$this->assertRedirect('/', 302);
 	}
 
+	public function test_external_uri()
+	{
+		$this->request('GET', 'redirect/external');
+		$this->assertRedirect('http://www.example.com', 302);
+	}
+
 	public function test_refresh()
 	{
 		$this->request('GET', ['Redirect', 'refresh']);
@@ -24,5 +30,11 @@ class Redirect_test extends TestCase
 	{
 		$this->request('GET', 'redirect/refresh');
 		$this->assertRedirect('/', 200);
+	}
+
+	public function test_refresh_external_uri()
+	{
+		$this->request('GET', 'redirect/refresh_external');
+		$this->assertRedirect('http://www.example.com', 200);
 	}
 }
