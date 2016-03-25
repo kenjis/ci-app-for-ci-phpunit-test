@@ -316,6 +316,7 @@ MonkeyPatchManager::init([
 		'ExitPatcher',
 		'FunctionPatcher',
 		'MethodPatcher',
+		'ConstantPatcher',
 	],
 	// Functions to patch
 	'functions_to_patch' => [
