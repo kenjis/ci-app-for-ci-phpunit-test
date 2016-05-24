@@ -20,6 +20,13 @@ class Patching_on_function extends CI_Controller
 		echo "$cstrong\n";
 	}
 
+	public function openssl_random_pseudo_bytes_without_2nd_arg()
+	{
+		$bytes = openssl_random_pseudo_bytes(4);
+		$hex   = bin2hex($bytes);
+		echo "$hex\n";
+	}
+
 	public function function_exists()
 	{
 		if (function_exists('random_bytes'))
