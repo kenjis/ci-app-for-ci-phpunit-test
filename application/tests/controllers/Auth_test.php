@@ -5,7 +5,7 @@ class Auth_test extends TestCase
 	public function test_index()
 	{
 		// This request is redirected to '/auth/login'
-		$this->request('GET', ['Auth', 'index']);
+		$this->request('GET', 'auth/index');
 		$this->assertRedirect('auth/login');
 	}
 
@@ -21,7 +21,7 @@ class Auth_test extends TestCase
 				$CI->ion_auth = $auth;
 			}
 		);
-		$output = $this->request('GET', ['Auth', 'index']);
+		$output = $this->request('GET', 'auth/index');
 		$this->assertContains('<p>Below is a list of the users.</p>', $output);
 	}
 
