@@ -92,17 +92,25 @@ EOL
 
 [<<<'EOL'
 <?php
-interface Foo
+abstract class Foo
 {
-	public function bar();
+	protected abstract function bar();
+	public function run()
+	{
+		$this->bar();
+	}
 }
 EOL
 ,
 <<<'EOL'
 <?php
-interface Foo
+abstract class Foo
 {
-	public function bar();
+	protected abstract function bar();
+	public function run()
+	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
+		$this->bar();
+	}
 }
 EOL
 ],
