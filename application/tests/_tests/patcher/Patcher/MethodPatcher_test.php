@@ -89,6 +89,23 @@ class Foo
 }
 EOL
 ],
+
+[<<<'EOL'
+<?php
+interface Foo
+{
+	public function bar();
+}
+EOL
+,
+<<<'EOL'
+<?php
+interface Foo
+{
+	public function bar();
+}
+EOL
+],
 		];
 	}
 }
