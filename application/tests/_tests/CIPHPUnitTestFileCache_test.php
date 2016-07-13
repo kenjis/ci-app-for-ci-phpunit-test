@@ -43,6 +43,11 @@ class CIPHPUnitTestFileCache_test extends PHPUnit_Framework_TestCase
 	{
 		chmod(__DIR__.'/tmp', 0);
 		$cache_file = __DIR__.'/tmp/cache_fail.php';
+		if(file_put_contents($cache_file, '') !== false)
+		{
+			unlink($cache_file);
+			$this->markTestSkipped('Ignored for root user');
+		}
 		@new CIPHPUnitTestFileCache($cache_file);
 	}
 
@@ -54,6 +59,12 @@ class CIPHPUnitTestFileCache_test extends PHPUnit_Framework_TestCase
 	{
 		chmod(__DIR__.'/tmp', 0);
 		$cache_file = __DIR__.'/tmp/sub/cache_fail.php';
+		$dir = dirname($cache_file);
+		if (@mkdir($dir, 0777, true) !== false)
+		{
+			rmdir($dir);
+			$this->markTestSkipped('Ignored for root user');
+		}
 		@new CIPHPUnitTestFileCache($cache_file);
 	}
 
