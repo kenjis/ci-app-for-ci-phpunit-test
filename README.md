@@ -26,3 +26,4 @@ $ ./test.sh
 * [CodeIgniter Deployer](https://github.com/kenjis/codeigniter-deployer)
 * [CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker)
 * [CodeIgniter Widget (View Partial) Sample](https://github.com/kenjis/codeigniter-widgets)
+* [CodeIgniter3 Namespaced Controller](https://github.com/kenjis/codeigniter3-namespaced-controller)
