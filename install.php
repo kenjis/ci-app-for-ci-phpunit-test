@@ -9,13 +9,29 @@
  * @link       https://github.com/kenjis/ci-phpunit-test
  */
 
+$installer = new Installer();
+$installer->prepareForWindows();
+
 system('php vendor/kenjis/ci-phpunit-test/install.php');
 
-$installer = new Installer();
 $installer->install();
 
 class Installer
 {
+    public static function prepareForWindows()
+    {
+        if (! self::isWindows()) {
+            return;
+        }
+
+        // Remove symlink
+        unlink('application/tests/_ci_phpunit_test');
+    }
+
+    private static function isWindows(){
+        return defined('PHP_WINDOWS_VERSION_MAJOR');
+    }
+
     public static function install()
     {
         self::recursiveCopy(
