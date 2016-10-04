@@ -2,13 +2,14 @@
 
 namespace Kenjis\MonkeyPatch;
 
+use TestCase;
 use CIPHPUnitTest;
 
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class MonkeyPatchManager_test extends \PHPUnit_Framework_TestCase
+class MonkeyPatchManager_test extends TestCase
 {
 	public static function tearDownAfterClass()
 	{

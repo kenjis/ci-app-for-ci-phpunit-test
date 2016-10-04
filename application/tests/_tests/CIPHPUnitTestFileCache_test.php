@@ -3,7 +3,7 @@
 /**
  * @group ci-phpunit-test
  */
-class CIPHPUnitTestFileCache_test extends PHPUnit_Framework_TestCase
+class CIPHPUnitTestFileCache_test extends TestCase
 {
 	public static function setUpBeforeClass()
 	{

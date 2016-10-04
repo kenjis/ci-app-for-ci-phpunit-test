@@ -2,11 +2,13 @@
 
 namespace Kenjis\MonkeyPatch;
 
+use TestCase;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class PathChecker_test extends \PHPUnit_Framework_TestCase
+class PathChecker_test extends TestCase
 {
 	public static function tearDownAfterClass()
 	{

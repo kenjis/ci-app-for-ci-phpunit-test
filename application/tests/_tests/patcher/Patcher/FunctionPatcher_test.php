@@ -4,6 +4,7 @@ namespace Kenjis\MonkeyPatch\Patcher;
 
 use LogicException;
 
+use TestCase;
 use ReflectionHelper;
 use Kenjis\MonkeyPatch\MonkeyPatch;
 use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
@@ -12,7 +13,7 @@ use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
  * @group ci-phpunit-test
  * @group patcher
  */
-class FunctionPatcher_test extends \PHPUnit_Framework_TestCase
+class FunctionPatcher_test extends TestCase
 {
 	public function setUp()
 	{

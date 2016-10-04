@@ -2,11 +2,13 @@
 
 namespace Kenjis\MonkeyPatch\Patcher;
 
+use TestCase;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class Backtrace_test extends \PHPUnit_Framework_TestCase
+class Backtrace_test extends TestCase
 {
 	public function test_getInfo_FunctionPatcher()
 	{

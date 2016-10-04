@@ -2,11 +2,13 @@
 
 namespace Kenjis\MonkeyPatch\Patcher;
 
+use TestCase;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class ConstantPatcher_test extends \PHPUnit_Framework_TestCase
+class ConstantPatcher_test extends TestCase
 {
 	public function setUp()
 	{

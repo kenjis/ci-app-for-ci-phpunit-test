@@ -2,11 +2,13 @@
 
 namespace Kenjis\MonkeyPatch\Patcher;
 
+use TestCase;
+
 /**
  * @group ci-phpunit-test
  * @group patcher
  */
-class ExitPatcher_test extends \PHPUnit_Framework_TestCase
+class ExitPatcher_test extends TestCase
 {
 	/**
 	 * @dataProvider provide_source
