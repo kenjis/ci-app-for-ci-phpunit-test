@@ -77,4 +77,16 @@ EOL;
 EOL;
 		$this->assertContains($expected, $output);
 	}
+
+	public function test_index_path_info()
+    {
+        $output = $this->request(
+            'GET',
+            'super_global/index'
+        );
+        $expected = <<< 'EOL'
+'PATH_INFO' => '/super_global/index',
+EOL;
+        $this->assertContains($expected, $output);
+    }
 }
