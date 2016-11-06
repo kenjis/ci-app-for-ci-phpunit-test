@@ -25,4 +25,16 @@ class CIPHPUnitTestDouble_test extends TestCase
 		$mock = $this->getDouble('CI_Input', ['method' => $expected]);
 		$mock->method('abc', 'def');
 	}
+
+	public function test_getDouble_constructor_param()
+	{
+		$mock = $this->getDouble(
+			'SplFileObject',
+			[
+				'current' => ['foo', 'bar'],
+				'next'    => NULL
+			],
+			['php://memory']
+		);
+	}
 }
