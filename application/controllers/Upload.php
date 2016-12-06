@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property CI_Upload $upload
+ */
 class Upload extends CI_Controller
 {
 	public function __construct()
