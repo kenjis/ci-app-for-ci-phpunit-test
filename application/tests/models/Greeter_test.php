@@ -7,9 +7,7 @@ class Greeter_test extends TestCase
 {
 	public function setUp()
 	{
-		$this->resetInstance();
-		$this->CI->load->model('Greeter');
-		$this->obj = $this->CI->Greeter;
+		$this->obj = $this->newModel('Greeter');
 	}
 
 	/**

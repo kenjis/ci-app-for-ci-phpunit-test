@@ -4,9 +4,7 @@ class Category_model_mocking_db_test extends TestCase
 {
 	public function setUp()
 	{
-		$this->resetInstance();
-		$this->CI->load->model('Category_model');
-		$this->obj = $this->CI->Category_model;
+		$this->obj = $this->newModel('Category_model');
 	}
 
 	public function test_get_category_list()
