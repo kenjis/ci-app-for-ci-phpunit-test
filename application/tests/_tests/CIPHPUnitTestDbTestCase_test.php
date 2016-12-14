@@ -7,7 +7,7 @@ class CIPHPUnitTestDbTestCase_test extends DbTestCase
 {
 	private $table = 'category';
 
-	public function test_when_you_has_one_recored_in_database_then_you_can_see_one_record()
+	public function test_when_you_have_one_recored_in_database_then_you_can_see_one_record()
 	{
 		$this->db->truncate($this->table);
 
