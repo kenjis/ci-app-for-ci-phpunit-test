@@ -15,11 +15,24 @@ class Backtrace_test extends TestCase
 		$trace = debug_backtrace();
 		$info = Backtrace::getInfo('FunctionPatcher', $trace);
 
-		$this->assertEquals('PHPUnit_Framework_TestCase', $info['class']);
+		if (class_exists('PHPUnit\Framework\TestCase'))
+		{
+			// PHPUnit 6.0
+			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
+			$this->assertEquals(
+				'PHPUnit\Framework\TestCase::runBare', $info['class_method']
+			);
+		}
+		else
+		{
+			// PHPUnit 5.7 and before
+			$this->assertEquals('PHPUnit_Framework_TestCase', $info['class']);
+			$this->assertEquals(
+				'PHPUnit_Framework_TestCase::runBare', $info['class_method']
+			);
+		}
+
 		$this->assertEquals('runBare', $info['method']);
-		$this->assertEquals(
-			'PHPUnit_Framework_TestCase::runBare', $info['class_method']
-		);
 		$this->assertNull($info['function']);
 	}
 
@@ -152,11 +165,24 @@ class Backtrace_test extends TestCase
 		$trace = debug_backtrace();
 		$info = Backtrace::getInfo('MethodPatcher', $trace);
 
-		$this->assertEquals('PHPUnit_Framework_TestCase', $info['class']);
+		if (class_exists('PHPUnit\Framework\TestCase'))
+		{
+			// PHPUnit 6.0
+			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
+			$this->assertEquals(
+				'PHPUnit\Framework\TestCase::runTest', $info['class_method']
+			);
+		}
+		else
+		{
+			// PHPUnit 5.7 and before
+			$this->assertEquals('PHPUnit_Framework_TestCase', $info['class']);
+			$this->assertEquals(
+				'PHPUnit_Framework_TestCase::runTest', $info['class_method']
+			);
+		}
+
 		$this->assertEquals('runTest', $info['method']);
-		$this->assertEquals(
-			'PHPUnit_Framework_TestCase::runTest', $info['class_method']
-		);
 		$this->assertNull($info['function']);
 	}
 }
