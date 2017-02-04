@@ -15,7 +15,7 @@ class Backtrace_test extends TestCase
 		$trace = debug_backtrace();
 		$info = Backtrace::getInfo('FunctionPatcher', $trace);
 
-		if (class_exists('PHPUnit\Framework\TestCase'))
+		if (class_exists('PHPUnit\Runner\Version'))
 		{
 			// PHPUnit 6.0
 			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
@@ -165,7 +165,7 @@ class Backtrace_test extends TestCase
 		$trace = debug_backtrace();
 		$info = Backtrace::getInfo('MethodPatcher', $trace);
 
-		if (class_exists('PHPUnit\Framework\TestCase'))
+		if (class_exists('PHPUnit\Runner\Version'))
 		{
 			// PHPUnit 6.0
 			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
