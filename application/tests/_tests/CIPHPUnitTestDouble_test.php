@@ -36,5 +36,6 @@ class CIPHPUnitTestDouble_test extends TestCase
 			],
 			['php://memory']
 		);
+		$this->assertEquals(NULL, $mock->next());
 	}
 }
