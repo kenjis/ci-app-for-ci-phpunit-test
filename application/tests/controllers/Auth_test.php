@@ -32,7 +32,12 @@ class Auth_test extends TestCase
 				// Get mock object
 				$validation = $this->getDouble(
 					'CI_Form_validation',
-					['set_rules' => NULL, 'run' => FALSE, 'set_value' => 'foo']
+					[
+						'set_rules' => NULL,
+						'run' => FALSE,
+						'reset_validation' => NULL,
+						'set_value' => 'foo',
+					]
 				);
 				// Verify invocations
 				$this->verifyInvokedMultipleTimes($validation, 'set_rules', 2);
