@@ -43,7 +43,7 @@ class CIPHPUnitTestFileCache_test extends TestCase
 	{
 		chmod(__DIR__.'/tmp', 0);
 		$cache_file = __DIR__.'/tmp/cache_fail.php';
-		if(file_put_contents($cache_file, '') !== false)
+		if (file_put_contents($cache_file, '') !== false)
 		{
 			unlink($cache_file);
 			$this->markTestSkipped('Ignored for root user');
