@@ -1,15 +1,16 @@
 {
-    "description": "The CodeIgniter Test Application for CI PHPUnit Test",
+    "description": "The CodeIgniter Test Application for ci-phpunit-test",
     "type": "project",
     "require": {
         "php": ">=5.4",
-        "codeigniter/framework": "3.0.*"
+        "codeigniter/framework": "3.1.*"
     },
     "require-dev": {
         "mikey179/vfsStream": "1.1.*",
-        "kenjis/ci-phpunit-test": "dev-master",
-        "satooshi/php-coveralls": "0.6.*",
-        "phpunit/phpunit": "4.8.*"
+        "kenjis/ci-phpunit-test": "1.0.x@dev",
+        "satooshi/php-coveralls": "^1.0",
+        "phpunit/phpunit": "4.8.*|5.7.*|6.0.*",
+        "psy/psysh": "0.8.*"
     },
     "repositories": [
         { "type": "vcs", "url": "/Users/kenji/work/CodeIgniter/ci-phpunit-test" }
