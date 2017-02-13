@@ -38,4 +38,11 @@ class CIPHPUnitTestDouble_test extends TestCase
 		);
 		$this->assertEquals(NULL, $mock->next());
 	}
+
+	public function test_getDobule_method_returns_phpunit_stub()
+	{
+		$mock = $this->getDouble('CI_Email', ['to' => $this->returnSelf()]);
+		$expected = $mock->to('test@example.com');
+		$this->assertEquals($expected, $mock);
+	}
 }
