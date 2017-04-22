@@ -9,7 +9,7 @@ class Download_test extends TestCase
 		$this->assertResponseHeader(
 			'Content-Disposition', 'attachment; filename="test.csv"'
 		);
-		
+
 		$expected = "Header1,Header2,Header3\nData1,Data2,Data3\n";
 		$this->assertEquals($expected, $output);
 	}
@@ -22,8 +22,21 @@ class Download_test extends TestCase
 		$this->assertResponseHeader(
 			'Content-Type', 'application/csv; charset=utf-8'
 		);
-		
+
 		$expected = "Header1,Header2,Header3\nData1,Data2,Data3\n";
+		$this->assertEquals($expected, $output);
+	}
+
+	public function test_set_header_twice()
+	{
+		$output = $this->request('GET', 'download/set_header_twice');
+
+		$this->assertResponseCode(200);
+		$this->assertResponseHeader(
+			'Content-Type', 'text/html; charset=UTF-8'
+		);
+
+		$expected = "<html></html>\n";
 		$this->assertEquals($expected, $output);
 	}
 }
