@@ -40,6 +40,14 @@ class Set_cookie_test extends TestCase
 		);
 	}
 
+	public function test_cookie_is_just_set()
+	{
+		$output = $this->request('GET', 'set_cookie/name_and_value');
+		$this->assertResponseCookie(
+			'The-Cookie-Name', $this->anything()
+		);
+	}
+
 	public function test_twice()
 	{
 		$output = $this->request('GET', 'set_cookie/twice');
