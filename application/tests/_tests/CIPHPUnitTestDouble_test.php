@@ -45,4 +45,20 @@ class CIPHPUnitTestDouble_test extends TestCase
 		$expected = $mock->to('test@example.com');
 		$this->assertEquals($expected, $mock);
 	}
+
+	public function test_verifyInvokedOnce_with_params()
+	{
+		$expected = 'DELETE';
+		$mock = $this->getDouble('CI_Input', ['method' => $expected]);
+		$this->verifyInvokedOnce($mock, 'method', [true]);
+		$mock->method(true);
+	}
+
+	public function test_verifyInvokedOnce_without_params()
+	{
+		$expected = 'DELETE';
+		$mock = $this->getDouble('CI_Input', ['method' => $expected]);
+		$this->verifyInvokedOnce($mock, 'method');
+		$mock->method();
+	}
 }
