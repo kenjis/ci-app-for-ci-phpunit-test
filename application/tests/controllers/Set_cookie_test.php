@@ -66,4 +66,12 @@ class Set_cookie_test extends TestCase
 			'The-Cookie-Name', $cookie, TRUE
 		);
 	}
+
+	public function test_cookie_is_just_set()
+	{
+		$output = $this->request('GET', 'set_cookie/name_and_value');
+		$this->assertResponseCookie(
+			'The-Cookie-Name', null
+		);
+	}
 }
