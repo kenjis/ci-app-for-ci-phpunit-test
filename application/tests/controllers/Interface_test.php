@@ -1,6 +1,6 @@
 <?php
 
-class Interface_test extends TestCase
+class Interface_test_test extends TestCase
 {
 	public function test_test()
 	{
