@@ -317,12 +317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "ad269d0c4a8d37840be30546d8d73ea384fa5309"
+                "reference": "d7334dbbf5f669d11f37200982df2d255c3b1915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/ad269d0c4a8d37840be30546d8d73ea384fa5309",
-                "reference": "ad269d0c4a8d37840be30546d8d73ea384fa5309",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/d7334dbbf5f669d11f37200982df2d255c3b1915",
+                "reference": "d7334dbbf5f669d11f37200982df2d255c3b1915",
                 "shasum": ""
             },
             "require": {
@@ -354,7 +354,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2017-11-26T09:47:32+00:00"
+            "time": "2017-11-26T10:15:25+00:00"
         },
         {
             "name": "mikey179/vfsStream",
