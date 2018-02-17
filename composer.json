@@ -9,7 +9,7 @@
         "mikey179/vfsStream": "1.1.*",
         "kenjis/ci-phpunit-test": "1.0.x@dev",
         "satooshi/php-coveralls": "^1.0",
-        "phpunit/phpunit": "4.8.*|5.7.*|6.1.*",
+        "phpunit/phpunit": "4.8.*|5.7.*|6.1.*|7.*",
         "psy/psysh": "0.8.*"
     }
 }
