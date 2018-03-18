@@ -16,6 +16,7 @@
 			<file>../libraries/Seeder.php</file>
 			<exclude>
 				<directory suffix=".php">./_ci_phpunit_test/replacing/core/old</directory>
+				<directory suffix=".php">./_ci_phpunit_test/replacing/helpers/old</directory>
 				<directory suffix=".php">./_ci_phpunit_test/replacing/libraries/old</directory>
 				<directory suffix=".php">./_ci_phpunit_test/patcher/third_party</directory>
 				<directory suffix=".php">./_ci_phpunit_test/patcher/2.x</directory>
