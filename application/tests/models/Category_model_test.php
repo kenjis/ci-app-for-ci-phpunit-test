@@ -1,11 +1,11 @@
 <?php
 
-class Category_model_test extends TestCase
+class Category_model_test extends UnitTestCase
 {
 	public static function setUpBeforeClass()
 	{
 		parent::setUpBeforeClass();
-		
+
 		$CI =& get_instance();
 		$CI->load->library('Seeder');
 		$CI->seeder->call('CategorySeeder');

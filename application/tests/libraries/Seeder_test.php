@@ -1,6 +1,6 @@
 <?php
 
-class Seeder_test extends TestCase
+class Seeder_test extends UnitTestCase
 {
 	public function setUp()
 	{
@@ -14,9 +14,9 @@ class Seeder_test extends TestCase
 			2 => 'CD',
 			3 => 'DVD',
 		];
-		
+
 		$this->obj->call('CategorySeeder');
-		
+
 		$query = $this->CI->db->query('SELECT id, name FROM category');
 		foreach ($query->result() as $row)
 		{

@@ -3,7 +3,7 @@
 /**
  * @group ci-phpunit-test
  */
-class CIPHPUnitTestCase_test extends TestCase
+class CIPHPUnitTestCase_test extends UnitTestCase
 {
 	public function test_when_create_model_then_you_can_get_the_model()
 	{

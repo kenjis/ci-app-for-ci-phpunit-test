@@ -3,7 +3,7 @@
 /**
  * @group patcher
  */
-class Greeter_test extends TestCase
+class Greeter_test extends UnitTestCase
 {
 	public function setUp()
 	{

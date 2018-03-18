@@ -1,6 +1,6 @@
 <?php
 
-class Category_model_mocking_db_test extends TestCase
+class Category_model_mocking_db_test extends UnitTestCase
 {
 	public function setUp()
 	{
@@ -23,7 +23,7 @@ class Category_model_mocking_db_test extends TestCase
 			->disableOriginalConstructor()
 			->getMock();
 		$db->method('get')->willReturn($db_result);
-		
+
 		// Verify invocations
 		$this->verifyInvokedOnce(
 			$db_result,
