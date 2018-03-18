@@ -42,8 +42,32 @@ class CIPHPUnitTestDouble_test extends TestCase
 	public function test_getDobule_method_returns_phpunit_stub()
 	{
 		$mock = $this->getDouble('CI_Email', ['to' => $this->returnSelf()]);
-		$expected = $mock->to('test@example.com');
-		$this->assertEquals($expected, $mock);
+		$test = $mock->to('test@example.com');
+
+		if ($this->phpunit_version(7)) {
+			$expected = PHPUnit\Framework\MockObject\Stub\ReturnSelf::class;
+			$this->assertInstanceOf($expected, $test);
+		} else {
+			$this->assertEquals($mock, $test);
+		}
+	}
+
+	/**
+	 * Check if PHPUnit version is equal to or greater
+	 *
+	 * @param int $major_version
+	 *
+	 * @return bool
+	 */
+	private function phpunit_version($major_version) {
+		if (class_exists(PHPUnit\Runner\Version::class)) {
+			$phpunit_major_version = (int) PHPUnit\Runner\Version::series();
+			if ($phpunit_major_version >= $major_version) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function test_verifyInvokedOnce_with_params()
