@@ -12,6 +12,8 @@
 		<whitelist>
 			<directory suffix=".php">./_ci_phpunit_test</directory>
 			<file>./TestCase.php</file>
+			<file>./DbTestCase.php</file>
+			<file>./UnitTestCase.php</file>
 			<file>../database/seeds/CategorySeeder.php</file>
 			<file>../libraries/Seeder.php</file>
 			<exclude>
