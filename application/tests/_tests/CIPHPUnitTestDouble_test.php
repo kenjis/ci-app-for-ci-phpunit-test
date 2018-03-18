@@ -60,7 +60,7 @@ class CIPHPUnitTestDouble_test extends TestCase
 	 * @return bool
 	 */
 	private function phpunit_version($major_version) {
-		if (class_exists(PHPUnit\Runner\Version::class)) {
+		if (class_exists('PHPUnit\Runner\Version')) {
 			$phpunit_major_version = (int) PHPUnit\Runner\Version::series();
 			if ($phpunit_major_version >= $major_version) {
 				return true;
