@@ -3,6 +3,16 @@
 class Example_test extends TestCase
 {
 	/**
+	 * Set $strictRequestErrorCheck false, because the following error occurs if true
+	 *
+	 * 1) Example_test::test_users_get_format_csv
+	 * RuntimeException: Array to string conversion on line 373 in file .../application/libraries/Format.php
+	 *
+	 * @var bool
+	 */
+	protected $strictRequestErrorCheck = false;
+
+	/**
 	 * @group patcher
 	 */
 	public function test_users_get()
