@@ -45,7 +45,7 @@ class CIPHPUnitTestDouble_test extends TestCase
 		$test = $mock->to('test@example.com');
 
 		if ($this->phpunit_version(7)) {
-			$expected = PHPUnit\Framework\MockObject\Stub\ReturnSelf::class;
+			$expected = 'PHPUnit\Framework\MockObject\Stub\ReturnSelf';
 			$this->assertInstanceOf($expected, $test);
 		} else {
 			$this->assertEquals($mock, $test);
