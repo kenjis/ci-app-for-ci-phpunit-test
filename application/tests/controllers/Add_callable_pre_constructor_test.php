@@ -5,7 +5,7 @@ class Add_callable_pre_constructor_test extends TestCase
 	public static function setUpBeforeClass()
 	{
 		parent::setUpBeforeClass();
-		
+
 		$CI =& get_instance();
 		$CI->load->library('Seeder');
 		$CI->seeder->call('CategorySeeder');
@@ -17,7 +17,7 @@ class Add_callable_pre_constructor_test extends TestCase
 		$this->db = $CI->load->database('default', TRUE);
 		$this->db->trans_begin();
 		$DB = $this->db;
-		
+
 		$this->request->setCallablePreConstructor(
 			function () use ($DB) {
 				// Inject db object
@@ -29,12 +29,14 @@ class Add_callable_pre_constructor_test extends TestCase
 	public function tearDown()
 	{
 		$this->db->trans_rollback();
+
+		parent::tearDown();
 	}
 
 	public function test_index()
 	{
 		$foo = new Foo();
-		
+
 		// If you want to add another callable
 		$this->request->addCallablePreConstructor(
 			function () use ($foo) {

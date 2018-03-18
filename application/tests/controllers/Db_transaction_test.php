@@ -5,7 +5,7 @@ class Db_transaction_test extends TestCase
 	public static function setUpBeforeClass()
 	{
 		parent::setUpBeforeClass();
-		
+
 		$CI =& get_instance();
 		$CI->load->library('Seeder');
 		$CI->seeder->call('CategorySeeder');
@@ -17,7 +17,7 @@ class Db_transaction_test extends TestCase
 		$this->db = $this->CI->load->database('default', TRUE);
 		$this->db->trans_begin();
 		$DB = $this->db;
-		
+
 		$this->request->setCallablePreConstructor(
 			function () use ($DB) {
 				// Inject db object
@@ -29,6 +29,8 @@ class Db_transaction_test extends TestCase
 	public function tearDown()
 	{
 		$this->db->trans_rollback();
+
+		parent::tearDown();
 	}
 
 	public function test_index()
