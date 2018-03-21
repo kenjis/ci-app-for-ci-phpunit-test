@@ -59,4 +59,10 @@ class CIPHPUnitTestDbTestCase_test extends DbTestCase
 		$name = $this->grabFromDatabase($this->table, 'name', ['id' => 2]);
 		$this->assertEquals('CD', $name);
 	}
+
+	public function test_resetInstance_after_take_over_db()
+	{
+		$this->resetInstance();
+		$this->assertNotFalse($this->db->conn_id);
+	}
 }
