@@ -4,6 +4,7 @@ namespace Kenjis\MonkeyPatch;
 
 use TestCase;
 use CIPHPUnitTest;
+use CIPHPUnitTestReflection;
 
 /**
  * @group ci-phpunit-test
@@ -11,10 +12,22 @@ use CIPHPUnitTest;
  */
 class MonkeyPatchManager_test extends TestCase
 {
+	private static $debug;
+	private static $log_file;
+
+	public static function setUpBeforeClass()
+	{
+		self::$debug = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'debug');
+		self::$log_file = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'log_file');
+
+	}
+
 	public static function tearDownAfterClass()
 	{
 		Cache::clearCache();
 		CIPHPUnitTest::setPatcherCacheDir();
+		CIPHPUnitTestReflection::setPrivateProperty(MonkeyPatchManager::class, 'debug', self::$debug);
+		CIPHPUnitTestReflection::setPrivateProperty(MonkeyPatchManager::class, 'log_file', self::$log_file);
 	}
 
 	/**
