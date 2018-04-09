@@ -60,4 +60,15 @@ class MonkeyPatchManager_test extends TestCase
 
 		$this->assertTrue(file_exists($cache_file));
 	}
+
+	public function test_log_file_path_configurable()
+	{
+		$debug_method = CIPHPUnitTestReflection::getPrivateMethodInvoker(MonkeyPatchManager::class, 'setDebug');
+		$debug_method(['debug' => true, 'log_file' => 'unit_test']);
+
+		$actual_debug = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'debug');
+		$actual_log_file = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'log_file');
+		$this->assertTrue($actual_debug);
+		$this->assertEquals('unit_test', $actual_log_file);
+	}
 }
