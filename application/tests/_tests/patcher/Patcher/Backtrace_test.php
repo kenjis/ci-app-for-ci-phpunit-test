@@ -15,13 +15,21 @@ class Backtrace_test extends TestCase
 		$trace = debug_backtrace();
 		$info = Backtrace::getInfo('FunctionPatcher', $trace);
 
-		if (class_exists('PHPUnit\Runner\Version'))
+		if ($this->is_phpunit_71_and_greater())
 		{
+			// PHPUnit 7.1
+			$this->assertEquals('PHPUnit\Framework\TestResult', $info['class']);
+			$this->assertEquals(
+				'PHPUnit\Framework\TestResult::run', $info['class_method']
+			);
+			$this->assertEquals('run', $info['method']);
+		} elseif ($this->is_phpunit_60_and_greater()) {
 			// PHPUnit 6.0
 			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
 			$this->assertEquals(
 				'PHPUnit\Framework\TestCase::runBare', $info['class_method']
 			);
+			$this->assertEquals('runBare', $info['method']);
 		}
 		else
 		{
@@ -30,10 +38,32 @@ class Backtrace_test extends TestCase
 			$this->assertEquals(
 				'PHPUnit_Framework_TestCase::runBare', $info['class_method']
 			);
+			$this->assertEquals('runBare', $info['method']);
 		}
 
-		$this->assertEquals('runBare', $info['method']);
 		$this->assertNull($info['function']);
+	}
+
+	private function is_phpunit_71_and_greater()
+	{
+		if (class_exists('PHPUnit\Runner\Version')) {
+			if (version_compare(\PHPUnit\Runner\Version::series(), '7.1') >= 0) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private function is_phpunit_60_and_greater()
+	{
+		if (class_exists('PHPUnit\Runner\Version')) {
+			if (version_compare(\PHPUnit\Runner\Version::series(), '6.0') >= 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function provide_PHP5_trace()
@@ -165,13 +195,23 @@ class Backtrace_test extends TestCase
 		$trace = debug_backtrace();
 		$info = Backtrace::getInfo('MethodPatcher', $trace);
 
-		if (class_exists('PHPUnit\Runner\Version'))
+		if ($this->is_phpunit_71_and_greater())
+		{
+			// PHPUnit 7.1
+			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
+			$this->assertEquals(
+				'PHPUnit\Framework\TestCase::runBare', $info['class_method']
+			);
+			$this->assertEquals('runBare', $info['method']);
+		}
+		elseif ($this->is_phpunit_60_and_greater())
 		{
 			// PHPUnit 6.0
 			$this->assertEquals('PHPUnit\Framework\TestCase', $info['class']);
 			$this->assertEquals(
 				'PHPUnit\Framework\TestCase::runTest', $info['class_method']
 			);
+			$this->assertEquals('runTest', $info['method']);
 		}
 		else
 		{
@@ -180,9 +220,9 @@ class Backtrace_test extends TestCase
 			$this->assertEquals(
 				'PHPUnit_Framework_TestCase::runTest', $info['class_method']
 			);
+			$this->assertEquals('runTest', $info['method']);
 		}
 
-		$this->assertEquals('runTest', $info['method']);
 		$this->assertNull($info['function']);
 	}
 }
