@@ -9,6 +9,7 @@
  */
 
 class FavoriteDetailsClearSeeder extends Seeder {
+
 	public function run()
 	{
 		$this->db->truncate('favorite_detail');

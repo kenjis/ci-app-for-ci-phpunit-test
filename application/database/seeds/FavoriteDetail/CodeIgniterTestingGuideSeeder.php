@@ -15,6 +15,7 @@ class CodeIgniterTestingGuideSeeder extends Seeder {
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->depends = [
 			APPPATH.'database/seeds' => 'FavoriteSeeder',
 			APPPATH.'database/seeds/FavoriteDetail' => [
