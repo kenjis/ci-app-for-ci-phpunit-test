@@ -17,4 +17,10 @@ class Patching_on_constant extends CI_Controller
 			echo 'This is testing enviromnent.';
 		}
 	}
+
+	public function no_classmethod()
+    {
+        define('CONST_FOR_JUST_TESTING', 'CONST_FOR_JUST_TESTING');
+        echo CONST_FOR_JUST_TESTING;
+    }
 }
