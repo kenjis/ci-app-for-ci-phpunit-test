@@ -3,7 +3,7 @@
 /**
  * @group ci-phpunit-test
  */
-class CIPHPUnitTestRequest_test extends TestCase
+class CIPHPUnitTestRequest_test extends CIPHPUnitTestCase
 {
 	/**
 	 * @expectedException LogicException
