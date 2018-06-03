@@ -21,7 +21,7 @@ class Request_and_db_test extends DbTestCase
 
 	public function test_index()
 	{
-		$this->request('GET', 'Add_category');
+		$this->request('GET', 'add_category');
 
 		// I don't know why, but the moment, $this->db->conn_id is null.
 		// So I have to reconnect to the database. If not, I have the error:
