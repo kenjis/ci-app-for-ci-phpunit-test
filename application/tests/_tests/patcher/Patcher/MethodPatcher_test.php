@@ -133,6 +133,29 @@ interface Foo
 }
 EOL
 ],
+
+[<<<'EOL'
+<?php
+class Foo
+{
+	public static function bar() : void
+	{
+		echo 'Bar';
+	}
+}
+EOL
+,
+<<<'EOL'
+<?php
+class Foo
+{
+	public static function bar() : void
+	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return;
+		echo 'Bar';
+	}
+}
+EOL
+],
 		];
 	}
 }
