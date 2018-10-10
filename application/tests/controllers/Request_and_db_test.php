@@ -23,11 +23,6 @@ class Request_and_db_test extends DbTestCase
 	{
 		$this->request('GET', 'add_category');
 
-		// I don't know why, but the moment, $this->db->conn_id is null.
-		// So I have to reconnect to the database. If not, I have the error:
-		//   Error: Call to a member function quote() on boolean
-		$this->reconnectDb();
-
 		$data = [
 			'name' => 'a_category_added_by_controller',
 		];
