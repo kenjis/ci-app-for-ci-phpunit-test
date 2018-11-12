@@ -29,6 +29,7 @@ class CIPHPUnitTestCase_test extends UnitTestCase
 		$this->assertInstanceOf('Subdir_library', $libary);
 	}
 
+
 	public function test_resetInstance_false()
 	{
 		$this->resetInstance();
@@ -39,5 +40,14 @@ class CIPHPUnitTestCase_test extends UnitTestCase
 	{
 		$this->resetInstance(true);
 		$this->assertInstanceOf('MY_Controller', $this->CI);
+	}
+
+	public function test_when_close_db_connection_tear_down_after_class()
+	{
+		$this->resetInstance();
+		$db = $this->CI->load->database('default', true);
+		self::tearDownAfterClass();
+
+		$this->assertFalse($db->conn_id);
 	}
 }
