@@ -42,7 +42,7 @@ class CIPHPUnitTestCase_test extends UnitTestCase
 		$this->assertInstanceOf('MY_Controller', $this->CI);
 	}
 
-	public function test_when_close_db_connection_tear_down_after_class()
+	public function test_tear_down_after_class_close_db_connection()
 	{
 		$this->resetInstance();
 		$db = $this->CI->load->database('default', true);
