@@ -17,8 +17,8 @@ class MonkeyPatchManager_test extends TestCase
 
 	public static function setUpBeforeClass()
 	{
-		self::$debug = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'debug');
-		self::$log_file = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'log_file');
+		self::$debug = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'debug');
+		self::$log_file = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'log_file');
 
 	}
 
@@ -26,8 +26,8 @@ class MonkeyPatchManager_test extends TestCase
 	{
 		Cache::clearCache();
 		CIPHPUnitTest::setPatcherCacheDir();
-		CIPHPUnitTestReflection::setPrivateProperty(MonkeyPatchManager::class, 'debug', self::$debug);
-		CIPHPUnitTestReflection::setPrivateProperty(MonkeyPatchManager::class, 'log_file', self::$log_file);
+		CIPHPUnitTestReflection::setPrivateProperty('MonkeyPatchManager', 'debug', self::$debug);
+		CIPHPUnitTestReflection::setPrivateProperty('MonkeyPatchManager', 'log_file', self::$log_file);
 	}
 
 	/**
@@ -63,11 +63,11 @@ class MonkeyPatchManager_test extends TestCase
 
 	public function test_log_file_path_configurable()
 	{
-		$debug_method = CIPHPUnitTestReflection::getPrivateMethodInvoker(MonkeyPatchManager::class, 'setDebug');
+		$debug_method = CIPHPUnitTestReflection::getPrivateMethodInvoker('MonkeyPatchManager', 'setDebug');
 		$debug_method(['debug' => true, 'log_file' => 'unit_test']);
 
-		$actual_debug = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'debug');
-		$actual_log_file = CIPHPUnitTestReflection::getPrivateProperty(MonkeyPatchManager::class, 'log_file');
+		$actual_debug = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'debug');
+		$actual_log_file = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'log_file');
 		$this->assertTrue($actual_debug);
 		$this->assertEquals('unit_test', $actual_log_file);
 	}
