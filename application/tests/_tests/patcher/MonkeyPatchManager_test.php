@@ -4,6 +4,7 @@ namespace Kenjis\MonkeyPatch;
 
 use TestCase;
 use CIPHPUnitTest;
+use CIPHPUnitTestReflection;
 
 /**
  * @group ci-phpunit-test
@@ -11,10 +12,24 @@ use CIPHPUnitTest;
  */
 class MonkeyPatchManager_test extends TestCase
 {
+	private static $debug;
+	private static $log_file;
+
+	public static function setUpBeforeClass()
+	{
+		self::$debug = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'debug');
+		self::$log_file = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'log_file');
+
+	}
+
 	public static function tearDownAfterClass()
 	{
 		Cache::clearCache();
 		CIPHPUnitTest::setPatcherCacheDir();
+		CIPHPUnitTestReflection::setPrivateProperty('MonkeyPatchManager', 'debug', self::$debug);
+		CIPHPUnitTestReflection::setPrivateProperty('MonkeyPatchManager', 'log_file', self::$log_file);
+
+		unlink(__DIR__.'/monkey-patch-debug.log');
 	}
 
 	/**
@@ -46,5 +61,16 @@ class MonkeyPatchManager_test extends TestCase
 		MonkeyPatchManager::patch(__FILE__);
 
 		$this->assertTrue(file_exists($cache_file));
+	}
+
+	public function test_log_file_path_configurable()
+	{
+		$debug_method = CIPHPUnitTestReflection::getPrivateMethodInvoker('MonkeyPatchManager', 'setDebug');
+		$debug_method(['debug' => true, 'log_file' => __DIR__.'/monkey-patch-debug.log']);
+
+		$actual_debug = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'debug');
+		$actual_log_file = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'log_file');
+		$this->assertTrue($actual_debug);
+		$this->assertEquals(__DIR__.'/monkey-patch-debug.log', $actual_log_file);
 	}
 }
