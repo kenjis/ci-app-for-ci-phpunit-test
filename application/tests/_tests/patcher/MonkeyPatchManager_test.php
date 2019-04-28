@@ -64,11 +64,11 @@ class MonkeyPatchManager_test extends TestCase
 	public function test_log_file_path_configurable()
 	{
 		$debug_method = CIPHPUnitTestReflection::getPrivateMethodInvoker('MonkeyPatchManager', 'setDebug');
-		$debug_method(['debug' => true, 'log_file' => 'unit_test']);
+		$debug_method(['debug' => true, 'log_file' => __DIR__.'/monkey-patch-debug.log']);
 
 		$actual_debug = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'debug');
 		$actual_log_file = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'log_file');
 		$this->assertTrue($actual_debug);
-		$this->assertEquals('unit_test', $actual_log_file);
+		$this->assertEquals(__DIR__.'/monkey-patch-debug.log', $actual_log_file);
 	}
 }
