@@ -23,7 +23,7 @@ class Auth_check_in_construct_test extends TestCase
 		);
 
 		$output = $this->request('GET', 'auth_check_in_construct');
-		$this->assertContains('You are logged in.', $output);
+		$this->assertStringContainsString('You are logged in.', $output);
 	}
 
 	/**
@@ -34,6 +34,6 @@ class Auth_check_in_construct_test extends TestCase
 		MonkeyPatch::patchMethod('Ion_auth', ['logged_in' => TRUE]);
 
 		$output = $this->request('GET', 'auth_check_in_construct');
-		$this->assertContains('You are logged in.', $output);
+		$this->assertStringContainsString('You are logged in.', $output);
 	}
 }

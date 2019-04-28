@@ -17,7 +17,7 @@ class Exit_to_exception_test extends TestCase
 			$this->assertEquals('call_exit_in_controller_method', $e->method);
 			$this->assertNull($e->exit_status);
 		}
-		$this->assertContains('{"foo":"bar"}', $output);
+		$this->assertStringContainsString('{"foo":"bar"}', $output);
 	}
 
 	public function test_call_exit_in_function()
@@ -31,6 +31,6 @@ class Exit_to_exception_test extends TestCase
 			$this->assertEquals('die_test', $e->method);
 			$this->assertEquals('Bye!', $e->exit_status);
 		}
-		$this->assertContains('You can not access this page!', $output);
+		$this->assertStringContainsString('You can not access this page!', $output);
 	}
 }

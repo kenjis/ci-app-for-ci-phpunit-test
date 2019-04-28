@@ -9,7 +9,7 @@ class Patching_on_function_test extends TestCase
 	{
 		MonkeyPatch::patchFunction('mt_rand', 100, 'Patching_on_function');
 		$output = $this->request('GET', 'patching_on_function');
-		$this->assertContains('100', $output);
+		$this->assertStringContainsString('100', $output);
 	}
 
 	public function test_index_patch_on_mt_rand_return_null()
@@ -29,7 +29,7 @@ class Patching_on_function_test extends TestCase
 			'Patching_on_function'
 		);
 		$output = $this->request('GET', 'patching_on_function/another');
-		$this->assertContains('19', $output);
+		$this->assertStringContainsString('19', $output);
 	}
 
 	public function test_openssl_random_pseudo_bytes()
@@ -121,8 +121,8 @@ class Patching_on_function_test extends TestCase
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
-		$this->assertContains("I use random_bytes().", $output);
-		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
+		$this->assertStringContainsString("I use random_bytes().", $output);
+		$this->assertStringContainsString("Do you know? There is no exit() function in PHP.", $output);
 	}
 
 	public function test_function_exists_use_openssl_random_pseudo_bytes()
@@ -152,8 +152,8 @@ class Patching_on_function_test extends TestCase
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
-		$this->assertContains("I use openssl_random_pseudo_bytes().", $output);
-		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
+		$this->assertStringContainsString("I use openssl_random_pseudo_bytes().", $output);
+		$this->assertStringContainsString("Do you know? There is no exit() function in PHP.", $output);
 	}
 
 	public function test_function_exists_use_mcrypt_create_iv()
@@ -183,8 +183,8 @@ class Patching_on_function_test extends TestCase
 		$output = $this->request(
 			'GET', 'patching_on_function/function_exists'
 		);
-		$this->assertContains("I use mcrypt_create_iv().", $output);
-		$this->assertContains("Do you know? There is no exit() function in PHP.", $output);
+		$this->assertStringContainsString("I use mcrypt_create_iv().", $output);
+		$this->assertStringContainsString("Do you know? There is no exit() function in PHP.", $output);
 	}
 
 	public function test_scope_limitation_method()

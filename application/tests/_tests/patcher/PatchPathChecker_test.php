@@ -10,7 +10,7 @@ use TestCase;
  */
 class PathChecker_test extends TestCase
 {
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		PathChecker::setIncludePaths(
 			[

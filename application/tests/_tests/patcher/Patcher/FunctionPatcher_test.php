@@ -15,7 +15,7 @@ use Kenjis\MonkeyPatch\Patcher\FunctionPatcher\Proxy;
  */
 class FunctionPatcher_test extends TestCase
 {
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->obj = new FunctionPatcher();
 	}
@@ -158,7 +158,7 @@ EOL
 		try {
 			MonkeyPatch::patchFunction('redirect', null);
 		} catch (LogicException $e) {
-			$this->assertContains(
+			$this->assertStringContainsString(
 				"Can't patch on 'redirect'. It is in blacklist.",
 				$e->getMessage()
 			);
@@ -172,7 +172,7 @@ EOL
 		try {
 			MonkeyPatch::patchFunction('htmlspecialchars', null);
 		} catch (LogicException $e) {
-			$this->assertContains(
+			$this->assertStringContainsString(
 				"Can't patch on 'htmlspecialchars'. It is not in whitelist.",
 				$e->getMessage()
 			);
@@ -186,7 +186,7 @@ EOL
 		try {
 			Proxy::ksort([]);
 		} catch (LogicException $e) {
-			$this->assertContains(
+			$this->assertStringContainsString(
 				"Can't patch on function 'ksort'.",
 				$e->getMessage()
 			);
@@ -194,12 +194,11 @@ EOL
 		ob_end_clean();
 	}
 
-	/**
-	 * @expectedException        LogicException
-	 * @expectedExceptionMessage You can't add to whitelist after initialization
-	 */
 	public function test_addWhitelists()
 	{
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage('You can\'t add to whitelist after initialization');
+
 		FunctionPatcher::addWhitelists(['mt_rand']);
 	}
 }

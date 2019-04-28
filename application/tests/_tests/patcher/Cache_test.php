@@ -12,7 +12,7 @@ use ReflectionHelper;
  */
 class Cache_test extends TestCase
 {
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		Cache::clearCache();
 		CIPHPUnitTest::setPatcherCacheDir();

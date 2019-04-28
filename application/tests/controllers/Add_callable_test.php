@@ -2,7 +2,7 @@
 
 class Add_callable_test extends TestCase
 {
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 		
@@ -11,7 +11,7 @@ class Add_callable_test extends TestCase
 		$CI->seeder->call('CategorySeeder');
 	}
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->request->setCallable(
 			function ($CI) {
@@ -41,7 +41,7 @@ class Add_callable_test extends TestCase
 		);
 
 		$output = $this->request('GET', 'add_callable');
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'Greeting from Mocked Greeter3Return from Mocked Foo', $output
 		);
 	}
@@ -61,7 +61,7 @@ class Add_callable_test extends TestCase
 		);
 
 		$output = $this->request('GET', 'add_callable');
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'Greeting from Mocked Greeter5something', $output
 		);
 	}

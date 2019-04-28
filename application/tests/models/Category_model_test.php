@@ -2,7 +2,7 @@
 
 class Category_model_test extends UnitTestCase
 {
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 
@@ -11,7 +11,7 @@ class Category_model_test extends UnitTestCase
 		$CI->seeder->call('CategorySeeder');
 	}
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->obj = $this->newModel('Category_model');
 	}

@@ -2,7 +2,7 @@
 
 class Category_model_mocking_db_test extends UnitTestCase
 {
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->obj = $this->newModel('Category_model');
 	}

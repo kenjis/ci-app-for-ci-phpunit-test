@@ -2,7 +2,7 @@
 
 class Db_transaction_test extends TestCase
 {
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 
@@ -11,7 +11,7 @@ class Db_transaction_test extends TestCase
 		$CI->seeder->call('CategorySeeder');
 	}
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->resetInstance();
 		$this->db = $this->CI->load->database('default', TRUE);
@@ -26,7 +26,7 @@ class Db_transaction_test extends TestCase
 		);
 	}
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		$this->db->trans_rollback();
 
@@ -36,7 +36,7 @@ class Db_transaction_test extends TestCase
 	public function test_index()
 	{
 		$output = $this->request('GET', 'add_callable_pre_constructor');
-		$this->assertContains(
+		$this->assertStringContainsString(
 			"Book\nCD\nDVD\nEbook\nSeminar\nWebminar\nsomething", $output
 		);
 	}
@@ -45,7 +45,7 @@ class Db_transaction_test extends TestCase
 	{
 		// Make sure the db transaction rolled back
 		$output = $this->request('GET', 'add_callable_pre_constructor/list_category');
-		$this->assertContains(
+		$this->assertStringContainsString(
 			"Book\nCD\nDVD\n", $output
 		);
 	}

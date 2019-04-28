@@ -7,7 +7,7 @@ class Key_test extends TestCase
 {
 	private static $key;
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 		$CI =& get_instance();
@@ -15,7 +15,7 @@ class Key_test extends TestCase
 		$CI->db->truncate('keys');
 	}
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->request->setCallable(
 			function ($CI) {

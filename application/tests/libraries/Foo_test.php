@@ -5,7 +5,7 @@
  */
 class Foo_test extends TestCase
 {
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->obj = new Foo();
 	}

@@ -19,7 +19,7 @@ class Warning_test extends TestCase
 		try {
 			// The controller raise a warning, and ci-phpunit-test turns it into RuntimeException
 			$output = $this->request('GET', 'warning/index');
-			$this->assertContains('Warning::index', $output);
+			$this->assertStringContainsString('Warning::index', $output);
 		}
 		catch (RuntimeException $e)
 		{

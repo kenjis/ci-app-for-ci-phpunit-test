@@ -5,7 +5,7 @@ class Upload_test extends TestCase
 	public function test_index()
 	{
 		$output = $this->request('GET', 'upload');
-		$this->assertContains('<input type="file" name="userfile"', $output);
+		$this->assertStringContainsString('<input type="file" name="userfile"', $output);
 	}
 
 	public function test_post_do_upload()
@@ -22,6 +22,6 @@ class Upload_test extends TestCase
 		];
 		$this->request->setFiles($files);
 		$output = $this->request('POST', 'upload/do_upload');
-		$this->assertContains('<h3>Your file was successfully uploaded!</h3>', $output);
+		$this->assertStringContainsString('<h3>Your file was successfully uploaded!</h3>', $output);
 	}
 }

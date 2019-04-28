@@ -15,6 +15,6 @@ class Output_display_test extends TestCase
     "status": "OK"
 }
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 	}
 }

@@ -22,7 +22,7 @@ class Auth_test extends TestCase
 			}
 		);
 		$output = $this->request('GET', 'auth/index');
-		$this->assertContains('<p>Below is a list of the users.</p>', $output);
+		$this->assertStringContainsString('<p>Below is a list of the users.</p>', $output);
 	}
 
 	public function test_login_validation_fail()
@@ -49,7 +49,7 @@ class Auth_test extends TestCase
 			}
 		);
 		$output = $this->request('POST', 'auth/login');
-		$this->assertContains('<p>Please login with your email/username and password below.</p>', $output);
+		$this->assertStringContainsString('<p>Please login with your email/username and password below.</p>', $output);
 	}
 
 	public function test_login_validation_pass_but_login_fail()

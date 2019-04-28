@@ -5,26 +5,26 @@
  */
 class CIPHPUnitTestFileCache_test extends TestCase
 {
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		$cache_file = __DIR__.'/tmp/cache.php';
 		@unlink($cache_file);
 	}
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		$cache_file = __DIR__.'/tmp/cache.php';
 		unlink($cache_file);
 		rmdir(__DIR__.'/tmp');
 	}
 
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->cache_file = __DIR__.'/tmp/cache.php';
 		$this->obj = new CIPHPUnitTestFileCache($this->cache_file);
 	}
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		chmod(__DIR__.'/tmp', 0777);
 		unset($this->obj);
@@ -35,12 +35,11 @@ class CIPHPUnitTestFileCache_test extends TestCase
 		$this->assertTrue(file_exists($this->cache_file));
 	}
 
-	/**
-	 * @expectedException        RuntimeException
-	 * @expectedExceptionMessage Failed to write to cache file:
-	 */
 	public function test_construct_fail_to_create_cache_file()
 	{
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Failed to write to cache file:');
+
 		chmod(__DIR__.'/tmp', 0);
 		$cache_file = __DIR__.'/tmp/cache_fail.php';
 		if (@file_put_contents($cache_file, '') !== false)
@@ -51,12 +50,11 @@ class CIPHPUnitTestFileCache_test extends TestCase
 		@new CIPHPUnitTestFileCache($cache_file);
 	}
 
-	/**
-	 * @expectedException        RuntimeException
-	 * @expectedExceptionMessage Failed to create folder:
-	 */
 	public function test_construct_fail_to_create_dir()
 	{
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Failed to create folder:');
+
 		chmod(__DIR__.'/tmp', 0);
 		$cache_file = __DIR__.'/tmp/sub/cache_fail.php';
 		$dir = dirname($cache_file);

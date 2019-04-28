@@ -20,7 +20,7 @@ class Mock_phpunit_test extends TestCase
 				'body' => 'This is test mail.',
 			]
 		);
-		$this->assertContains('Mail sent', $output);
+		$this->assertStringContainsString('Mail sent', $output);
 	}
 
 	public function test_send_error()
@@ -41,6 +41,6 @@ class Mock_phpunit_test extends TestCase
 				'body' => 'This is test mail.',
 			]
 		);
-		$this->assertContains('Error', $output);
+		$this->assertStringContainsString('Error', $output);
 	}
 }

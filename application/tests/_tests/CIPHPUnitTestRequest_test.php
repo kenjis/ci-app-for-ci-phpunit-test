@@ -5,12 +5,11 @@
  */
 class CIPHPUnitTestRequest_test extends TestCase
 {
-	/**
-	 * @expectedException LogicException
-	 * @expectedExceptionMessage Status code is not set
-	 */
 	public function test_getStatus()
 	{
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage('Status code is not set');
+
 		$obj = new CIPHPUnitTestRequest($this);
 		$obj->getStatus();
 	}

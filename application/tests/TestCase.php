@@ -4,7 +4,7 @@ class TestCase extends CIPHPUnitTestCase
 {
 	private static $migrate = false;
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 

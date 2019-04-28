@@ -24,6 +24,6 @@ class Mock_model_in_controller_test extends TestCase
 		);
 
 		$output = $this->request('GET', 'mock_model_in_controller');
-		$this->assertContains("ABC\nDEF\nGHI", $output);
+		$this->assertStringContainsString("ABC\nDEF\nGHI", $output);
 	}
 }

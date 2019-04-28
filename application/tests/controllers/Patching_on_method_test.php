@@ -18,7 +18,7 @@ class Patching_on_method_test extends TestCase
 			'Welcome::index'
 		);
 		$output = $this->request('GET', 'patching_on_method');
-		$this->assertContains('Nothing', $output);
+		$this->assertStringContainsString('Nothing', $output);
 	}
 
 	public function test_index_return_is_clouser()
@@ -36,7 +36,7 @@ class Patching_on_method_test extends TestCase
 			'Category_model::get_category_list'
 		);
 		$output = $this->request('GET', 'patching_on_method');
-		$this->assertContains('Nothing', $output);
+		$this->assertStringContainsString('Nothing', $output);
 	}
 
 	public function test_index_return_null()
@@ -82,6 +82,6 @@ class Patching_on_method_test extends TestCase
 			'POST', 'patching_on_method/auth',
 			['id' => 'foo', 'password' => 'bar']
 		);
-		$this->assertContains('Okay!', $output);
+		$this->assertStringContainsString('Okay!', $output);
 	}
 }

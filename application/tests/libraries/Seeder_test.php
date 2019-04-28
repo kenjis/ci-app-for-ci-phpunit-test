@@ -2,7 +2,7 @@
 
 class Seeder_test extends UnitTestCase
 {
-	public function setUp()
+	public function setUp() : void
 	{
 		$this->obj = $this->newLibrary('Seeder');
 	}

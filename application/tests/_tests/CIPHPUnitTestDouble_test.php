@@ -13,12 +13,11 @@ class CIPHPUnitTestDouble_test extends TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	/**
-	 * @expectedException Exception
-	 * @expectedExceptionMessage I can throw an exception and can use params: abcdef
-	 */
 	public function test_getDouble_method_returns_execption()
 	{
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('I can throw an exception and can use params: abcdef');
+
 		$ret = function ($param1, $param2) {
 			throw new Exception('I can throw an exception and can use params: '.$param1.$param2);
 		};

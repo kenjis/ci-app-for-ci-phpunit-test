@@ -10,7 +10,7 @@
 
 class Request_and_db_test extends DbTestCase
 {
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 

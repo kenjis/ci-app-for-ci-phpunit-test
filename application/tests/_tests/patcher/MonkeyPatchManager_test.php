@@ -5,6 +5,8 @@ namespace Kenjis\MonkeyPatch;
 use TestCase;
 use CIPHPUnitTest;
 use CIPHPUnitTestReflection;
+use RuntimeException;
+use LogicException;
 
 /**
  * @group ci-phpunit-test
@@ -15,14 +17,14 @@ class MonkeyPatchManager_test extends TestCase
 	private static $debug;
 	private static $log_file;
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		self::$debug = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'debug');
 		self::$log_file = CIPHPUnitTestReflection::getPrivateProperty('MonkeyPatchManager', 'log_file');
 
 	}
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		Cache::clearCache();
 		CIPHPUnitTest::setPatcherCacheDir();
@@ -32,21 +34,19 @@ class MonkeyPatchManager_test extends TestCase
 		unlink(__DIR__.'/monkey-patch-debug.log');
 	}
 
-	/**
-	 * @expectedException RuntimeException
-	 * @expectedExceptionMessage Failed to create folder:
-	 */
 	public function test_setCacheDir_error()
 	{
+		$this->expectException(RuntimeException::class);
+		$this->expectExceptionMessage('Failed to create folder:');
+
 		MonkeyPatchManager::setCacheDir(null);
 	}
 
-	/**
-	 * @expectedException LogicException
-	 * @expectedExceptionMessage Can't read 'dummy'
-	 */
 	public function test_patch_error_cannot_read_file()
 	{
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage("Can't read 'dummy'");
+
 		MonkeyPatchManager::patch('dummy');
 	}
 

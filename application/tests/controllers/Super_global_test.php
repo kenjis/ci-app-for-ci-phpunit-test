@@ -21,12 +21,12 @@ $_GET: array (
   'city' => '東京',
 )
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 
 		$expected = <<< 'EOL'
 'REQUEST_URI' => '/super_global?name=Mike+O%27Reilly&nickname=%7Emike&city=%E6%9D%B1%E4%BA%AC',
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 	}
 
 	public function test_index_with_query_string()
@@ -43,12 +43,12 @@ $_GET: array (
   'city' => '東京',
 )
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 
 		$expected = <<< 'EOL'
 'REQUEST_URI' => '/super_global?name=Mike+O%27Reilly&nickname=%7Emike&city=%E6%9D%B1%E4%BA%AC',
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 	}
 
 	public function test_index_with_2nd_arg_array()
@@ -70,12 +70,12 @@ $_GET: array (
   'city' => '東京',
 )
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 
 		$expected = <<< 'EOL'
 'REQUEST_URI' => '/super_global/index/6146/new-song?name=Mike+O%27Reilly&nickname=%7Emike&city=%E6%9D%B1%E4%BA%AC',
 EOL;
-		$this->assertContains($expected, $output);
+		$this->assertStringContainsString($expected, $output);
 	}
 
 	public function test_index_path_info()
@@ -87,6 +87,6 @@ EOL;
         $expected = <<< 'EOL'
 'PATH_INFO' => '/super_global/index',
 EOL;
-        $this->assertContains($expected, $output);
+        $this->assertStringContainsString($expected, $output);
     }
 }
