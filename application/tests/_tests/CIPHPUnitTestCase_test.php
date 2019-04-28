@@ -28,4 +28,16 @@ class CIPHPUnitTestCase_test extends UnitTestCase
 		$libary = $this->newLibrary('subdir/Subdir_library');
 		$this->assertInstanceOf('Subdir_library', $libary);
 	}
+
+	public function test_resetInstance_false()
+	{
+		$this->resetInstance();
+		$this->assertInstanceOf(CI_Controller::class, $this->CI);
+	}
+
+	public function test_resetInstance_true()
+	{
+		$this->resetInstance(true);
+		$this->assertInstanceOf(MY_Controller::class, $this->CI);
+	}
 }
