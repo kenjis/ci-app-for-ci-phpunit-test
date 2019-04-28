@@ -32,12 +32,12 @@ class CIPHPUnitTestCase_test extends UnitTestCase
 	public function test_resetInstance_false()
 	{
 		$this->resetInstance();
-		$this->assertInstanceOf(CI_Controller::class, $this->CI);
+		$this->assertInstanceOf('CI_Controller', $this->CI);
 	}
 
 	public function test_resetInstance_true()
 	{
 		$this->resetInstance(true);
-		$this->assertInstanceOf(MY_Controller::class, $this->CI);
+		$this->assertInstanceOf('MY_Controller', $this->CI);
 	}
 }
