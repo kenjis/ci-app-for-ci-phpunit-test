@@ -28,6 +28,8 @@ class MonkeyPatchManager_test extends TestCase
 		CIPHPUnitTest::setPatcherCacheDir();
 		CIPHPUnitTestReflection::setPrivateProperty('MonkeyPatchManager', 'debug', self::$debug);
 		CIPHPUnitTestReflection::setPrivateProperty('MonkeyPatchManager', 'log_file', self::$log_file);
+
+		unlink(__DIR__.'/monkey-patch-debug.log');
 	}
 
 	/**
