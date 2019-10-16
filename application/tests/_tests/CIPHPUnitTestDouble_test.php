@@ -43,12 +43,7 @@ class CIPHPUnitTestDouble_test extends TestCase
 		$mock = $this->getDouble('CI_Email', ['to' => $this->returnSelf()]);
 		$test = $mock->to('test@example.com');
 
-		if ($this->phpunit_version(7)) {
-			$expected = 'PHPUnit\Framework\MockObject\Stub\ReturnSelf';
-			$this->assertInstanceOf($expected, $test);
-		} else {
-			$this->assertEquals($mock, $test);
-		}
+		$this->assertEquals($mock, $test);
 	}
 
 	/**
