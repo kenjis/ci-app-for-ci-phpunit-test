@@ -10,105 +10,124 @@
 
 class Seeder
 {
-    private $CI;
-    protected $db;
-    protected $dbforge;
-    protected $seedPath;
-    protected $depends = [];
+	/**
+	 * @var CI_Controller
+	 */
+	private $CI;
 
-    public function __construct()
-    {
-        $this->CI =& get_instance();
-        $this->CI->load->database();
-        $this->CI->load->dbforge();
-        $this->db = $this->CI->db;
-        $this->dbforge = $this->CI->dbforge;
-    }
+	/**
+	 * @var CI_DB_query_builder
+	 */
+	protected $db;
 
-    /**
-     * Run another seeder
-     *
-     * @param string $seeder Seeder classname
-     * @param bool $callDependencies
-     */
-    public function call($seeder, $callDependencies = true)
-    {
-        if ($this->seedPath === null)
-        {
-            $this->seedPath = APPPATH . 'database/seeds/';
-        }
+	/**
+	 * @var CI_DB_forge
+	 */
+	protected $dbforge;
 
-        $obj = $this->loadSeeder($seeder);
-        if ($callDependencies === true && $obj instanceof Seeder) {
-            $obj->callDependencies($this->seedPath);
-        }
-        $obj->run();
-    }
+	/**
+	 * @var string
+	 */
+	protected $seedPath;
 
-    /**
-     * Get Seeder instance
-     *
-     * @param string $seeder
-     * @return Seeder
-     */
-    protected function loadSeeder($seeder)
-    {
-        $file = $this->seedPath . $seeder . '.php';
-        require_once $file;
+	/**
+	 * @var array
+	 */
+	protected $depends = [];
 
-        return new $seeder;
-    }
+	public function __construct()
+	{
+		$this->CI =& get_instance();
+		$this->CI->load->database();
+		$this->CI->load->dbforge();
+		$this->db = $this->CI->db;
+		$this->dbforge = $this->CI->dbforge;
+	}
 
-    /**
-     * Call dependency seeders
-     *
-     * @param string $seedPath
-     */
-    public function callDependencies($seedPath)
-    {
-        foreach ($this->depends as $path => $seeders) {
-            $this->seedPath = $seedPath;
-            if (is_string($path)) {
-                $this->setPath($path);
-            }
+	/**
+	 * Run another seeder
+	 *
+	 * @param string $seeder Seeder classname
+	 * @param bool $callDependencies
+	 */
+	public function call($seeder, $callDependencies = true)
+	{
+		if ($this->seedPath === null)
+		{
+			$this->seedPath = APPPATH . 'database/seeds/';
+		}
 
-            $this->callDependency($seeders);
-        }
-        $this->setPath($seedPath);
-    }
+		$obj = $this->loadSeeder($seeder);
+		if ($callDependencies === true && $obj instanceof Seeder) {
+			$obj->callDependencies($this->seedPath);
+		}
+		$obj->run();
+	}
 
-    /**
-     * Call dependency seeder
-     *
-     * @param string|array $seederName
-     */
-    protected function callDependency($seederName)
-    {
-        if (is_array($seederName)) {
-            array_map([$this, 'callDependency'], $seederName);
-            return;
-        }
+	/**
+	 * Get Seeder instance
+	 *
+	 * @param string $seeder
+	 * @return Seeder
+	 */
+	protected function loadSeeder($seeder)
+	{
+		$file = $this->seedPath . $seeder . '.php';
+		require_once $file;
 
-        $seeder = $this->loadSeeder($seederName);
-        if (is_string($this->seedPath)) {
-            $seeder->setPath($this->seedPath);
-        }
+		return new $seeder;
+	}
 
-        $seeder->call($seederName, true);
-    }
+	/**
+	 * Call dependency seeders
+	 *
+	 * @param string $seedPath
+	 */
+	public function callDependencies($seedPath)
+	{
+		foreach ($this->depends as $path => $seeders) {
+			$this->seedPath = $seedPath;
+			if (is_string($path)) {
+				$this->setPath($path);
+			}
 
-    /**
-     * Set path for seeder files
-     *
-     * @param string $path
-     */
-    public function setPath($path)
-    {
-        $this->seedPath = rtrim($path, '/').'/';
-    }
+			$this->callDependency($seeders);
+		}
+		$this->setPath($seedPath);
+	}
 
-    public function __get($property)
-    {
-        return $this->CI->$property;
-    }
+	/**
+	 * Call dependency seeder
+	 *
+	 * @param string|array $seederName
+	 */
+	protected function callDependency($seederName)
+	{
+		if (is_array($seederName)) {
+			array_map([$this, 'callDependency'], $seederName);
+			return;
+		}
+
+		$seeder = $this->loadSeeder($seederName);
+		if (is_string($this->seedPath)) {
+			$seeder->setPath($this->seedPath);
+		}
+
+		$seeder->call($seederName, true);
+	}
+
+	/**
+	 * Set path for seeder files
+	 *
+	 * @param string $path
+	 */
+	public function setPath($path)
+	{
+		$this->seedPath = rtrim($path, '/').'/';
+	}
+
+	public function __get($property)
+	{
+		return $this->CI->$property;
+	}
 }
