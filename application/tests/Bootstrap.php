@@ -179,8 +179,7 @@ switch (ENVIRONMENT)
  *
  * Un-comment the $assign_to_config array below to use this feature
  */
-	// $assign_to_config['name_of_config_item'] = 'value of config item';
-
+	$assign_to_config['name_of_config_item'] = 'value of config item';
 
 
 // --------------------------------------------------------------------
@@ -291,7 +290,7 @@ switch (ENVIRONMENT)
  * -------------------------------------------------------------------
  *  Enabling Monkey Patching
  * -------------------------------------------------------------------
- * 
+ *
  * If you want to use monkey patching, uncomment below code and configure
  * for your application.
  */
