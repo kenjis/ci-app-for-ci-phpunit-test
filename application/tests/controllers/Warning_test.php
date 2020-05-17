@@ -23,12 +23,29 @@ class Warning_test extends TestCase
 		}
 		catch (RuntimeException $e)
 		{
-			$this->assertRegExp('/Undefined variable: undefined_variable/', $e->getMessage());
+			if ($this->is_phpunit_91_and_greater()) {
+				$this->assertMatchesRegularExpression('/Undefined variable: undefined_variable/', $e->getMessage());
+			}
+			else
+			{
+				$this->assertRegExp('/Undefined variable: undefined_variable/', $e->getMessage());
+			}
 
 			while (ob_get_level() > 1)
 			{
 				ob_end_clean();
 			}
 		}
+	}
+
+	private function is_phpunit_91_and_greater()
+	{
+		if (class_exists('PHPUnit\Runner\Version')) {
+			if (version_compare(\PHPUnit\Runner\Version::series(), '9.1') >= 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
