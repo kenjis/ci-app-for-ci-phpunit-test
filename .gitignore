@@ -10,6 +10,7 @@ cache.properties
 build
 vendor/
 composer.phar
+.phpunit.result.cache
 application/logs/
 application/data/session/
 application/tests/_ci_phpunit_test/tmp/
