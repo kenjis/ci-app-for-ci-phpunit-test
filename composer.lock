@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e259009324e3bcebd471a5f3f5ee0a48",
+    "content-hash": "543614c3e914fdb541b6411a909d47fa",
     "packages": [
         {
             "name": "codeigniter/framework",
@@ -362,7 +362,7 @@
             "time": "2020-04-12T04:26:59+00:00"
         },
         {
-            "name": "mikey179/vfsStream",
+            "name": "mikey179/vfsstream",
             "version": "v1.1.0",
             "source": {
                 "type": "git",
