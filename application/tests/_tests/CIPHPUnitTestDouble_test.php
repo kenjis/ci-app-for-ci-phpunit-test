@@ -13,6 +13,53 @@ class CIPHPUnitTestDouble_test extends TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function test_getDouble_method_returns_consecutive()
+	{
+		$returns = ['GET', 'PUT', 'DELETE'];
+		$mock = $this->getDouble(
+			'CI_Input',
+			[
+				['method' => $returns],
+			]
+		);
+
+		$actual = $mock->method();
+		$this->assertEquals($returns[0], $actual);
+
+		$actual = $mock->method();
+		$this->assertEquals($returns[1], $actual);
+
+		$actual = $mock->method();
+		$this->assertEquals($returns[2], $actual);
+	}
+
+	public function test_getDouble_returns_consecutive_and_other()
+	{
+		$returns = ['GET', 'PUT', 'DELETE'];
+		$mock = $this->getDouble(
+			'CI_Input',
+			[
+				'get' => [],
+				['method' => $returns],
+			]
+		);
+
+		$actual = $mock->method();
+		$this->assertEquals($returns[0], $actual);
+
+		$actual = $mock->method();
+		$this->assertEquals($returns[1], $actual);
+
+		$actual = $mock->method();
+		$this->assertEquals($returns[2], $actual);
+
+		$actual = $mock->get();
+		$this->assertEquals([], $actual);
+
+		$actual = $mock->get();
+		$this->assertEquals([], $actual);
+	}
+
 	/**
 	 * @expectedException Exception
 	 * @expectedExceptionMessage I can throw an exception and can use params: abcdef
