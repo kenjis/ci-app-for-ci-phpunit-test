@@ -8,7 +8,7 @@ require_once __DIR__ . '/PhpParserTestCase.php';
  * @group ci-phpunit-test
  * @group patcher
  */
-class MethodPatcher_test extends PhpParserTestCase
+class MethodPatcher_PhpParser46_test extends PhpParserTestCase
 {
 	/**
 	 * @var MethodPatcher
@@ -27,7 +27,7 @@ class MethodPatcher_test extends PhpParserTestCase
 	 */
 	public function test_patch($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
 			$this->markTestSkipped();
 		}
 
@@ -51,12 +51,13 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 class Foo
 {
-	public function bar()
-	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
-		echo 'Bar';
-	}
+    public function bar()
+    { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
+        echo 'Bar';
+    }
 }
 EOL
 ],
@@ -73,11 +74,13 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 class Foo
 {
-	public function bar() { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
-		echo 'Bar';
-	}
+    public function bar()
+    { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
+        echo 'Bar';
+    }
 }
 EOL
 ],
@@ -94,11 +97,13 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 class Foo
 {
-	public static function bar() { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
-		echo 'Bar';
-	}
+    public static function bar()
+    { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
+        echo 'Bar';
+    }
 }
 EOL
 ],
@@ -117,13 +122,14 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 abstract class Foo
 {
-	protected abstract function bar();
-	public function run()
-	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
-		$this->bar();
-	}
+    protected abstract function bar();
+    public function run()
+    { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return $__ret__;
+        $this->bar();
+    }
 }
 EOL
 ],
@@ -138,9 +144,10 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 interface Foo
 {
-	public function bar();
+    public function bar();
 }
 EOL
 ],
@@ -158,12 +165,13 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 class Foo
 {
-	public static function bar() : void
-	{ if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return;
-		echo 'Bar';
-	}
+    public static function bar() : void
+    { if (($__ret__ = \__PatchManager__::getReturn(__CLASS__, __FUNCTION__, func_get_args())) !== __GO_TO_ORIG__) return;
+        echo 'Bar';
+    }
 }
 EOL
 ],

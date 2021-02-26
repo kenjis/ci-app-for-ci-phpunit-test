@@ -8,7 +8,7 @@ require_once __DIR__ . '/PhpParserTestCase.php';
  * @group ci-phpunit-test
  * @group patcher
  */
-class ConstantPatcher_test extends PhpParserTestCase
+class ConstantPatcher_PhpParser46_test extends PhpParserTestCase
 {
 	/**
 	 * @var ConstantPatcher
@@ -27,7 +27,7 @@ class ConstantPatcher_test extends PhpParserTestCase
 	 */
 	public function test_patch($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
 			$this->markTestSkipped();
 		}
 
@@ -40,7 +40,7 @@ class ConstantPatcher_test extends PhpParserTestCase
 	 */
 	public function test_cannot_patch($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
 			$this->markTestSkipped();
 		}
 
@@ -58,6 +58,7 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 echo \__ConstProxy__::get('ENVIRONMENT');
 EOL
 ],
@@ -76,6 +77,7 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 function test($a = ENVIRONMENT)
 {
 }

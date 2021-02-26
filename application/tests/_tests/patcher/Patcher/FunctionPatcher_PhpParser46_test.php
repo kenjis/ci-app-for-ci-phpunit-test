@@ -13,7 +13,7 @@ require_once __DIR__ . '/PhpParserTestCase.php';
  * @group ci-phpunit-test
  * @group patcher
  */
-class FunctionPatcher_test extends PhpParserTestCase
+class FunctionPatcher_PhpParser46_test extends PhpParserTestCase
 {
 	/**
 	 * @var FunctionPatcher
@@ -32,7 +32,7 @@ class FunctionPatcher_test extends PhpParserTestCase
 	 */
 	public function test_patch($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
 			$this->markTestSkipped();
 		}
 
@@ -43,53 +43,59 @@ class FunctionPatcher_test extends PhpParserTestCase
 	public function provide_source()
 	{
 		return [
-[<<<'EOL'
+			[<<<'EOL'
 <?php
 mt_rand(1, 100);
 EOL
-,
-<<<'EOL'
+				,
+				<<<'EOL'
 <?php
+
 \__FuncProxy__::mt_rand(1, 100);
 EOL
-],
+			],
 
-[<<<'EOL'
+			[<<<'EOL'
 <?php
 exit();
 EOL
-,
-<<<'EOL'
+				,
+				<<<'EOL'
 <?php
-exit();
-EOL
-],
 
-[<<<'EOL'
+exit;
+EOL
+			],
+
+			[<<<'EOL'
 <?php
 namespace Foo;
 mt_rand(1, 100);
 EOL
-,
-<<<'EOL'
+				,
+				<<<'EOL'
 <?php
+
 namespace Foo;
+
 \__FuncProxy__::mt_rand(1, 100);
 EOL
-],
+			],
 
-[<<<'EOL'
+			[<<<'EOL'
 <?php
 namespace Foo;
 Bar\mt_rand(1, 100);
 EOL
-,
-<<<'EOL'
+				,
+				<<<'EOL'
 <?php
+
 namespace Foo;
+
 Bar\mt_rand(1, 100);
 EOL
-],
+			],
 		];
 	}
 
@@ -98,10 +104,6 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
-			$this->markTestSkipped();
-		}
-
 		ReflectionHelper::setPrivateProperty(
 			'Kenjis\MonkeyPatch\Patcher\FunctionPatcher',
 			'lock_function_list',
@@ -133,6 +135,7 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 mt_rand(1, 100);
 \__FuncProxy__::time();
 EOL
@@ -145,10 +148,6 @@ EOL
 	 */
 	public function test_not_loaded_function($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
-			$this->markTestSkipped();
-		}
-
 		list($actual,) = $this->obj->patch($source);
 		$this->assertEquals($expected, $actual);
 	}
@@ -164,6 +163,7 @@ EOL
 ,
 <<<'EOL'
 <?php
+
 not_loaded_func();
 \__FuncProxy__::date(DATE_ATOM);
 EOL
@@ -177,7 +177,7 @@ EOL
 		try {
 			MonkeyPatch::patchFunction('redirect', null);
 		} catch (LogicException $e) {
-			$this->assertStringContainsString(
+			$this->assertContains(
 				"Can't patch on 'redirect'. It is in blacklist.",
 				$e->getMessage()
 			);
@@ -191,7 +191,7 @@ EOL
 		try {
 			MonkeyPatch::patchFunction('htmlspecialchars', null);
 		} catch (LogicException $e) {
-			$this->assertStringContainsString(
+			$this->assertContains(
 				"Can't patch on 'htmlspecialchars'. It is not in whitelist.",
 				$e->getMessage()
 			);
@@ -205,7 +205,7 @@ EOL
 		try {
 			Proxy::ksort([]);
 		} catch (LogicException $e) {
-			$this->assertStringContainsString(
+			$this->assertContains(
 				"Can't patch on function 'ksort'.",
 				$e->getMessage()
 			);
@@ -213,11 +213,12 @@ EOL
 		ob_end_clean();
 	}
 
+	/**
+	 * @expectedException        LogicException
+	 * @expectedExceptionMessage You can't add to whitelist after initialization
+	 */
 	public function test_addWhitelists()
 	{
-		$this->expectException(LogicException::class);
-		$this->expectExceptionMessage('You can\'t add to whitelist after initialization');
-
 		FunctionPatcher::addWhitelists(['mt_rand']);
 	}
 }
