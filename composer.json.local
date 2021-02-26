@@ -13,6 +13,6 @@
         "psy/psysh": "0.9.*"
     },
     "repositories": [
-        { "type": "vcs", "url": "/Users/kenji/work/CodeIgniter/ci-phpunit-test" }
+        { "type": "vcs", "url": "/Users/kenji/work/codeigniter/ci-phpunit-test" }
     ]
 }
