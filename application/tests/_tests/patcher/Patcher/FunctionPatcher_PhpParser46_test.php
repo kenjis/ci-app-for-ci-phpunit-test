@@ -32,7 +32,7 @@ class FunctionPatcher_PhpParser46_test extends PhpParserTestCase
 	 */
 	public function test_patch($source, $expected)
 	{
-		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThanOrEqualTo('4.6')) {
 			$this->markTestSkipped();
 		}
 
@@ -104,7 +104,7 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
-		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThanOrEqualTo('4.6')) {
 			$this->markTestSkipped();
 		}
 
@@ -152,7 +152,7 @@ EOL
 	 */
 	public function test_not_loaded_function($source, $expected)
 	{
-		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
+		if (! $this->phpParserVersion->isGreaterThanOrEqualTo('4.6')) {
 			$this->markTestSkipped();
 		}
 
