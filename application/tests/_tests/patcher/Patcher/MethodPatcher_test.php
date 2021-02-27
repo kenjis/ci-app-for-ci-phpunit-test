@@ -27,7 +27,7 @@ class MethodPatcher_test extends PhpParserTestCase
 	 */
 	public function test_patch($source, $expected)
 	{
-		if ($this->phpParserVersion->isGreaterThan('4.5')) {
+		if ($this->phpParserVersion->isGreaterThanOrEqualTo('4.6')) {
 			$this->markTestSkipped();
 		}
 
