@@ -104,6 +104,10 @@ EOL
 	 */
 	public function test_addBlacklist($source, $expected)
 	{
+		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
+			$this->markTestSkipped();
+		}
+
 		ReflectionHelper::setPrivateProperty(
 			'Kenjis\MonkeyPatch\Patcher\FunctionPatcher',
 			'lock_function_list',
@@ -148,6 +152,10 @@ EOL
 	 */
 	public function test_not_loaded_function($source, $expected)
 	{
+		if (! $this->phpParserVersion->isGreaterThan('4.5')) {
+			$this->markTestSkipped();
+		}
+
 		list($actual,) = $this->obj->patch($source);
 		$this->assertEquals($expected, $actual);
 	}
