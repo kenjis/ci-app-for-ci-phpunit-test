@@ -33,7 +33,7 @@
 		</exclude>
 		<report>
 			<html outputDirectory="build/coverage" lowUpperBound="50" highLowerBound="90"/>
-			<clover outputFile="clover.xml"/>
+			<clover outputFile="build/logs/clover.xml"/>
 		</report>
 	</coverage>
 	<logging>
