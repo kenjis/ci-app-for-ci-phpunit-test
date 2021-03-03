@@ -6,3 +6,4 @@ git checkout master
 cp composer.json.local composer.json
 composer update
 git clean -fd public/uploads/
+rm -rf application/tests/_ci_phpunit_test/tmp/cache
