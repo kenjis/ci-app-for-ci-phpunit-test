@@ -1,7 +1,7 @@
 <phpunit
-	bootstrap="./Bootstrap.php"
-	backupGlobals="true"
-	colors="true">
+		bootstrap="./Bootstrap.php"
+		backupGlobals="true"
+		colors="true">
 	<testsuites>
 		<testsuite name="CodeIgniter Application Test Suite">
 			<directory suffix="test.php">./</directory>
@@ -22,6 +22,8 @@
 				<directory suffix=".php">./_ci_phpunit_test/replacing/libraries/old</directory>
 				<directory suffix=".php">./_ci_phpunit_test/patcher/third_party</directory>
 				<directory suffix=".php">./_ci_phpunit_test/patcher/2.x</directory>
+				<directory suffix=".php">./_ci_phpunit_test/patcher/4.5</directory>
+				<directory suffix=".php">./_ci_phpunit_test/patcher/4.x</directory>
 				<directory suffix=".php">./_ci_phpunit_test/tmp</directory>
 				<file>./_ci_phpunit_test/autoloader.php</file>
 				<file>./_ci_phpunit_test/TestSuiteProvider.php</file>
