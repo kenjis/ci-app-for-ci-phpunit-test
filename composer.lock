@@ -358,12 +358,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenjis/ci-phpunit-test.git",
-                "reference": "32defbc99b696582cc7a781c64f4cb187608ad18"
+                "reference": "4c73183416ebe281951a0080329fe42ac81f1706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/32defbc99b696582cc7a781c64f4cb187608ad18",
-                "reference": "32defbc99b696582cc7a781c64f4cb187608ad18",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/4c73183416ebe281951a0080329fe42ac81f1706",
+                "reference": "4c73183416ebe281951a0080329fe42ac81f1706",
                 "shasum": ""
             },
             "require": {
@@ -400,9 +400,9 @@
             "support": {
                 "forum": "http://forum.codeigniter.com/thread-61725.html",
                 "issues": "https://github.com/kenjis/ci-phpunit-test/issues",
-                "source": "https://github.com/kenjis/ci-phpunit-test/tree/master"
+                "source": "https://github.com/kenjis/ci-phpunit-test/tree/v1.0.0"
             },
-            "time": "2021-03-02T07:52:38+00:00"
+            "time": "2021-03-03T00:53:40+00:00"
         },
         {
             "name": "mikey179/vfsstream",
