@@ -25,10 +25,10 @@ class Patching_on_constant_test extends TestCase
 		$this->assertEquals('This is production enviromnent.', $output);
 	}
 
-    public function test_no_classmethod()
-    {
-        MonkeyPatch::patchConstant('CONST_FOR_JUST_TESTING', 'Can you see?');
-        $output = $this->request('GET', 'patching_on_constant/no_classmethod');
-        $this->assertEquals('Can you see?', $output);
-    }
+	public function test_no_classmethod()
+	{
+		MonkeyPatch::patchConstant('CONST_FOR_JUST_TESTING', 'Can you see?');
+		$output = $this->request('GET', 'patching_on_constant/no_classmethod');
+		$this->assertEquals('Can you see?', $output);
+	}
 }
