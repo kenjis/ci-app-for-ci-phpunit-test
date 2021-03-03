@@ -4,12 +4,12 @@ This CodeIgniter Application is for testing of [ci-phpunit-test](https://github.
 
 ## Requirements
 
-* PHP 7.2 or later
+* PHP 7.3 or later
 
 ## How to Run Tests
 
 ~~~
-$ git clone -b 2.x https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
+$ git clone -b 3.x https://github.com/kenjis/ci-app-for-ci-phpunit-test.git
 $ cd ci-app-for-ci-phpunit-test
 $ composer update
 $ ./install.php
