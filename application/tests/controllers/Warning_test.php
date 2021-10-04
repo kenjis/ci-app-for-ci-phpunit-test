@@ -24,11 +24,31 @@ class Warning_test extends TestCase
 		catch (RuntimeException $e)
 		{
 			if ($this->is_phpunit_91_and_greater()) {
-				$this->assertMatchesRegularExpression('/Undefined variable: undefined_variable/', $e->getMessage());
+				if (PHP_VERSION_ID < 80000) {
+					$this->assertMatchesRegularExpression(
+						'/Undefined variable: undefined_variable/',
+						$e->getMessage()
+					);
+				} else {
+					$this->assertMatchesRegularExpression(
+						'/Undefined variable \$undefined_variable/',
+						$e->getMessage()
+					);
+				}
 			}
 			else
 			{
-				$this->assertRegExp('/Undefined variable: undefined_variable/', $e->getMessage());
+				if (PHP_VERSION_ID < 80000) {
+					$this->assertRegExp(
+						'/Undefined variable: undefined_variable/',
+						$e->getMessage()
+					);
+				} else {
+					$this->assertRegExp(
+						'/Undefined variable \$undefined_variable/',
+						$e->getMessage()
+					);
+				}
 			}
 
 			while (ob_get_level() > 1)
