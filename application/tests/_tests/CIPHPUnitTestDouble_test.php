@@ -78,7 +78,7 @@ class CIPHPUnitTestDouble_test extends TestCase
 			'SplFileObject',
 			[
 				'current' => ['foo', 'bar'],
-				'next'    => NULL
+				'next'    => ':void',
 			],
 			['php://memory']
 		);
