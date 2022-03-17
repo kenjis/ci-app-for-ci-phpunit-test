@@ -5,8 +5,6 @@
  */
 class Key_test extends TestCase
 {
-	private static $key;
-
 	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
@@ -36,14 +34,19 @@ class Key_test extends TestCase
 		$this->assertTrue($response->status);
 		$this->assertResponseCode(201);
 
-		self::$key = $response->key;
+		return $response->key;
 	}
 
-	public function test_level_post()
+	/**
+	 * @depends test_index_put
+	 *
+	 * @param string $key
+	 */
+	public function test_level_post($key)
 	{
 		try {
 			$output = $this->request(
-				'POST', 'api/key/level', ['key' => self::$key, 'level' => 10]
+				'POST', 'api/key/level', ['key' => $key, 'level' => 10]
 			);
 		} catch (CIPHPUnitTestExitException $e) {
 			$output = ob_get_clean();
@@ -68,7 +71,12 @@ class Key_test extends TestCase
 		$this->assertResponseCode(400);
 	}
 
-	public function test_index_delete_key()
+	/**
+	 * @depends test_index_put
+	 *
+	 * @param string $key
+	 */
+	public function test_index_delete_key($key)
 	{
 //		$this->request->setCallablePreConstructor(
 //			function () {
@@ -83,7 +91,7 @@ class Key_test extends TestCase
 
 		try {
 			$output = $this->request(
-				'DELETE', 'api/key/index', 'key='.self::$key
+				'DELETE', 'api/key/index', 'key='.$key
 			);
 		} catch (CIPHPUnitTestExitException $e) {
 			$output = ob_get_clean();
