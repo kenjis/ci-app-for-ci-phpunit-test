@@ -15,7 +15,7 @@ class Patching_on_function extends CI_Controller
 	public function openssl_random_pseudo_bytes()
 	{
 		$bytes = openssl_random_pseudo_bytes(4, $cstrong);
-		$hex   = bin2hex($bytes);
+		$hex   = bin2hex((string) $bytes);
 		echo "$hex\n";
 		echo "$cstrong\n";
 	}

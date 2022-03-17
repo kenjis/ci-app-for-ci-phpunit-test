@@ -38,7 +38,7 @@ class Key extends REST_Controller {
 
         // If no key level provided, provide a generic key
         $level = $this->put('level') ? $this->put('level') : 1;
-        $ignore_limits = ctype_digit($this->put('ignore_limits')) ? (int) $this->put('ignore_limits') : 1;
+        $ignore_limits = ctype_digit((string) $this->put('ignore_limits')) ? (int) $this->put('ignore_limits') : 1;
 
         // Insert the new key
         if ($this->_insert_key($key, ['level' => $level, 'ignore_limits' => $ignore_limits]))
