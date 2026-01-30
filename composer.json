@@ -10,6 +10,6 @@
         "kenjis/ci-phpunit-test": "3.x@dev",
         "satooshi/php-coveralls": "^1.0",
         "phpunit/phpunit": "^9.3",
-        "psy/psysh": "0.9.*"
+        "psy/psysh": "0.11.*"
     }
 }
